@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot70 - AutoLot.Dal - ApplicationDbContextFactory.cs
+// AutoLot8 - AutoLot.Dal - ApplicationDbContextFactory.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2023/08/20
+// http://www.skimedic.com 2024/07/29
 // ==================================
 
 namespace AutoLot.Dal.EfStructures;
