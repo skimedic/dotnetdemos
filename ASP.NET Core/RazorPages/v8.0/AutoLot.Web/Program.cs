@@ -14,7 +14,10 @@ if (!builder.Environment.IsDevelopment())
 }
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages()
+    .AddControllersAsServices()
+    .AddViewComponentsAsServices()
+    .AddTagHelpersAsServices();
 builder.Host.UseDefaultServiceProvider(o =>
 {
     o.ValidateOnBuild = true;
