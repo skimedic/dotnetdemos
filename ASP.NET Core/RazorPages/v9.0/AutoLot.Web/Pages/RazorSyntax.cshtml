@@ -12,11 +12,16 @@
     var bar = "Bar";
     var htmlString = "<ul><li>one</li><li>two</li></ul>";
 }
-@foo<br />
-@htmlString<br />
-@foo.@bar<br />
-@foo.ToUpper()<br/>
-@Html.Raw(htmlString)<br/>
+@foo
+<br />
+@htmlString
+<br />
+@foo.@bar
+<br />
+@foo.ToUpper()
+<br />
+@Html.Raw(htmlString)
+<br />
 <hr />
 @{
     @:Straight Text
@@ -26,12 +31,17 @@
     </text>
     <br />
 }
-<hr/>
-Email Address Handling:<br/>
-foo@foo.com<br />
-@@foo<br/>
-test@foo<br/>
-test@(foo)<br />
+<hr />
+Email Address Handling:
+<br />
+foo@foo.com
+<br />
+@@foo
+<br />
+test@foo
+<br />
+test@(foo)
+<br />
 @*
   Multiline Comments
   Hi.
@@ -49,7 +59,9 @@ test@(foo)<br />
 }
 @foreach (string s in sortedList)
 {
-    @s@:&nbsp;
+    @s
+
+    @:&nbsp;
 }
 <hr/>
 @{
@@ -63,6 +75,7 @@ Display For examples
 Make:
 @Html.DisplayFor(x=>x.Entity.MakeNavigation)
 Car:
+@* If the templates were in the shared folder, you wouldn't need the full path listed*@
 <div class="container">
     @Html.DisplayFor(c=>c.Entity,"Cars/DisplayTemplates/Car.cshtml")
     <hr/>

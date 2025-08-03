@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Dal - SampleData.cs
+// AutoLot9 - AutoLot.Dal - SampleData.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 namespace AutoLot.Dal.Initialization;
@@ -19,7 +19,7 @@ public static class SampleData
     ];
     public static List<Driver> Drivers =>
     [
-        new() { Id = 1, PersonInformation = new() { FirstName = "Fred", LastName = "Flinstone" } },
+        new() { Id = 1, PersonInformation = new() { FirstName = "Fred", LastName = "Flintstone" } },
         new() { Id = 2, PersonInformation = new() { FirstName = "Barney", LastName = "Rubble" } }
     ];
     public static List<Car> Inventory =>

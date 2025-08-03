@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Web - GlobalUsings.cs
+// AutoLot9 - AutoLot.Web - GlobalUsings.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 global using AutoLot.Dal.EfStructures;
@@ -42,3 +42,4 @@ global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Options;
 
 global using System.Diagnostics;
+global using System.Text.Json.Serialization;

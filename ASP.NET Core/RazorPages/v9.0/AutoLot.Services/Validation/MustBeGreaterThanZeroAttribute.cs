@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Services - MustBeGreaterThanZeroAttribute.cs
+// AutoLot9 - AutoLot.Services - MustBeGreaterThanZeroAttribute.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 namespace AutoLot.Services.Validation;
@@ -22,14 +22,12 @@ public class MustBeGreaterThanZeroAttribute(string errorMessage)
         if (value is not int intValue)
         {
             return new ValidationResult(
-                FormatErrorMessage(validationContext.DisplayName), 
-                new[] { validationContext.MemberName });
+                FormatErrorMessage(validationContext.DisplayName), new[] { validationContext.MemberName });
         }
 
         return intValue <= 0
             ? new ValidationResult(
-                FormatErrorMessage(validationContext.DisplayName), 
-                new[] { validationContext.MemberName })
+                FormatErrorMessage(validationContext.DisplayName), new[] { validationContext.MemberName })
             : ValidationResult.Success;
     }
 
@@ -38,7 +36,6 @@ public class MustBeGreaterThanZeroAttribute(string errorMessage)
         string propertyDisplayName =
             context.ModelMetadata.DisplayName ?? context.ModelMetadata.PropertyName;
         string errorMessage = FormatErrorMessage(propertyDisplayName);
-        
         context.Attributes.Add("data-val-greaterthanzero", errorMessage);
         context.Attributes.Add("data-val-greaterthanzero-reevaluate", "true");
     }

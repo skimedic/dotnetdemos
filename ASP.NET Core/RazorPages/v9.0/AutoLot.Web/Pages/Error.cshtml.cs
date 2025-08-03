@@ -1,13 +1,9 @@
 // Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Web - Error.cshtml.cs
+// AutoLot9 - AutoLot.Web - Error.cshtml.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
-
-using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AutoLot.Web.Pages;
 
