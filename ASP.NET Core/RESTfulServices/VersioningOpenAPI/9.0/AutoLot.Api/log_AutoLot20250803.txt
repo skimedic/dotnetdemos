@@ -1,0 +1,4 @@
+[25-08-03 13:00:26 Error]AutoLot.Api:AutoLot.Api.Controllers.ValuesController
+Message:Test error
+in method TestLogging at C:\Projects\dotnetdemos\ASP.NET Core\RESTfulServices\APIs\9.0\AutoLot.Api\Controllers\ValuesController.cs:20
+
