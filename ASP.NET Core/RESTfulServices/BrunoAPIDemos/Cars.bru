@@ -1,0 +1,17 @@
+meta {
+  name: Cars
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://localhost:5011/api/Cars
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  ~Accept: text/csv
+  ~Accept: application/xml
+}
