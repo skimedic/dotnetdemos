@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Models - RadioConfiguration.cs
+// AutoLot9 - AutoLot.Models - RadioConfiguration.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 namespace AutoLot.Models.Entities.Configuration;
@@ -18,7 +18,8 @@ public class RadioConfiguration : IEntityTypeConfiguration<Radio>
         builder.HasIndex(e => e.CarId, "IX_Radios_CarId")
             .IsUnique();
         builder.HasQueryFilter(e => e.CarNavigation.IsDrivable);
-        builder.HasOne(d => d.CarNavigation)
+        builder
+            .HasOne(d => d.CarNavigation)
             .WithOne(p => p.RadioNavigation)
             .HasForeignKey<Radio>(d => d.CarId);
     }

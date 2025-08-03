@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Web - Program.cs
+// AutoLot9 - AutoLot.Web - Program.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,26 +15,22 @@ if (!builder.Environment.IsDevelopment())
 
 // Add services to the container.
 builder.Services.AddRazorPages()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.PropertyNamingPolicy = null;
+        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
+        options.JsonSerializerOptions.WriteIndented = true;
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    })
     .AddControllersAsServices()
     .AddViewComponentsAsServices()
     .AddTagHelpersAsServices();
+	
 builder.Host.UseDefaultServiceProvider(o =>
 {
     o.ValidateOnBuild = true;
     o.ValidateScopes = true;
 });
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    // This lambda determines whether user consent for non-essential cookies is
-    // needed for a given request.
-    options.CheckConsentNeeded = context => true;
-    options.MinimumSameSitePolicy = SameSiteMode.None;
-});
-// The TempData provider cookie is not essential. Make it essential
-// so TempData is functional when tracking is disabled.
-builder.Services.Configure<CookieTempDataProviderOptions>(
-    options => { options.Cookie.IsEssential = true; });
-builder.Services.AddSession(options => { options.Cookie.IsEssential = true; });
 
 builder.Services.AddScoped<ICarDriverRepo, CarDriverRepo>();
 builder.Services.AddScoped<ICarRepo, CarRepo>();
@@ -51,8 +47,7 @@ builder.Services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>(
 builder.Services.AddHttpContextAccessor();
 
 var connectionString = builder.Configuration.GetConnectionString("AutoLot");
-builder.Services.AddDbContextPool<ApplicationDbContext>(
-    options =>
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
     {
         options.ConfigureWarnings(wc => wc.Ignore(RelationalEventId.BoolWithDefaultWarning));
         options.UseSqlServer(connectionString,
@@ -79,6 +74,18 @@ else
     });
 }
 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is
+    // needed for a given request.
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+// The TempData provider cookie is not essential. Make it essential
+// so TempData is functional when tracking is disabled.
+builder.Services.Configure<CookieTempDataProviderOptions>(options => { options.Cookie.IsEssential = true; });
+builder.Services.AddSession(options => { options.Cookie.IsEssential = true; });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -95,19 +102,24 @@ if (app.Environment.IsDevelopment())
 else
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    // The default HSTS value is 30 days. 
+    // You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
+app.UseCookiePolicy();
 app.UseWebOptimizer();
 app.UseHttpsRedirection();
-app.UseCookiePolicy();
 app.UseStaticFiles();
 
 app.UseRouting();
 
 app.UseAuthorization();
 
+//app.MapStaticAssets();
+
 app.MapRazorPages();
+//app.MapRazorPages()
+//    .WithStaticAssets();
 
 app.Run();

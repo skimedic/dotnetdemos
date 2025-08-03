@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Dal - BaseRepo.cs
+// AutoLot9 - AutoLot.Dal - BaseRepo.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 namespace AutoLot.Dal.Repos.Base;
@@ -10,8 +10,11 @@ namespace AutoLot.Dal.Repos.Base;
 public abstract class BaseRepo<T>(ApplicationDbContext context)
     : BaseViewRepo<T>(context), IBaseRepo<T> where T : BaseEntity, new() 
 {
-    protected BaseRepo(DbContextOptions<ApplicationDbContext> options) 
-        : this(new ApplicationDbContext(options)) { }
+    protected BaseRepo(DbContextOptions<ApplicationDbContext> options)
+        : this(new ApplicationDbContext(options))
+    {
+    }
+
 
     public int SaveChanges()
     {
@@ -78,6 +81,7 @@ public abstract class BaseRepo<T>(ApplicationDbContext context)
         return persist ? SaveChanges() : 0;
     }
 
+    //This delete shows using entity state to eliminate a query
     public int Delete(int id, long timeStamp, bool persist = true)
     {
         var entity = new T { Id = id, TimeStamp = timeStamp };

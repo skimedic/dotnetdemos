@@ -1,13 +1,15 @@
 // Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Web - Index.cshtml.cs
+// AutoLot9 - AutoLot.Web - Index.cshtml.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 namespace AutoLot.Web.Pages;
 
-public class IndexModel(IAppLogging<IndexModel> logger, IOptionsMonitor<DealerInfo> dealerOptionsMonitor) : PageModel
+public class IndexModel(
+    IAppLogging<IndexModel> logger,
+    IOptionsMonitor<DealerInfo> dealerOptionsMonitor) : PageModel
 {
     [BindProperty]
     public DealerInfo Entity { get; } = dealerOptionsMonitor.CurrentValue;

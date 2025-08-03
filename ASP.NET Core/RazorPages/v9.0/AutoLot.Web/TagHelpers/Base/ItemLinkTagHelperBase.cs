@@ -1,16 +1,19 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Web - ItemLinkTagHelperBase.cs
+// AutoLot9 - AutoLot.Web - ItemLinkTagHelperBase.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 namespace AutoLot.Web.TagHelpers.Base;
 
 public abstract class ItemLinkTagHelperBase(
-    IActionContextAccessor contextAccessor, IUrlHelperFactory urlHelperFactory) : TagHelper
+    IActionContextAccessor contextAccessor,
+    IUrlHelperFactory urlHelperFactory) : TagHelper
 {
-    protected readonly IUrlHelper UrlHelper = urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext);
+    protected readonly IUrlHelper UrlHelper =
+        urlHelperFactory.GetUrlHelper(contextAccessor.ActionContext);
+
     public int? ItemId { get; set; }
     private readonly string _pageName = 
         contextAccessor.ActionContext.ActionDescriptor

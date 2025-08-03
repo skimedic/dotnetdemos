@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Models - CarConfiguration.cs
+// AutoLot9 - AutoLot.Models - CarConfiguration.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 namespace AutoLot.Models.Entities.Configuration;
@@ -20,7 +20,9 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
         builder.Property(p => p.IsDrivable)
             .HasDefaultValue(true);
 
-        builder.Property(e => e.DateBuilt).HasDefaultValueSql("getdate()");
+        builder
+            .Property(e => e.DateBuilt)
+            .HasDefaultValueSql("getdate()");
 
         builder.Property(e => e.Display)
             .HasComputedColumnSql("[PetName] + ' (' + [Color] + ')'", stored: true);
@@ -32,7 +34,8 @@ public class CarConfiguration : IEntityTypeConfiguration<Car>
             v => decimal.Parse(v, style, provider),
             v => v.ToString("C2"));
 
-        builder.HasOne(d => d.MakeNavigation)
+        builder
+            .HasOne(d => d.MakeNavigation)
             .WithMany(p => p.Cars)
             .HasForeignKey(d => d.MakeId)
             .OnDelete(DeleteBehavior.ClientSetNull)

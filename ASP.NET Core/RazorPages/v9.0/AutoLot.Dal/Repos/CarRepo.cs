@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Dal - CarRepo.cs
+// AutoLot9 - AutoLot.Dal - CarRepo.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/07/29
+// http://www.skimedic.com 2025/08/03
 // ==================================
 
 namespace AutoLot.Dal.Repos;
@@ -25,15 +25,14 @@ public class CarRepo : BaseRepo<Car>, ICarRepo
     public override IEnumerable<Car> GetAllIgnoreQueryFilters()
         => BuildBaseQuery().IgnoreQueryFilters();
 
-    public IEnumerable<Car> GetAllBy(int makeId)
-        => BuildBaseQuery().Where(x => x.MakeId == makeId);
-
     public override Car Find(int? id)
         => Table
-			.IgnoreQueryFilters()
+            .IgnoreQueryFilters()
             .Where(x => x.Id == id)
             .Include(m => m.MakeNavigation)
             .FirstOrDefault();
+    public IEnumerable<Car> GetAllBy(int makeId)
+        => BuildBaseQuery().Where(x => x.MakeId == makeId);
 
     public int SetAllDrivableCarsColorAndMakeId(string color, int makeId)
         => ExecuteBulkUpdate(x => x.IsDrivable,
@@ -57,7 +56,9 @@ public class CarRepo : BaseRepo<Car>, ICarRepo
             Size = 50,
             Direction = ParameterDirection.Output
         };
-        ExecuteParameterizedQuery("EXEC [dbo].[GetPetName] @carId, @petName OUTPUT", [parameterId, parameterName]);
+        ExecuteParameterizedQuery("EXEC [dbo].[GetPetName] @carId, @petName OUTPUT",
+            [parameterId, parameterName]);
+        //_ = Context.Database.ExecuteSqlRaw("EXEC [dbo].[GetPetName] @carId, @petName OUTPUT",parameterId, parameterName);
         return (string)parameterName.Value;
     }
 }
