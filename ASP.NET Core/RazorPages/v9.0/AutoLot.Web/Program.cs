@@ -60,7 +60,7 @@ if (builder.Environment.IsDevelopment() || builder.Environment.IsEnvironment("Lo
 }
 else
 {
-    //builder.Services.AddWebOptimizer(false,false);
+    //builder.Services.AddWebOptimizer(false,false); 
     builder.Services.AddWebOptimizer(options =>
     {
         //options.MinifyCssFiles(); //Minifies all CSS files
