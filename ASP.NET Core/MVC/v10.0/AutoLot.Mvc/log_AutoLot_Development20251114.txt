@@ -1,0 +1,4 @@
+[25-11-14 10:14:55 Error]AutoLot.Mvc:AutoLot.Services.Logging.AppLogging
+Message:Test error
+in method Index at C:\Projects\presentations\DOTNETCore\ASP.NETCore\MVC\v10.0\AutoLot.Mvc\Controllers\HomeController.cs:21
+
