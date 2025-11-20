@@ -1,17 +1,22 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Api - GlobalUsings.cs
+// AutoLot9 - AutoLot.Api - GlobalUsings.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/06/29
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 global using Asp.Versioning;
+global using Asp.Versioning.ApplicationModels;
 global using Asp.Versioning.ApiExplorer;
 
+global using AutoLot.Api.ApiVersionSupport;
 global using AutoLot.Api.Controllers.Base;
 global using AutoLot.Api.DataShaping;
 global using AutoLot.Api.Filters;
 global using AutoLot.Api.Formatters;
+global using AutoLot.Api.Swagger;
+global using AutoLot.Api.Swagger.Models;
+global using AutoLot.Api.Swagger.HideEndpoints;
 
 global using AutoLot.Dal.EfStructures;
 global using AutoLot.Dal.Exceptions;
@@ -34,6 +39,7 @@ global using Microsoft.AspNetCore.Authorization;
 
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.ApiExplorer;
+global using Microsoft.AspNetCore.Mvc.ApplicationModels;
 global using Microsoft.AspNetCore.Mvc.Authorization;
 global using Microsoft.AspNetCore.Mvc.Filters;
 global using Microsoft.AspNetCore.Mvc.Formatters;
@@ -41,6 +47,7 @@ global using Microsoft.AspNetCore.Mvc.Formatters;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Diagnostics;
 
+global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Options;
 
 global using Microsoft.OpenApi.Any;

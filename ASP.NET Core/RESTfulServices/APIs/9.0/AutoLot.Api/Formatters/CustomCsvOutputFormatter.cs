@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot9 - AutoLot.Api - CustomCsvOutputFormatter.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/07/13
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 using MediaTypeHeaderValue = Microsoft.Net.Http.Headers.MediaTypeHeaderValue;

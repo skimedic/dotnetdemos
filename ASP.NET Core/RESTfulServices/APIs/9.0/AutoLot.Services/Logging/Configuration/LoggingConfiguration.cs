@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Services - LoggingConfiguration.cs
+// AutoLot9 - AutoLot.Services - LoggingConfiguration.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/06/29
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 namespace AutoLot.Services.Logging.Configuration;
@@ -11,7 +11,7 @@ public static class LoggingConfiguration
 {
     public static IServiceCollection RegisterLoggingInterfaces(this IServiceCollection services)
     {
-        services.AddScoped(typeof(IAppLogging<>), typeof(AppLogging<>));
+        services.AddScoped<IAppLogging,AppLogging>();
         return services;
     }
 

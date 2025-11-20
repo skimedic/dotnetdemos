@@ -7,7 +7,7 @@
 
 namespace AutoLot.Api.Controllers;
 
-[ApiVersion("2.0")]
+[ApiVersion("2.0-Beta")]
 public class Version2Controller : Version1Controller
 {
     [HttpGet]

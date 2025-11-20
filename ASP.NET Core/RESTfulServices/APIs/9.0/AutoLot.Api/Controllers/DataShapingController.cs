@@ -1,14 +1,16 @@
-﻿// Copyright Information
+// Copyright Information
 // ==================================
 // AutoLot9 - AutoLot.Api - DataShapingController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/07/13
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 namespace AutoLot.Api.Controllers;
 
 [ApiController]
+[ApiVersion(1.0)]
 [Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")] 
 public class DataShapingController(IDriverRepo driverRepo,IDataShaper<Driver> dataShaper) : ControllerBase
 {
     [HttpGet]

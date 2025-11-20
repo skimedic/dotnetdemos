@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Services - StringExtensions.cs
+// AutoLot9 - AutoLot.Services - StringExtensions.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/06/29
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 namespace AutoLot.Services.Utilities;

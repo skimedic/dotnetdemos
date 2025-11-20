@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11005.162 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{943C9206-BCC1-4EEF-8E56-9899DBC0913F}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,6 +18,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLot.Models", "AutoLot.Models\AutoLot.Models.csproj", "{82546386-CBFC-437F-81EF-B3DCF4148333}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoLot.Dal", "AutoLot.Dal\AutoLot.Dal.csproj", "{0DB4D05F-AE48-47A4-B58B-7986B8E954AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication2", "WebApplication2\WebApplication2.csproj", "{805216D9-CB09-432E-9C62-7BD2FED97308}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{0DB4D05F-AE48-47A4-B58B-7986B8E954AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DB4D05F-AE48-47A4-B58B-7986B8E954AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DB4D05F-AE48-47A4-B58B-7986B8E954AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805216D9-CB09-432E-9C62-7BD2FED97308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805216D9-CB09-432E-9C62-7BD2FED97308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805216D9-CB09-432E-9C62-7BD2FED97308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805216D9-CB09-432E-9C62-7BD2FED97308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

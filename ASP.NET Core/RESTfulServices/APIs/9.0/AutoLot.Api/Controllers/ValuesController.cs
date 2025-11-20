@@ -1,15 +1,17 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Api - ValuesController.cs
+// AutoLot9 - AutoLot.Api - ValuesController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/06/29
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 namespace AutoLot.Api.Controllers;
 
-[Route("api/[controller]")]
+[ApiVersionNeutral]
 [ApiController]
-public class ValuesController(IAppLogging<ValuesController> logger) : ControllerBase
+[Route("api/[controller]")]
+[Route("api/v{version:apiVersion}/[controller]")]
+public class ValuesController(IAppLogging logger) : ControllerBase
 {
     [HttpGet("problem")]
     public IActionResult Problem() => NotFound();
@@ -26,4 +28,9 @@ public class ValuesController(IAppLogging<ValuesController> logger) : Controller
     {
         throw new Exception("Test Exception");
     }
+
+    [ApiExplorerSettings(IgnoreApi = true)]
+    [HttpGet("hidden/{id?}")]
+    public string HiddenEndPoint(int? id, ApiVersion apiVersion)
+        => $"Controller = {GetType().Name}{Environment.NewLine}Version = {apiVersion}";
 }

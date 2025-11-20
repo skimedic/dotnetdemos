@@ -1,13 +1,13 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Services - IAppLogging.cs
+// AutoLot9 - AutoLot.Services - IAppLogging.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/06/29
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 namespace AutoLot.Services.Logging.Interfaces;
 
-public interface IAppLogging<T>
+public interface IAppLogging
 {
     void LogAppError(
         Exception exception,

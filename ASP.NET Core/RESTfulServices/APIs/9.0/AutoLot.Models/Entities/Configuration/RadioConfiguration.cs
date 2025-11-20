@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot9 - AutoLot.Models - RadioConfiguration.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/07/10
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 namespace AutoLot.Models.Entities.Configuration;

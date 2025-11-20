@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot9 - AutoLot.Api - DataShaper.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/07/13
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 namespace AutoLot.Api.DataShaping;

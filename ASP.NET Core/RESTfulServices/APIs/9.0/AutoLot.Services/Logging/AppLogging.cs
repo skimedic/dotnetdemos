@@ -1,13 +1,13 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Services - AppLogging.cs
+// AutoLot9 - AutoLot.Services - AppLogging.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2024/06/29
+// http://www.skimedic.com 2025/11/20
 // ==================================
 
 namespace AutoLot.Services.Logging;
 
-public class AppLogging<T>(ILogger<T> logger) : IAppLogging<T>
+public class AppLogging(ILogger<AppLogging> logger) : IAppLogging
 {
     internal static void LogWithException(
         string memberName, 

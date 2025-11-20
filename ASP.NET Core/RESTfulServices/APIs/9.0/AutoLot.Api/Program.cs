@@ -1,9 +1,11 @@
 // Copyright Information
 // ==================================
-// AutoLot8 - AutoLot.Api - Program.cs
+// AutoLot9 - AutoLot.Api - Program.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2023/11/26
+// http://www.skimedic.com 2025/11/20
 // ==================================
+
+using AutoLot.Api.ApiVersionSupport;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.ConfigureSerilog();
@@ -59,9 +61,7 @@ builder.Host.UseDefaultServiceProvider(o =>
     o.ValidateScopes = true;
 });
 
-
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddAutoLotApiVersionConfiguration(new ApiVersion(1, 0));
 
 builder.Services.AddCors(options =>
 {
@@ -74,6 +74,11 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddAndConfigureSwagger(
+    builder.Configuration,
+    Path.Combine(AppContext.BaseDirectory,
+        $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
 
 var app = builder.Build();
 
@@ -81,9 +86,19 @@ var app = builder.Build();
 
 app.UseCors("AllowAll");
 
-if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Local"))
+app.UseSwagger();
+app.UseSwaggerUI(options =>
 {
-    app.MapOpenApi();
+    foreach (var description in app.DescribeApiVersions())
+    {
+        var url = $"/swagger/{description.GroupName}/swagger.json";
+        var name = $"AutoLot API: {description.GroupName}";
+        options.SwaggerEndpoint(url, name);
+    }
+});
+if (app.Environment.IsDevelopment())
+{
+    //app.MapOpenApi();
     //Initialize the database
     if (app.Configuration.GetValue<bool>("RebuildDataBase"))
     {
