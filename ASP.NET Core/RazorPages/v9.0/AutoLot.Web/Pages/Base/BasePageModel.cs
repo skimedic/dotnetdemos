@@ -92,8 +92,8 @@ public abstract class BasePageModel<TEntity, TPageModel>(
         }
         catch (Exception ex)
         {
-            Entity = BaseRepoInstance.Find(id);
             ModelState.Clear();
+            Entity = BaseRepoInstance.Find(id);
             return HandleErrorReturnPage(ex);
         }
     }
