@@ -1,0 +1,8 @@
+[25-11-14 10:21:04 Error]AutoLot.Web:AutoLot.Services.Logging.AppLogging
+Message:Test Error
+in method OnGet at C:\Projects\presentations\DOTNETCore\ASP.NETCore\RazorPages\v10.0\AutoLot.Web\Pages\Index.cshtml.cs:19
+
+[25-11-14 10:21:12 Error]AutoLot.Web:AutoLot.Services.Logging.AppLogging
+Message:Test Error
+in method OnGet at C:\Projects\presentations\DOTNETCore\ASP.NETCore\RazorPages\v10.0\AutoLot.Web\Pages\Index.cshtml.cs:19
+
