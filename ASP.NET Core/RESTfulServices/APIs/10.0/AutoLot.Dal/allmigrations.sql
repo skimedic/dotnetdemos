@@ -9,20 +9,17 @@ END;
 GO
 
 BEGIN TRANSACTION;
-GO
-
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     IF SCHEMA_ID(N'Logging') IS NULL EXEC(N'CREATE SCHEMA [Logging];');
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE TABLE [dbo].[Drivers] (
@@ -34,11 +31,10 @@ BEGIN
         CONSTRAINT [PK_Drivers] PRIMARY KEY ([Id])
     );
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE TABLE [dbo].[Makes] (
@@ -48,11 +44,10 @@ BEGIN
         CONSTRAINT [PK_Makes] PRIMARY KEY ([Id])
     );
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE TABLE [Logging].[SeriLogs] (
@@ -75,11 +70,10 @@ BEGIN
         CONSTRAINT [PK_SeriLogs] PRIMARY KEY ([Id])
     );
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE TABLE [dbo].[Inventory] (
@@ -96,11 +90,10 @@ BEGIN
         CONSTRAINT [FK_Inventory_Makes_MakeId] FOREIGN KEY ([MakeId]) REFERENCES [dbo].[Makes] ([Id])
     );
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE TABLE [dbo].[InventoryToDrivers] (
@@ -113,11 +106,10 @@ BEGIN
         CONSTRAINT [FK_InventoryDriver_Inventory_InventoryId] FOREIGN KEY ([InventoryId]) REFERENCES [dbo].[Inventory] ([Id])
     );
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE TABLE [dbo].[Radios] (
@@ -131,115 +123,105 @@ BEGIN
         CONSTRAINT [FK_Radios_Inventory_InventoryId] FOREIGN KEY ([InventoryId]) REFERENCES [dbo].[Inventory] ([Id]) ON DELETE CASCADE
     );
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE INDEX [IX_Inventory_MakeId] ON [dbo].[Inventory] ([MakeId]);
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE INDEX [IX_InventoryToDrivers_DriverId] ON [dbo].[InventoryToDrivers] ([DriverId]);
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE UNIQUE INDEX [IX_InventoryToDrivers_InventoryId_DriverId] ON [dbo].[InventoryToDrivers] ([InventoryId], [DriverId]);
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     CREATE UNIQUE INDEX [IX_Radios_CarId] ON [dbo].[Radios] ([InventoryId]);
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240520032907_Initial'
+    WHERE [MigrationId] = N'20241124151508_Initial'
 )
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20240520032907_Initial', N'8.0.5');
+    VALUES (N'20241124151508_Initial', N'10.0.0');
 END;
-GO
 
 COMMIT;
 GO
 
 BEGIN TRANSACTION;
-GO
-
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240522165742_CustomSql'
+    WHERE [MigrationId] = N'20241124200547_CustomSql'
 )
 BEGIN
     exec (N' 
-        CREATE PROCEDURE [dbo].[GetPetName] @carID int, @petName nvarchar(50) output
-        AS
-        SELECT @petName = PetName from dbo.Inventory where Id = @carID')
+                CREATE PROCEDURE [dbo].[GetPetName] 
+                  @carID int, 
+                  @petName nvarchar(50) output
+                AS
+                SELECT @petName = PetName from dbo.Inventory where Id = @carID')
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240522165742_CustomSql'
+    WHERE [MigrationId] = N'20241124200547_CustomSql'
 )
 BEGIN
     exec (N'
-        CREATE FUNCTION [dbo].[udtf_GetCarsForMake] ( @makeId int )
-        RETURNS TABLE 
-        AS
-        RETURN 
-          (
-            SELECT Id, IsDrivable, DateBuilt, Color, PetName, MakeId, TimeStamp, Display, Price
-            FROM Inventory WHERE MakeId = @makeId
-          )')
+                CREATE FUNCTION [dbo].[udtf_GetCarsForMake] ( @makeId int )
+                RETURNS TABLE 
+                AS
+                RETURN 
+                  (
+                    SELECT Id, IsDrivable, DateBuilt, Color, PetName, MakeId, TimeStamp, Display, Price
+                    FROM Inventory WHERE MakeId = @makeId
+                  )')
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240522165742_CustomSql'
+    WHERE [MigrationId] = N'20241124200547_CustomSql'
 )
 BEGIN
     exec (N'
-        CREATE FUNCTION [dbo].[udf_CountOfMakes] ( @makeid int )
-        RETURNS int
-        AS
-        BEGIN
-          DECLARE @Result int
-          SELECT @Result = COUNT(makeid) FROM dbo.Inventory WHERE makeid = @makeid
-          RETURN @Result
-        END')
+                CREATE FUNCTION [dbo].[udf_CountOfMakes] ( @makeid int )
+                RETURNS int
+                AS
+                BEGIN
+                  DECLARE @Result int
+                  SELECT @Result = COUNT(makeid) FROM dbo.Inventory WHERE makeid = @makeid
+                  RETURN @Result
+                END')
 END;
-GO
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20240522165742_CustomSql'
+    WHERE [MigrationId] = N'20241124200547_CustomSql'
 )
 BEGIN
     INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-    VALUES (N'20240522165742_CustomSql', N'8.0.5');
+    VALUES (N'20241124200547_CustomSql', N'10.0.0');
 END;
-GO
 
 COMMIT;
 GO
