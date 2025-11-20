@@ -7,4 +7,4 @@
 
 namespace AutoLot.Dal.Repos.Interfaces;
 
-public interface ICarDriverRepo : IBaseRepo<CarDriver> { }
+public interface ICarDriverRepo : IBaseRepo<CarDriver>;
