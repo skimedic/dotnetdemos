@@ -1,43 +1,38 @@
 // Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Mvc - HomeController.cs
+// AutoLot - AutoLot.Mvc - HomeController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 namespace AutoLot.Mvc.Controllers;
 
 [Route("[controller]/[action]")]
-//[Route("Home/[action]")]
-public class HomeController(IAppLogging logger) : Controller
+public class HomeController(
+    IAppLogging logger) : Controller
 {
-    //[Route("/MyHomePage")] 
     [Route("/")]
     [Route("/[controller]")]
     [Route("/[controller]/[action]")]
     [HttpGet]
-    public IActionResult Index([FromServices] IOptionsMonitor<DealerInfo> dealerOptionsMonitor)
+    public IActionResult Index(
+        [FromServices] IOptionsSnapshot<DealerInfo> dealerOptionsSnapshot)
     {
         //logger.LogAppError("Test error");
-        return View(dealerOptionsMonitor.CurrentValue);
+        return View(dealerOptionsSnapshot.Value);
     }
 
     [HttpGet]
     public IActionResult Validation()
     {
-        var vm = new AddToCartViewModelMvc
-        {
-            Id = 1,
-            ItemId = 1,
-            StockQuantity = 2,
-            Quantity = 0
-        };
+        var vm = new AddToCartViewModelMvc { Id = 1, ItemId = 1, StockQuantity = 2, Quantity = 0 };
         return View(vm);
     }
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> ValidationAsync(AddToCartViewModelMvc viewModel)
+    public async Task<IActionResult> ValidationAsync(
+        AddToCartViewModelMvc viewModel)
     {
         if (!ModelState.IsValid)
         {
@@ -46,21 +41,19 @@ public class HomeController(IAppLogging logger) : Controller
 
         await Task.Delay(5000);
 
-        return RedirectToAction(nameof(Validation), nameof(HomeController).RemoveController());
+        return RedirectToAction(nameof(Validation), nameof(HomeController).RemoveControllerSuffix());
     }
 
     [HttpGet]
     public IActionResult GetServiceOne(
-        [FromKeyedServices(nameof(SimpleServiceOne))]
-        ISimpleService service)
+        [FromKeyedServices(nameof(SimpleServiceOne))] ISimpleService service)
     {
         return View("SimpleService", service.SayHello());
     }
 
     [HttpGet]
     public IActionResult GetServiceTwo(
-        [FromKeyedServices(nameof(SimpleServiceTwo))]
-        ISimpleService service)
+        [FromKeyedServices(nameof(SimpleServiceTwo))] ISimpleService service)
     {
         return View("SimpleService", service.SayHello());
     }
@@ -69,7 +62,7 @@ public class HomeController(IAppLogging logger) : Controller
     public IActionResult GrantConsent()
     {
         HttpContext.Features.Get<ITrackingConsentFeature>().GrantConsent();
-        return RedirectToAction(nameof(Index), nameof(HomeController).RemoveController(),
+        return RedirectToAction(nameof(Index), nameof(HomeController).RemoveControllerSuffix(),
             new { area = "" });
     }
 
@@ -77,12 +70,13 @@ public class HomeController(IAppLogging logger) : Controller
     public IActionResult WithdrawConsent()
     {
         HttpContext.Features.Get<ITrackingConsentFeature>().WithdrawConsent();
-        return RedirectToAction(nameof(Index), nameof(HomeController).RemoveController(),
+        return RedirectToAction(nameof(Index), nameof(HomeController).RemoveControllerSuffix(),
             new { area = "" });
     }
 
     [HttpGet]
-    public IActionResult RazorSyntax([FromServices] ICarRepo carRepo)
+    public IActionResult RazorSyntax(
+        [FromServices] ICarRepo carRepo)
     {
         var car = carRepo.Find(6);
         return View(car);

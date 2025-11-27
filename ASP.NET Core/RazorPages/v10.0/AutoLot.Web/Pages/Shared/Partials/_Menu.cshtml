@@ -7,7 +7,7 @@
 <nav class="navbar navbar-expand-sm bg-white border-bottom box-shadow mb-3">
     <div class="container-fluid">
         <a class="navbar-brand" asp-area="" asp-page="/Index">@dealerInfo.DealerName</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -18,7 +18,7 @@
                     <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown">
                         Inventory <i class="fa fa-car" style="color: #63E6BE;"></i>
                     </a>
-                    <vc:menu />
+                    <vc:menu/>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-page="/RazorSyntax">
@@ -49,7 +49,7 @@
                 @if (showBanner)
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/Consent" asp-page-handler="GrantConsent" 
+                        <a class="nav-link text-dark" asp-page="/Consent" asp-page-handler="GrantConsent"
                            title="Accept Cookie Policy">
                             Accept Cookie Policy <i class="fa-solid fa-cookie-bite" style="color: green;"></i>
                         </a>
@@ -58,12 +58,13 @@
                 else
                 {
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-page="/Consent" asp-page-handler="WithdrawConsent" 
+                        <a class="nav-link text-dark" asp-page="/Consent" asp-page-handler="WithdrawConsent"
                            title="Revoke Cookie Policy">
                             Revoke Cookie Policy <i class="fa-solid fa-cookie" style="color: red;"></i>
                         </a>
                     </li>
                 }
+
             </ul>
         </div>
     </div>

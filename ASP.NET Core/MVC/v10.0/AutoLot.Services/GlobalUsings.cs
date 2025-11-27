@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Services - GlobalUsings.cs
+// AutoLot - AutoLot.Services - GlobalUsings.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 global using AutoLot.Dal.Repos;
@@ -15,6 +15,7 @@ global using AutoLot.Services.Logging.Interfaces;
 global using AutoLot.Services.Logging.Settings;
 global using AutoLot.Services.Simple;
 global using AutoLot.Services.Simple.Interfaces;
+global using AutoLot.Services.Utilities;
 global using AutoLot.Services.Validation;
 global using AutoLot.Services.ViewModels;
 global using AutoLot.Services.ViewModels.Base;

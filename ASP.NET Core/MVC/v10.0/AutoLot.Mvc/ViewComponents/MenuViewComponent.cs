@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Mvc - MenuViewComponent.cs
+// AutoLot - AutoLot.Mvc - MenuViewComponent.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 namespace AutoLot.Mvc.ViewComponents;

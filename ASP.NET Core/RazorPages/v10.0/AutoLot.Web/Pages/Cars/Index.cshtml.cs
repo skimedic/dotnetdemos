@@ -1,28 +1,34 @@
 // Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Web - Index.cshtml.cs
+// AutoLot - AutoLot.Web - Index.cshtml.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/07/10
+// http://www.skimedic.com 2025/11/26
 // ==================================
 
 namespace AutoLot.Web.Pages.Cars;
 
-public class IndexModel(IAppLogging appLogging, ICarRepo repo)
-    : BasePageModel<Car>(appLogging, repo, "Inventory")
+public class IndexModel(
+    ICarRepo carRepo,
+    IAppLogging appLogging) : BasePageModel<Car>(appLogging, carRepo, "Inventory")
 {
     public string MakeName { get; set; }
     public int? MakeId { get; set; }
-    public IEnumerable<Car> CarRecords { get; set; }
-    public void OnGet(int? makeId, string makeName)
+    public IList<Car> CarRecords { get; set; }
+
+    public void OnGet(
+        int? makeId,
+        string makeName)
     {
+        MakeId = makeId;
         if (!makeId.HasValue)
         {
             MakeName = "All Makes";
-            CarRecords = repo.GetAllIgnoreQueryFilters();
-            return;
+            CarRecords = BaseRepoInstance.GetAllIgnoreQueryFilters().ToList();
         }
-        MakeId = makeId;
-        MakeName = makeName;
-        CarRecords =  repo.GetAllBy(makeId.Value);
+        else
+        {
+            MakeName = makeName;
+            CarRecords = ((ICarRepo)BaseRepoInstance).GetAllBy(makeId.Value).ToList();
+        }
     }
 }

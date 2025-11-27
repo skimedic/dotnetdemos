@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Mvc - GlobalUsings.cs
+// AutoLot - AutoLot.Mvc - GlobalUsings.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 global using AutoLot.Dal.EfStructures;
@@ -30,6 +30,8 @@ global using AutoLot.Services.ViewModels;
 
 global using Microsoft.AspNetCore.Http.Features;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Abstractions;
+global using Microsoft.AspNetCore.Mvc.Controllers;
 global using Microsoft.AspNetCore.Mvc.Infrastructure;
 global using Microsoft.AspNetCore.Mvc.Rendering;
 global using Microsoft.AspNetCore.Mvc.Routing;

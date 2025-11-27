@@ -27,7 +27,9 @@ global using AutoLot.Web.TagHelpers;
 global using AutoLot.Web.TagHelpers.Base;
 
 global using Microsoft.AspNetCore.Http.Features;
+global using Microsoft.AspNetCore.Mvc.Abstractions;
 global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Controllers;
 global using Microsoft.AspNetCore.Mvc.Infrastructure;
 global using Microsoft.AspNetCore.Mvc.RazorPages;
 global using Microsoft.AspNetCore.Mvc.Rendering;

@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Mvc - ItemDeleteTagHelper.cs
+// AutoLot - AutoLot.Mvc - ItemDeleteTagHelper.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 namespace AutoLot.Mvc.TagHelpers;
@@ -10,14 +10,14 @@ namespace AutoLot.Mvc.TagHelpers;
 public class ItemDeleteTagHelper : ItemLinkTagHelperBase
 {
     public ItemDeleteTagHelper(
-        IActionContextAccessor contextAccessor, 
-        IUrlHelperFactory urlHelperFactory) 
-        : base(contextAccessor, urlHelperFactory) 
+        IHttpContextAccessor contextAccessor,
+        IUrlHelperFactory urlHelperFactory)
+        : base(contextAccessor, urlHelperFactory)
     {
-        ActionName = nameof(CarsController.Delete); 
+        ActionName = nameof(CarsController.Delete);
     }
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
-        BuildContent(output,"text-danger","Delete","trash");
+        BuildContent(output, "text-danger", "Delete", "trash");
     }
 }

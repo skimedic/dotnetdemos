@@ -1,27 +1,27 @@
 {
   //https://api.cdnjs.com/libraries?output=human
   //https://api.cdnjs.com/libraries/jquery?output=human
-  "version": "1.0",
+    "version": "3.0",
   "defaultProvider": "cdnjs",
   "defaultDestination": "wwwroot/lib",
   "libraries": [
     {
       "library": "jquery@3.7.1",
       "destination": "wwwroot/lib/jquery",
-      "files": ["jquery.js", "jquery.min.js"]
+      "files": [ "jquery.js", "jquery.min.js" ]
     },
     {
       "library": "jquery-validate@1.21.0",
       "destination": "wwwroot/lib/jquery-validation",
-      "files": ["jquery.validate.js", "jquery.validate.min.js", "additional-methods.js", "additional-methods.min.js"]
+      "files": [ "jquery.validate.js", "jquery.validate.min.js", "additional-methods.js", "additional-methods.min.js" ]
     },
     {
       "library": "jquery-validation-unobtrusive@4.0.0",
       "destination": "wwwroot/lib/jquery-validation-unobtrusive",
-      "files": ["jquery.validate.unobtrusive.js", "jquery.validate.unobtrusive.min.js"]
+      "files": [ "jquery.validate.unobtrusive.js", "jquery.validate.unobtrusive.min.js" ]
     },
     {
-      "library": "twitter-bootstrap@5.3.7",
+            "library": "twitter-bootstrap@5.3.8",
       "destination": "wwwroot/lib/bootstrap",
       "files": [
         "css/bootstrap.css",
@@ -47,7 +47,6 @@
       ]
     },
     {
-      "provider": "cdnjs",
       "library": "popper.js@2.11.8",
       "destination": "wwwroot/lib/popper.js/",
       "files": [

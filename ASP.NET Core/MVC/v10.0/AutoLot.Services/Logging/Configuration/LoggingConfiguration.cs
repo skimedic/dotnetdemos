@@ -1,17 +1,18 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Services - LoggingConfiguration.cs
+// AutoLot - AutoLot.Services - LoggingConfiguration.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 namespace AutoLot.Services.Logging.Configuration;
 
 public static class LoggingConfiguration
 {
-    public static IServiceCollection RegisterLoggingInterfaces(this IServiceCollection services)
+    public static IServiceCollection RegisterLoggingInterfaces(
+        this IServiceCollection services)
     {
-        services.AddScoped<IAppLogging,AppLogging>();
+        services.AddScoped<IAppLogging, AppLogging>();
         return services;
     }
 
@@ -33,7 +34,8 @@ public static class LoggingConfiguration
         }
     };
 
-    public static void ConfigureSerilog(this WebApplicationBuilder builder)
+    public static void ConfigureSerilog(
+        this WebApplicationBuilder builder)
     {
         builder.Logging.ClearProviders();
         var config = builder.Configuration;
@@ -88,6 +90,7 @@ public static class LoggingConfiguration
                 Debugger.Break();
             });
         }
+
         builder.Logging.AddSerilog(log.CreateLogger(), false);
     }
 }

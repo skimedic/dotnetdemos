@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Services - MustNotBeGreaterThanAttribute.cs
+// AutoLot - AutoLot.Services - MustNotBeGreaterThanAttribute.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 namespace AutoLot.Services.Validation;
@@ -13,17 +13,16 @@ public class MustNotBeGreaterThanAttribute(string otherPropertyName, string erro
 {
     string _otherPropertyDisplayName = string.Empty;
     readonly string _prefix = prefix;
-    public MustNotBeGreaterThanAttribute(string otherPropertyName, string prefix = "")
-        : this(otherPropertyName, "{0} must not be greater than {1}", prefix)
-    {
-    }
 
-    public override string FormatErrorMessage(string name) 
+    public MustNotBeGreaterThanAttribute(string otherPropertyName, string prefix = "")
+        : this(otherPropertyName, "{0} must not be greater than {1}", prefix) { }
+
+    public override string FormatErrorMessage(string name)
         => string.Format(ErrorMessageString, name, _otherPropertyDisplayName);
 
     internal void SetOtherPropertyName(PropertyInfo otherPropertyInfo)
     {
-        _otherPropertyDisplayName = 
+        _otherPropertyDisplayName =
             otherPropertyInfo.GetCustomAttributes<DisplayAttribute>().FirstOrDefault()?.Name
             ?? otherPropertyInfo.GetCustomAttributes<DisplayNameAttribute>()
                 .FirstOrDefault()?.DisplayName
@@ -36,23 +35,26 @@ public class MustNotBeGreaterThanAttribute(string otherPropertyName, string erro
         if (otherPropertyInfo == null)
         {
             return new ValidationResult("Unable to validate property. Please contact support",
-                new[] {validationContext.MemberName,otherPropertyName});
+                new[] { validationContext.MemberName, otherPropertyName });
         }
+
         SetOtherPropertyName(otherPropertyInfo);
         if (value is not int intValue)
         {
             return new ValidationResult(FormatErrorMessage(validationContext.DisplayName),
-                new[] {validationContext.MemberName,otherPropertyName});
+                new[] { validationContext.MemberName, otherPropertyName });
         }
+
         var otherPropObjectValue = otherPropertyInfo.GetValue(validationContext.ObjectInstance, null);
         if (otherPropObjectValue is not int otherValue)
         {
             return new ValidationResult(FormatErrorMessage(validationContext.DisplayName),
-                new[] {validationContext.MemberName,otherPropertyName});
+                new[] { validationContext.MemberName, otherPropertyName });
         }
-        return intValue > otherValue 
+
+        return intValue > otherValue
             ? new ValidationResult(FormatErrorMessage(validationContext.DisplayName),
-                new[] {validationContext.MemberName,otherPropertyName}) 
+                new[] { validationContext.MemberName, otherPropertyName })
             : ValidationResult.Success;
     }
 

@@ -15,13 +15,6 @@ if (!builder.Environment.IsDevelopment())
 
 // Add services to the container.
 builder.Services.AddRazorPages()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.PropertyNamingPolicy = null;
-        options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
-        options.JsonSerializerOptions.WriteIndented = true;
-        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-    })
     .AddControllersAsServices()
     .AddViewComponentsAsServices()
     .AddTagHelpersAsServices();
@@ -31,6 +24,19 @@ builder.Host.UseDefaultServiceProvider(o =>
     o.ValidateOnBuild = true;
     o.ValidateScopes = true;
 });
+
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    // This lambda determines whether user consent for non-essential cookies is
+    // needed for a given request.
+    options.CheckConsentNeeded = context => true;
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+});
+// The TempData provider cookie is not essential. Make it essential
+// so TempData is functional when tracking is disabled.
+builder.Services.Configure<CookieTempDataProviderOptions>(
+  options => { options.Cookie.IsEssential = true; });
+builder.Services.AddSession(options => { options.Cookie.IsEssential = true; });
 
 builder.Services.AddScoped<ICarDriverRepo, CarDriverRepo>();
 builder.Services.AddScoped<ICarRepo, CarRepo>();
@@ -43,11 +49,11 @@ builder.Services.AddKeyedScoped<ISimpleService, SimpleServiceTwo>(nameof(SimpleS
 
 builder.Services.Configure<DealerInfo>(builder.Configuration.GetSection(nameof(DealerInfo)));
 
-builder.Services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
 builder.Services.AddHttpContextAccessor();
 
 var connectionString = builder.Configuration.GetConnectionString("AutoLot");
-builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
+builder.Services.AddDbContextPool<ApplicationDbContext>(
+  options =>
     {
         options.ConfigureWarnings(wc => wc.Ignore(RelationalEventId.BoolWithDefaultWarning));
         options.UseSqlServer(connectionString,
@@ -74,18 +80,6 @@ else
     });
 }
 
-builder.Services.Configure<CookiePolicyOptions>(options =>
-{
-    // This lambda determines whether user consent for non-essential cookies is
-    // needed for a given request.
-    options.CheckConsentNeeded = context => true;
-    options.MinimumSameSitePolicy = SameSiteMode.None;
-});
-// The TempData provider cookie is not essential. Make it essential
-// so TempData is functional when tracking is disabled.
-builder.Services.Configure<CookieTempDataProviderOptions>(options => { options.Cookie.IsEssential = true; });
-builder.Services.AddSession(options => { options.Cookie.IsEssential = true; });
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -107,9 +101,9 @@ else
     app.UseHsts();
 }
 
-app.UseCookiePolicy();
 app.UseWebOptimizer();
 app.UseHttpsRedirection();
+app.UseCookiePolicy();
 app.UseStaticFiles();
 
 app.UseRouting();

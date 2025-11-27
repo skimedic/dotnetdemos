@@ -1,0 +1,23 @@
+dotnet tool uninstall --global dotnet-ef 
+dotnet tool install --global dotnet-ef --version 10.0.0
+dotnet tool update --global dotnet-ef --prerelease
+
+dotnet ef database drop -f
+dotnet ef database update 0
+
+dotnet ef dbcontext scaffold "server=.,5433;Database=AutoLot;User Id=sa;Password=P@ssw0rd;" Microsoft.EntityFrameworkCore.SqlServer -d -c ApplicationDbContext --context-dir EfStructures -o Models 
+dotnet ef dbcontext scaffold "Server=(localdb)\MSSQLLocalDB;Database=AutoLot_Hol;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer --data-annotations -c ApplicationDbContext --context-dir .\Temp\Context -o .\Temp\Entities -n AutoLot.Models.Entities --context-namespace AutoLot.Dal.EfStructures --no-onconfiguring 
+
+dotnet ef migrations remove
+dotnet ef migrations script -o allmigrations.sql -i
+****----------------------------------------------------------------------------------------***
+dotnet ef migrations add Initial -o EfStructures\Migrations -c AutoLot.Dal.EfStructures.ApplicationDbContext 
+dotnet ef database update Initial -c AutoLot.Dal.EfStructures.ApplicationDbContext
+
+dotnet ef migrations remove -c AutoLot.Dal.EfStructures.ApplicationDbContext
+
+dotnet ef migrations add CustomSql -c AutoLot.Dal.EfStructures.ApplicationDbContext
+dotnet ef database update CustomSql -c AutoLot.Dal.EfStructures.ApplicationDbContext 
+
+dotnet ef migrations remove -c AutoLot.Dal.EfStructures.ApplicationDbContext
+

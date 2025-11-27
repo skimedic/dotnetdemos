@@ -1,14 +1,14 @@
 ﻿@page
 @model AutoLot.Web.Pages.Cars.CreateModel
 <h1>Create a New Car</h1>
-<hr />
+<hr/>
 @if (!string.IsNullOrEmpty(Model.Error))
 {
     <div class="alert alert-danger" role="alert"> @Model.Error </div>
 }
 else
 {
-    <form asp-page="Create" asp-page-handler="CreateNewCar">
+  <form asp-page="Create">
         <div class="row">
             <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -24,6 +24,6 @@ else
         </div>
     </form>
     @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
+        <partial name="_ValidationScriptsPartial"/>
     }
 }

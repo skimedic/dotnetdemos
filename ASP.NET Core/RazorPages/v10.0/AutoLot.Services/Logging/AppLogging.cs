@@ -1,152 +1,123 @@
-﻿// Copyright Information
+// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Services - AppLogging.cs
+// AutoLot - AutoLot.Services - AppLogging.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/02
+// http://www.skimedic.com 2025/11/26
 // ==================================
 
 namespace AutoLot.Services.Logging;
 
-public class AppLogging(ILogger<AppLogging> logger) : IAppLogging
+public sealed class AppLogging(
+    ILogger<AppLogging> logger) : IAppLogging
 {
-    internal static void LogWithException(
-        string memberName, 
-        string sourceFilePath,
-        int sourceLineNumber, 
-        Exception ex, 
+    internal void LogWithException(
+        string memberName,
+        string filePath,
+        int lineNumber,
         string message,
+        Exception ex,
         Action<Exception, string, object[]> logAction)
     {
-        var list = new List<IDisposable>
+        var disposables = new List<IDisposable>
         {
             LogContext.PushProperty("MemberName", memberName),
-            LogContext.PushProperty("FilePath", sourceFilePath),
-            LogContext.PushProperty("LineNumber", sourceLineNumber),
+            LogContext.PushProperty("FilePath", filePath),
+            LogContext.PushProperty("LineNumber", lineNumber)
         };
-        logAction(ex, message, null);
-        foreach (var item in list)
+        try
         {
-            item.Dispose();
+            logAction(ex, message, Array.Empty<object>());
+        }
+        finally
+        {
+            foreach (var d in disposables)
+            {
+                d.Dispose();
+            }
         }
     }
 
-    internal static void LogWithoutException(
-        string memberName, 
-        string sourceFilePath,
-        int sourceLineNumber, 
-        string message, 
+    internal void LogWithoutException(
+        string memberName,
+        string filePath,
+        int lineNumber,
+        string message,
         Action<string, object[]> logAction)
     {
-        var list = new List<IDisposable>
+        var disposables = new List<IDisposable>
         {
             LogContext.PushProperty("MemberName", memberName),
-            LogContext.PushProperty("FilePath", sourceFilePath),
-            LogContext.PushProperty("LineNumber", sourceLineNumber),
+            LogContext.PushProperty("FilePath", filePath),
+            LogContext.PushProperty("LineNumber", lineNumber)
         };
-        logAction(message, null);
-        foreach (var item in list)
+        try
         {
-            item.Dispose();
+            logAction(message, Array.Empty<object>());
+        }
+        finally
+        {
+            foreach (var d in disposables)
+            {
+                d.Dispose();
+            }
         }
     }
 
     public void LogAppError(
-        Exception exception, 
+        Exception exception,
         string message,
-        [CallerMemberName]
-        string memberName = "", 
-        [CallerFilePath] 
-        string sourceFilePath = "",
-        [CallerLineNumber]
-        int sourceLineNumber = 0)
-    {
-        LogWithException(memberName, sourceFilePath, sourceLineNumber,
-            exception, message, logger.LogError);
-    }
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string filePath = "",
+        [CallerLineNumber] int lineNumber = 0)
+        => LogWithException(memberName, filePath, lineNumber, message, exception, logger.LogError);
 
     public void LogAppError(
-        string message, 
-        [CallerMemberName] 
-        string memberName = "",
-        [CallerFilePath]
-        string sourceFilePath = "", 
-        [CallerLineNumber] 
-        int sourceLineNumber = 0)
-    {
-        LogWithoutException(memberName, sourceFilePath, sourceLineNumber, message, logger.LogError);
-    }
+        string message,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string filePath = "",
+        [CallerLineNumber] int lineNumber = 0)
+        => LogWithoutException(memberName, filePath, lineNumber, message, logger.LogError);
 
     public void LogAppCritical(
-        Exception exception, 
+        Exception exception,
         string message,
-        [CallerMemberName]
-        string memberName = "", 
-        [CallerFilePath] 
-        string sourceFilePath = "",
-        [CallerLineNumber]
-        int sourceLineNumber = 0)
-    {
-        LogWithException(memberName, sourceFilePath, sourceLineNumber, exception, message,
-            logger.LogCritical);
-    }
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string filePath = "",
+        [CallerLineNumber] int lineNumber = 0)
+        => LogWithException(memberName, filePath, lineNumber, message, exception, logger.LogCritical);
 
-    public void LogAppCritical(string message, 
-        [CallerMemberName] 
-        string memberName = "",
-        [CallerFilePath]
-        string sourceFilePath = "", 
-        [CallerLineNumber] 
-        int sourceLineNumber = 0)
-    {
-        LogWithoutException(memberName, sourceFilePath, sourceLineNumber, message, logger.LogCritical);
-    }
+    public void LogAppCritical(
+        string message,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string filePath = "",
+        [CallerLineNumber] int lineNumber = 0)
+        => LogWithoutException(memberName, filePath, lineNumber, message, logger.LogCritical);
 
     public void LogAppDebug(
-        string message, 
-        [CallerMemberName] 
-        string memberName = "",
-        [CallerFilePath]
-        string sourceFilePath = "", 
-        [CallerLineNumber] 
-        int sourceLineNumber = 0)
-    {
-        LogWithoutException(memberName, sourceFilePath, sourceLineNumber, message, logger.LogDebug);
-    }
+        string message,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string filePath = "",
+        [CallerLineNumber] int lineNumber = 0)
+        => LogWithoutException(memberName, filePath, lineNumber, message, logger.LogDebug);
 
     public void LogAppTrace(
-        string message, 
-        [CallerMemberName] 
-        string memberName = "",
-        [CallerFilePath]
-        string sourceFilePath = "", 
-        [CallerLineNumber] 
-        int sourceLineNumber = 0)
-    {
-        LogWithoutException(memberName, sourceFilePath, sourceLineNumber, message, logger.LogTrace);
-    }
+        string message,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string filePath = "",
+        [CallerLineNumber] int lineNumber = 0)
+        => LogWithoutException(memberName, filePath, lineNumber, message, logger.LogTrace);
 
     public void LogAppInformation(
-        string message, 
-        [CallerMemberName] 
-        string memberName = "",
-        [CallerFilePath]
-        string sourceFilePath = "", 
-        [CallerLineNumber] 
-        int sourceLineNumber = 0)
-    {
-        LogWithoutException(memberName, sourceFilePath, sourceLineNumber, message,
-            logger.LogInformation);
-    }
+        string message,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string filePath = "",
+        [CallerLineNumber] int lineNumber = 0)
+        => LogWithoutException(memberName, filePath, lineNumber, message, logger.LogInformation);
 
     public void LogAppWarning(
-        string message, 
-        [CallerMemberName] 
-        string memberName = "",
-        [CallerFilePath]
-        string sourceFilePath = "", 
-        [CallerLineNumber] 
-        int sourceLineNumber = 0)
-    {
-        LogWithoutException(memberName, sourceFilePath, sourceLineNumber, message, logger.LogWarning);
-    }
+        string message,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string filePath = "",
+        [CallerLineNumber] int lineNumber = 0)
+        => LogWithoutException(memberName, filePath, lineNumber, message, logger.LogWarning);
 }

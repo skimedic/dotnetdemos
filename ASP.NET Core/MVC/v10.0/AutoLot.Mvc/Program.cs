@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Mvc - Program.cs
+// AutoLot - AutoLot.Mvc - Program.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +17,8 @@ if (!builder.Environment.IsDevelopment())
 builder.Services.AddControllersWithViews(options =>
     {
         options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
-    })
+        }
+    )
     .AddControllersAsServices()
     .AddViewComponentsAsServices()
     .AddTagHelpersAsServices();
@@ -37,8 +38,7 @@ builder.Services.Configure<CookiePolicyOptions>(options =>
 });
 // The TempData provider cookie is not essential. Make it essential
 // so TempData is functional when tracking is disabled.
-builder.Services.Configure<CookieTempDataProviderOptions>(
-    options => { options.Cookie.IsEssential = true; });
+builder.Services.Configure<CookieTempDataProviderOptions>(options => { options.Cookie.IsEssential = true; });
 builder.Services.AddSession(options => { options.Cookie.IsEssential = true; });
 
 builder.Services.AddScoped<ICarDriverRepo, CarDriverRepo>();
@@ -52,12 +52,10 @@ builder.Services.AddKeyedScoped<ISimpleService, SimpleServiceTwo>(nameof(SimpleS
 
 builder.Services.Configure<DealerInfo>(builder.Configuration.GetSection(nameof(DealerInfo)));
 
-builder.Services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
 builder.Services.AddHttpContextAccessor();
 
 var connectionString = builder.Configuration.GetConnectionString("AutoLot");
-builder.Services.AddDbContextPool<ApplicationDbContext>(
-    options =>
+builder.Services.AddDbContextPool<ApplicationDbContext>(options =>
     {
         options.ConfigureWarnings(wc => wc.Ignore(RelationalEventId.BoolWithDefaultWarning));
         options.UseSqlServer(connectionString,

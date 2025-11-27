@@ -12,7 +12,7 @@ else
 {
     <h3>Are you sure you want to delete this car?</h3>
     <div>
-        @Html.DisplayFor(c=>c.Entity)
+        @Html.DisplayFor(c => c.Entity)
         <form asp-page="Delete" asp-route-id="@Model.Entity.Id">
             <input type="hidden" asp-for="Entity.Id"/>
             <input type="hidden" asp-for="Entity.TimeStamp"/>

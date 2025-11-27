@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Services - MustNotBeGreaterThanAttribute.cs
+// AutoLot - AutoLot.Services - MustNotBeGreaterThanAttribute.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/02
+// http://www.skimedic.com 2025/11/26
 // ==================================
 
 namespace AutoLot.Services.Validation;
@@ -13,17 +13,16 @@ public class MustNotBeGreaterThanAttribute(string otherPropertyName, string erro
 {
     string _otherPropertyDisplayName = string.Empty;
     readonly string _prefix = prefix;
+
     public MustNotBeGreaterThanAttribute(string otherPropertyName, string prefix = "")
-        : this(otherPropertyName, "{0} must not be greater than {1}", prefix)
-    {
-    }
+        : this(otherPropertyName, "{0} must not be greater than {1}", prefix) { }
 
     public override string FormatErrorMessage(string name) 
         => string.Format(ErrorMessageString, name, _otherPropertyDisplayName);
 
     internal void SetOtherPropertyName(PropertyInfo otherPropertyInfo)
     {
-        _otherPropertyDisplayName = 
+        _otherPropertyDisplayName =
             otherPropertyInfo.GetCustomAttributes<DisplayAttribute>().FirstOrDefault()?.Name
             ?? otherPropertyInfo.GetCustomAttributes<DisplayNameAttribute>()
                 .FirstOrDefault()?.DisplayName

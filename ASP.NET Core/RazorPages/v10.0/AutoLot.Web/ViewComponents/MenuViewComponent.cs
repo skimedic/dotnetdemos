@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Web - MenuViewComponent.cs
+// AutoLot - AutoLot.Web - MenuViewComponent.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/02
+// http://www.skimedic.com 2025/11/26
 // ==================================
 
 namespace AutoLot.Web.ViewComponents;
@@ -18,7 +18,7 @@ public class MenuViewComponent(IMakeRepo makeRepo) : ViewComponent
     //    }
     //    return View("MenuView", makes);
     //}
- 
+
     public async Task<IViewComponentResult> InvokeAsync()
     {
         return await Task.Run<IViewComponentResult>(() =>

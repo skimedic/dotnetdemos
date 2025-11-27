@@ -1,7 +1,7 @@
 {
   //https://api.cdnjs.com/libraries?output=human
   //https://api.cdnjs.com/libraries/jquery?output=human
-  "version": "1.0",
+    "version": "3.0",
   "defaultProvider": "cdnjs",
   "defaultDestination": "wwwroot/lib",
   "libraries": [
@@ -21,7 +21,7 @@
       "files": [ "jquery.validate.unobtrusive.js", "jquery.validate.unobtrusive.min.js" ]
     },
     {
-      "library": "twitter-bootstrap@5.3.7",
+      "library": "twitter-bootstrap@5.3.8",
       "destination": "wwwroot/lib/bootstrap",
       "files": [
         "css/bootstrap.css",
@@ -47,7 +47,6 @@
       ]
     },
     {
-      "provider": "cdnjs",
       "library": "popper.js@2.11.8",
       "destination": "wwwroot/lib/popper.js/",
       "files": [

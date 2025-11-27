@@ -1,14 +1,19 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Services - StringExtensions.cs
+// AutoLot - AutoLot.Services - StringExtensions.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 namespace AutoLot.Services.Utilities;
-
 public static class StringExtensions
 {
-    public static string RemoveController(this string original)
-        => original.Replace("Controller", "", StringComparison.OrdinalIgnoreCase);
+    extension(
+        string value)
+    {
+        public string RemoveControllerSuffix()
+        => value != null && value.EndsWith("Controller", StringComparison.OrdinalIgnoreCase)
+            ? value[..^10]
+            : value;
+    }
 }

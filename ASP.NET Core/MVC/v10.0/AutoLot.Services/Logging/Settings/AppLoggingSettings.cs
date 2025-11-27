@@ -1,11 +1,12 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot9 - AutoLot.Services - AppLoggingSettings.cs
+// AutoLot - AutoLot.Services - AppLoggingSettings.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/08/03
+// http://www.skimedic.com 2025/11/27
 // ==================================
 
 namespace AutoLot.Services.Logging.Settings;
+
 public class AppLoggingSettings
 {
     public GeneralSettings General { get; set; }
@@ -29,6 +30,6 @@ public class AppLoggingSettings
         public string FilePath { get; set; }
         public string FileName { get; set; }
         public string FullLogPathAndFileName =>
-            $"{Drive}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}{FilePath}{Path.DirectorySeparatorChar}{FileName}";
+    $"{Drive}{Path.VolumeSeparatorChar}{Path.DirectorySeparatorChar}{FilePath}{Path.DirectorySeparatorChar}{FileName}";
     }
 }
