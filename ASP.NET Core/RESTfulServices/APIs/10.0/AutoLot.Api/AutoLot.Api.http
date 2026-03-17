@@ -1,7 +1,0 @@
-@AutoLot.Api_HostAddress = https://localhost:5011
-
-GET {{AutoLot.Api_HostAddress}}/logging
-###
-GET {{AutoLot.Api_HostAddress}}/problem
-
-###

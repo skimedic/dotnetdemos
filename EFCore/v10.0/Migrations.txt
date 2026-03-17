@@ -21,3 +21,8 @@ dotnet ef database update CustomSql -c AutoLot.Dal.EfStructures.ApplicationDbCon
 
 dotnet ef migrations remove -c AutoLot.Dal.EfStructures.ApplicationDbContext
 
+dotnet ef migrations add Temporal -c AutoLot.Dal.EfStructures.ApplicationDbContext
+dotnet ef database update Temporal -c AutoLot.Dal.EfStructures.ApplicationDbContext 
+
+dotnet ef migrations remove -c AutoLot.Dal.EfStructures.ApplicationDbContext
+

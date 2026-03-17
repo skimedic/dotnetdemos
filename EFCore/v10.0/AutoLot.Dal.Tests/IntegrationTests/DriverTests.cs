@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot - AutoLot.Dal.Tests - DriverTests.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/27
+// http://www.skimedic.com 2025/11/22
 // ==================================
 
 namespace AutoLot.Dal.Tests.IntegrationTests;
@@ -24,6 +24,7 @@ public class DriverTests : BaseTest, IClassFixture<EnsureAutoLotDatabaseTestFixt
     }
 
     [Fact(Skip = "Just showing the example, doesn't work due to the computed column")]
+    //[Fact]
     public void ShouldUpdateInBulk()
     {
         var person = new Person { FirstName = "George", LastName = "Jetson" };

@@ -1,11 +1,4 @@
-﻿// Copyright Information
-// ==================================
-// AutoLot - AutoLot.Dal.Tests - CarTests.cs
-// All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/27
-// ==================================
-
-namespace AutoLot.Dal.Tests.IntegrationTests;
+﻿namespace AutoLot.Dal.Tests.IntegrationTests;
 
 [Collection("Integration Tests")]
 public class CarTests : BaseTest, IClassFixture<EnsureAutoLotDatabaseTestFixture>
@@ -120,7 +113,7 @@ public class CarTests : BaseTest, IClassFixture<EnsureAutoLotDatabaseTestFixture
         var schemaName = entity.GetSchema();
 #pragma warning disable EF1002 // Risk of vulnerability to SQL injection.
         var query = Context.Cars.FromSqlRaw(
-            $"Select * from {schemaName}.{tableName}");
+            $"Select *,ValidFrom,ValidTo from {schemaName}.{tableName}");
 #pragma warning restore EF1002 // Risk of vulnerability to SQL injection.
         var qs = query.ToQueryString();
         OutputHelper.WriteLine($"Query: {qs}");
@@ -150,7 +143,7 @@ public class CarTests : BaseTest, IClassFixture<EnsureAutoLotDatabaseTestFixture
         var schemaName = entity.GetSchema();
 #pragma warning disable EF1002 // Risk of vulnerability to SQL injection.
         var query = Context.Cars.FromSqlRaw(
-            $"Select * from {schemaName}.{tableName}").IgnoreQueryFilters();
+            $"Select *,ValidFrom,ValidTo from {schemaName}.{tableName}").IgnoreQueryFilters();
 #pragma warning restore EF1002 // Risk of vulnerability to SQL injection.
         var qs = query.ToQueryString();
         OutputHelper.WriteLine($"Query: {qs}");
@@ -164,7 +157,7 @@ public class CarTests : BaseTest, IClassFixture<EnsureAutoLotDatabaseTestFixture
         var carId = 1;
         var query = Context.Cars
             .FromSqlInterpolated(
-                $"Select * from dbo.Inventory where Id = {carId}")
+                $"Select *,ValidFrom,ValidTo from dbo.Inventory where Id = {carId}")
             .Include(x => x.MakeNavigation);
         var qs = query.ToQueryString();
         OutputHelper.WriteLine($"Query: {qs}");
@@ -204,7 +197,7 @@ public class CarTests : BaseTest, IClassFixture<EnsureAutoLotDatabaseTestFixture
 #pragma warning disable EF1002 // Risk of vulnerability to SQL injection.
         var queryable = Context
             .Cars
-            .FromSqlRaw($"Select * from {schemaName}.{tableName}")
+            .FromSqlRaw($"Select *,ValidFrom,ValidTo from {schemaName}.{tableName}")
             .Where(x => x.MakeId == makeId);
         var qs = queryable.ToQueryString();
         var cars = queryable.ToList();

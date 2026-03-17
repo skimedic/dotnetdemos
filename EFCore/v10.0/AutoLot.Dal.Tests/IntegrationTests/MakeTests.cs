@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot - AutoLot.Dal.Tests - MakeTests.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/27
+// http://www.skimedic.com 2025/11/22
 // ==================================
 
 namespace AutoLot.Dal.Tests.IntegrationTests;
@@ -108,4 +108,21 @@ public class MakeTests : BaseTest, IClassFixture<EnsureAutoLotDatabaseTestFixtur
         var list = query.ToList();
         Assert.Single(list);
     }
+    [Fact]
+    public void ShouldGetAllHistoryRows()
+    {
+        var make = new Make { Name = "TestMake" };
+        _repo.Add(make);
+        Thread.Sleep(2000);
+        make.Name = "Updated Name";
+        _repo.Update(make);
+        Thread.Sleep(2000);
+        _repo.Delete(make);
+        var list = _repo.GetAllHistory().Where(x => x.Entity.Id == make.Id).ToList();
+        Assert.Equal(2, list.Count);
+        Assert.Equal("TestMake", list[0].Entity.Name);
+        Assert.Equal("Updated Name", list[1].Entity.Name);
+        Assert.Equal(list[0].ValidTo, list[1].ValidFrom);
+    }
+
 }
