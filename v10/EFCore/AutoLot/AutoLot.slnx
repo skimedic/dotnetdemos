@@ -1,0 +1,16 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="Docker.txt" />
+    <File Path="global.json" />
+    <File Path="Migrations.txt" />
+    <File Path="nuget.config" />
+  </Folder>
+  <Project Path="AutoLot.Dal.Tests/AutoLot.Dal.Tests.csproj" />
+  <Project Path="AutoLot.Dal/AutoLot.Dal.csproj" />
+  <Project Path="AutoLot.Models/AutoLot.Models.csproj" />
+</Solution>

@@ -1,0 +1,9 @@
+Download Docker Desktop: https://www.docker.com/get-started
+
+2019:
+Pull Image: docker pull mcr.microsoft.com/mssql/server:2019-latest
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=P@ssw0rd" -p 5433:1433 --name AutoLot2019 --hostname AutoLotSql2019 -d mcr.microsoft.com/mssql/server:2019-latest
+
+2022:
+Pull Image: docker pull mcr.microsoft.com/mssql/server:2022-latest
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=P@ssw0rd" -p 5433:1433 --name AutoLot2022 --hostname AutoLotSql2019 -d mcr.microsoft.com/mssql/server:2022-latest

@@ -1,0 +1,22 @@
+﻿<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - AutoLot.Web</title>
+    <environment include="Development,Local">
+        <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/lib/font-awesome/css/solid.css" asp-append-version="true"/>
+    </environment>
+    <environment exclude="Development,Local">
+        <link rel="stylesheet" asp-fallback-href="~/lib/bootstrap/css/bootstrap.min.css"
+              href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.8/css/bootstrap.min.css"
+              asp-fallback-test-class="h6" asp-fallback-test-property="font-weight"
+              asp-fallback-test-value="500"
+              integrity="sha512-2bBQCjcnw658Lho4nlXJcc6WkV/UxpE/sAokbXPxQNGqmNdQrWqtw26Ns9kFF/yG792pKR1Sx8/Y1Lf1XN4GKA=="
+              crossorigin="anonymous" referrerpolicy="no-referrer"/>
+        <link rel="stylesheet" href="~/lib/font-awesome/css/fontawesome.min.css" asp-append-version="true"/>
+        <link rel="stylesheet" href="~/lib/font-awesome/css/solid.min.css" asp-append-version="true"/>
+    </environment>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/AutoLot.Web.styles.css" asp-append-version="true"/>
+</head>

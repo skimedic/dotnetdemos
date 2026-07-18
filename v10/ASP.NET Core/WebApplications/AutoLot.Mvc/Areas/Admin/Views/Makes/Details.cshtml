@@ -1,0 +1,14 @@
+@model Make
+
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>Details for @Model.Name</h1>
+<div>
+    @Html.DisplayForModel()
+</div>
+<div>
+    <item-edit item-id="@Model.Id"></item-edit> |
+    <item-delete item-id="@Model.Id"></item-delete> |
+    <item-list></item-list>
+</div>

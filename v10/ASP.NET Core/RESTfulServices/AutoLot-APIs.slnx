@@ -1,0 +1,15 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="../../global.json" />
+    <File Path="../../nuget.config" />
+  </Folder>
+  <Project Path="../../EFCore/AutoLot/AutoLot.Dal/AutoLot.Dal.csproj" />
+  <Project Path="../../EFCore/AutoLot/AutoLot.Models/AutoLot.Models.csproj" />
+  <Project Path="../Shared/AutoLot.Services/AutoLot.Services.csproj" />
+  <Project Path="AutoLot.Api/AutoLot.Api.csproj" />
+</Solution>

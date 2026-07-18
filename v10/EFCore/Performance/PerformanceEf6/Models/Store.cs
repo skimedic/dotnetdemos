@@ -1,0 +1,48 @@
+// Copyright Information
+// ==================================
+// EFCoreExamples - 01_PerformanceEf6 - Store.cs
+// All samples copyright Philip Japikse
+// http://www.skimedic.com 2026/07/18
+// ==================================
+
+namespace PerformanceEf6.Models;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
+
+[Table("Sales.Store")]
+public partial class Store
+{
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Store()
+    {
+        Customers = new HashSet<Customer>();
+    }
+
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.None)]
+    public int BusinessEntityID { get; set; }
+
+    [Required]
+    [StringLength(50)]
+    public string Name { get; set; }
+
+    public int? SalesPersonID { get; set; }
+
+    [Column(TypeName = "xml")]
+    public string Demographics { get; set; }
+
+    public Guid rowguid { get; set; }
+
+    public DateTime ModifiedDate { get; set; }
+
+    public virtual BusinessEntity BusinessEntity { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual ICollection<Customer> Customers { get; set; }
+
+    public virtual SalesPerson SalesPerson { get; set; }
+}

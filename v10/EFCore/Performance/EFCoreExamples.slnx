@@ -1,0 +1,13 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="Migrations.txt" />
+  </Folder>
+  <Project Path="Performance/01_Performance.csproj" />
+  <Project Path="PerformanceEf6/01_PerformanceEf6.csproj" />
+  <Project Path="PerformanceEfCore/01_PerformanceEfCore.csproj" />
+</Solution>
