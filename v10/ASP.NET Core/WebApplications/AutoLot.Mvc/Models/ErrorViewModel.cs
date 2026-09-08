@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Mvc - ErrorViewModel.cs
+// AutoLot-WebApps - AutoLot.Mvc - ErrorViewModel.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Mvc.Models;

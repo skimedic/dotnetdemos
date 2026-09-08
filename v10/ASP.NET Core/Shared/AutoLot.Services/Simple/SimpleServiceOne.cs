@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Services - SimpleServiceOne.cs
+// AutoLot-WebApps - AutoLot.Services - SimpleServiceOne.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Services.Simple;

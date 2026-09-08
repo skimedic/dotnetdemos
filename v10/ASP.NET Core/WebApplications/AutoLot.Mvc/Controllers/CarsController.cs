@@ -1,19 +1,24 @@
-﻿// Copyright Information
+// Copyright Information
 // ==================================
 // AutoLot - AutoLot.Mvc - CarsController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
 namespace AutoLot.Mvc.Controllers;
 
 public class CarsController(
-    IAppLogging appLogging,
+    IAppLogger appLogger,
     ICarDataService carDataService,
-    IMakeDataService makeDataService) : BaseCrudController<Car>(appLogging, carDataService)
+    IMakeDataService makeDataService) : BaseCrudController<Car>(
+    appLogger,
+    carDataService)
 {
     protected override async Task<SelectList> GetLookupValuesAsync() =>
-        new((await makeDataService.GetAllAsync()).OrderBy(m => m.Name), nameof(Make.Id), nameof(Make.Name));
+        new(
+            (await makeDataService.GetAllAsync()).OrderBy(m => m.Name),
+            nameof(Make.Id),
+            nameof(Make.Name));
 
     [HttpGet("{makeId}/{makeName}")]
     public async Task<IActionResult> ByMakeAsync(
@@ -23,5 +28,6 @@ public class CarsController(
         ViewBag.MakeName = makeName;
         return View(await carDataService.GetAllByMakeIdAsync(makeId));
     }
-    //public IActionResult BadEndPoint() => new OkObjectResult(5);
+
+    //public IActionResult BadEndPoint() => throw new Exception("Bad endpoint");
 }

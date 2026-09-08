@@ -1,13 +1,15 @@
 // Copyright Information
 // ==================================
-// AutoLot-Temp - AutoLot.Services - MakeApiDataService.cs
+// AutoLot-WebApps - AutoLot.Services - MakeApiDataService.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/04
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Services.DataServices.Api;
 
 public class MakeApiDataService(
-    IAppLogging appLogging,
-    IMakeApiServiceWrapper makeServiceWrapper) : ApiDataServiceBase<Make>(appLogging, makeServiceWrapper),
+    IAppLogger appLogger,
+    IMakeApiServiceWrapper makeServiceWrapper) : ApiDataServiceBase<Make>(
+        appLogger,
+        makeServiceWrapper),
     IMakeDataService;

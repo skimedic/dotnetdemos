@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - CarRepo.cs
+// AutoLot-WebApps - AutoLot.Dal - CarRepo.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Repos;
@@ -31,9 +31,12 @@ public class CarRepo : TemporalTableBaseRepo<Car>,
             .IgnoreQueryFilters();
 
     public override IQueryable<Car> GetAllIgnoreQueryFiltersAsQueryable(
-        string[] filtersToIgnore) =>
+        IEnumerable<string> filtersToIgnore) =>
         BuildBaseQuery()
-            .IgnoreQueryFilters(filtersToIgnore);
+            .IgnoreQueryFilters(
+            [
+                .. filtersToIgnore
+            ]);
 
     public override Car Find(
         int? id) =>
@@ -55,7 +58,7 @@ public class CarRepo : TemporalTableBaseRepo<Car>,
             .IgnoreQueryFilters()
             .FirstOrDefault(c => c.Id == id);
 
-    public IList<Car> GetAllByAsList(
+    public List<Car> GetAllByAsList(
         int makeId) =>
         GetAllByAsQueryable(makeId)
             .ToList();
@@ -70,23 +73,33 @@ public class CarRepo : TemporalTableBaseRepo<Car>,
         int id)
     {
         var outParam =
-            new SqlParameter("@petName", SqlDbType.NVarChar, 50)
-            {
-                Direction = ParameterDirection.Output
-            };
-        ExecuteParameterizedQuery("EXEC GetPetName @id, @petName OUT", [
-            new SqlParameter("@id", id),
-            outParam
-        ]);
+            new SqlParameter(
+                "@petName",
+                SqlDbType.NVarChar,
+                50) { Direction = ParameterDirection.Output };
+        ExecuteParameterizedQuery(
+            "EXEC GetPetName @id, @petName OUT",
+            [
+                new SqlParameter(
+                    "@id",
+                    id),
+                outParam
+            ]);
         return outParam.Value?.ToString();
     }
 
     public int SetAllDrivableCarsColorAndMakeId(
         string color,
         int makeId) =>
-        ExecuteBulkUpdate(c => c.IsDrivable, s =>
-            s.SetProperty(c => c.Color, color)
-                .SetProperty(c => c.MakeId, makeId));
+        ExecuteBulkUpdate(
+            c => c.IsDrivable,
+            s =>
+                s.SetProperty(
+                        c => c.Color,
+                        color)
+                    .SetProperty(
+                        c => c.MakeId,
+                        makeId));
 
     //public int SetAllDrivableCarsColorAndMakeId(string color, int makeId) =>
     //ExecuteBulkUpdate(c => c.IsDrivable, u =>

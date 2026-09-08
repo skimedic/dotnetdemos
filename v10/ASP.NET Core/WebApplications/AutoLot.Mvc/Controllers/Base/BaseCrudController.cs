@@ -2,18 +2,19 @@
 // ==================================
 // AutoLot - AutoLot.Mvc - BaseCrudController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
 namespace AutoLot.Mvc.Controllers.Base;
 
 [Route("[controller]/[action]")]
 public abstract class BaseCrudController<TEntity>(
-    IAppLogging appLogging,
+    IAppLogger appLogger,
     IDataServiceBase<TEntity> baseDataService) : Controller where TEntity : BaseEntity, new()
 {
-    protected readonly IAppLogging AppLoggingInstance = appLogging;
+    protected readonly IAppLogger AppLoggerInstance = appLogger;
     protected readonly IDataServiceBase<TEntity> BaseDataServiceInstance = baseDataService;
+
     protected virtual Task<SelectList> GetLookupValuesAsync() => Task.FromResult<SelectList>(null);
 
     protected async Task<TEntity> GetOneEntityAsync(
@@ -64,11 +65,10 @@ public abstract class BaseCrudController<TEntity>(
         }
 
         var savedEntity = await BaseDataServiceInstance.AddAsync(entity);
-        return RedirectToAction(nameof(DetailsAsync)
-            .RemoveAsyncSuffix(), new
-        {
-            id = savedEntity.Id
-        });
+        return RedirectToAction(
+            nameof(DetailsAsync)
+                .RemoveAsyncSuffix(),
+            new { id = savedEntity.Id });
     }
 
     [HttpGet("{id?}")]
@@ -108,11 +108,10 @@ public abstract class BaseCrudController<TEntity>(
         }
 
         var savedEntity = await BaseDataServiceInstance.UpdateAsync(entity);
-        return RedirectToAction(nameof(DetailsAsync)
-            .RemoveAsyncSuffix(), new
-        {
-            id = savedEntity.Id
-        });
+        return RedirectToAction(
+            nameof(DetailsAsync)
+                .RemoveAsyncSuffix(),
+            new { id = savedEntity.Id });
     }
 
     [HttpGet("{id?}")]
@@ -140,7 +139,8 @@ public abstract class BaseCrudController<TEntity>(
         }
 
         await BaseDataServiceInstance.DeleteAsync(entity);
-        return RedirectToAction(nameof(IndexAsync)
-            .RemoveAsyncSuffix());
+        return RedirectToAction(
+            nameof(IndexAsync)
+                .RemoveAsyncSuffix());
     }
 }

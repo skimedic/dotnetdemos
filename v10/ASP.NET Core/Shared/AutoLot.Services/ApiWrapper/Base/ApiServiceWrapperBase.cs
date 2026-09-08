@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot-Temp - AutoLot.Services - ApiServiceWrapperBase.cs
+// AutoLot-WebApps - AutoLot.Services - ApiServiceWrapperBase.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/04
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Services.ApiWrapper.Base;
@@ -30,12 +30,22 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
     internal async Task<HttpResponseMessage> PostAsJsonAsync(
         string uri,
         string json) =>
-        await Client.PostAsync(uri, new StringContent(json, Encoding.UTF8, "application/json"));
+        await Client.PostAsync(
+            uri,
+            new StringContent(
+                json,
+                Encoding.UTF8,
+                "application/json"));
 
     internal async Task<HttpResponseMessage> PutAsJsonAsync(
         string uri,
         string json) =>
-        await Client.PutAsync(uri, new StringContent(json, Encoding.UTF8, "application/json"));
+        await Client.PutAsync(
+            uri,
+            new StringContent(
+                json,
+                Encoding.UTF8,
+                "application/json"));
 
     internal async Task<HttpResponseMessage> DeleteAsJsonAsync(
         string uri,
@@ -44,18 +54,22 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
         HttpRequestMessage request =
             new HttpRequestMessage
             {
-                Content = new StringContent(json, Encoding.UTF8, "application/json"),
+                Content =
+                    new StringContent(
+                        json,
+                        Encoding.UTF8,
+                        "application/json"),
                 Method = HttpMethod.Delete,
                 RequestUri = new Uri(uri)
             };
         return await Client.SendAsync(request);
     }
 
-    public async Task<IList<TEntity>> GetAllEntitiesAsync()
+    public async Task<List<TEntity>> GetAllEntitiesAsync()
     {
         var response = await Client.GetAsync($"{ApiSettings.BaseUri}{_endPoint}?v={ApiVersion}");
         response.EnsureSuccessStatusCode();
-        var result = await response.Content.ReadFromJsonAsync<IList<TEntity>>();
+        var result = await response.Content.ReadFromJsonAsync<List<TEntity>>();
         return result;
     }
 
@@ -72,7 +86,9 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
         TEntity entity)
     {
         var response =
-            await PostAsJsonAsync($"{ApiSettings.BaseUri}{_endPoint}?v={ApiVersion}", JsonSerializer.Serialize(entity));
+            await PostAsJsonAsync(
+                $"{ApiSettings.BaseUri}{_endPoint}?v={ApiVersion}",
+                JsonSerializer.Serialize(entity));
         if (response == null)
         {
             throw new Exception("Unable to communicate with the service");
@@ -85,7 +101,8 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
         TEntity entity)
     {
         var response =
-            await PutAsJsonAsync($"{ApiSettings.BaseUri}{_endPoint}/{entity.Id}?v={ApiVersion}",
+            await PutAsJsonAsync(
+                $"{ApiSettings.BaseUri}{_endPoint}/{entity.Id}?v={ApiVersion}",
                 JsonSerializer.Serialize(entity));
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<TEntity>() ?? await GetEntityAsync(entity.Id);
@@ -95,7 +112,8 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
         TEntity entity)
     {
         var response =
-            await DeleteAsJsonAsync($"{ApiSettings.BaseUri}{_endPoint}/{entity.Id}?v={ApiVersion}",
+            await DeleteAsJsonAsync(
+                $"{ApiSettings.BaseUri}{_endPoint}/{entity.Id}?v={ApiVersion}",
                 JsonSerializer.Serialize(entity));
         response.EnsureSuccessStatusCode();
     }

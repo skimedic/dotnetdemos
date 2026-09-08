@@ -1,13 +1,15 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Models - SeriLogEntry.cs
+// AutoLot-WebApps - AutoLot.Models - SeriLogEntry.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Models.Entities;
 
-[Table("SeriLogs", Schema = "Logging")]
+[Table(
+    "SeriLogs",
+    Schema = "Logging")]
 [EntityTypeConfiguration(typeof(SeriLogEntryConfiguration))]
 public class SeriLogEntry
 {

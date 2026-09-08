@@ -1,20 +1,20 @@
 // Copyright Information
 // ==================================
-// AutoLot-Temp - AutoLot.Services - ApiDataServiceBase.cs
+// AutoLot-WebApps - AutoLot.Services - ApiDataServiceBase.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/04
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Services.DataServices.Api.Base;
 
 public abstract class ApiDataServiceBase<TEntity>(
-    IAppLogging appLogging,
+    IAppLogger appLogger,
     IApiServiceWrapperBase<TEntity> serviceWrapperBase) : IDataServiceBase<TEntity> where TEntity : BaseEntity, new()
 {
     protected readonly IApiServiceWrapperBase<TEntity> ServiceWrapper = serviceWrapperBase;
-    protected readonly IAppLogging AppLoggingInstance = appLogging;
+    protected readonly IAppLogger AppLogger = appLogger;
 
-    public Task<IList<TEntity>> GetAllAsync() => ServiceWrapper.GetAllEntitiesAsync();
+    public Task<List<TEntity>> GetAllAsync() => ServiceWrapper.GetAllEntitiesAsync();
 
     public Task<TEntity> FindAsync(
         int id) =>

@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - CustomCsvOutputFormatter.cs
+// AutoLot-APIs - AutoLot.Api - CustomCsvOutputFormatter.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 using MediaTypeHeaderValue = Microsoft.Net.Http.Headers.MediaTypeHeaderValue;
@@ -47,17 +47,27 @@ public class CustomCsvOutputFormatter : TextOutputFormatter
                 context.Object
             ];
         // Header
-        buffer.AppendLine(string.Join(",", props.Select(p => p.Name)));
+        buffer.AppendLine(
+            string.Join(
+                ",",
+                props.Select(p => p.Name)));
 
         // Rows
         foreach (var item in enumerable)
         {
             var values =
                 props.Select(p =>
-                    p.GetValue(item, null)
+                    p.GetValue(
+                            item,
+                            null)
                         ?.ToString()
-                        ?.Replace(",", " ") ?? "");
-            buffer.AppendLine(string.Join(",", values));
+                        ?.Replace(
+                            ",",
+                            " ") ?? "");
+            buffer.AppendLine(
+                string.Join(
+                    ",",
+                    values));
         }
 
         await response.WriteAsync(buffer.ToString());

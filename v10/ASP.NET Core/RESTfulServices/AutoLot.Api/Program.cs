@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - Program.cs
+// AutoLot-APIs - AutoLot.Api - Program.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 using JsonOptions = Microsoft.AspNetCore.Http.Json.JsonOptions;
@@ -10,7 +10,7 @@ using JsonOptions = Microsoft.AspNetCore.Http.Json.JsonOptions;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.ConfigureSerilog();
+builder.ConfigureSerilog(builder.Configuration);
 builder.Services.RegisterLoggingInterfaces();
 
 builder.Services
@@ -59,20 +59,24 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-builder.Services.AddScoped(typeof(IDataShaper<>), typeof(DataShaper<>));
+builder.Services.AddScoped(
+    typeof(IDataShaper<>),
+    typeof(DataShaper<>));
 
 var connectionString = builder.Configuration.GetConnectionString("AutoLot");
 builder.Services.AddAutoLotDal(connectionString);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", pb =>
-    {
-        pb.AllowAnyHeader()
-            .AllowAnyMethod()
-            //.AllowCredentials()
-            .AllowAnyOrigin();
-    });
+    options.AddPolicy(
+        "AllowAll",
+        pb =>
+        {
+            pb.AllowAnyHeader()
+                .AllowAnyMethod()
+                //.AllowCredentials()
+                .AllowAnyOrigin();
+        });
 });
 
 builder.Services.AddProblemDetails();
@@ -93,10 +97,13 @@ builder.Services
         // for query string, header, or media type versioning
         // NOTE: In a real application, pick one method, not all of them
         options.ApiVersionReader =
-            ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
+            ApiVersionReader.Combine(
+                new UrlSegmentApiVersionReader(),
                 new QueryStringApiVersionReader(), //defaults to "api-version"
-                new QueryStringApiVersionReader("v"), new HeaderApiVersionReader("x-ms-api-version"),
-                new HeaderApiVersionReader("x-ms-v"), new MediaTypeApiVersionReader(), //defaults to "v"
+                new QueryStringApiVersionReader("v"),
+                new HeaderApiVersionReader("x-ms-api-version"),
+                new HeaderApiVersionReader("x-ms-v"),
+                new MediaTypeApiVersionReader(), //defaults to "v"
                 new MediaTypeApiVersionReader("api-version"));
         options.ApiVersionSelector = new DefaultApiVersionSelector(options);
         //options.ApiVersionSelector =
@@ -151,17 +158,44 @@ builder.Services
 
 builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiControllerSpecification, ApiBehaviorSpecification>());
 
-builder.Services.AddOpenApi("v1", options => DocumentTools.ConfigureOptions(options, "v1", includeBlankGroups: true));
+builder.Services.AddOpenApi(
+    "v1",
+    options =>
+    DocumentTools.ConfigureOptions(
+        options,
+        "v1",
+        includeBlankGroups: true));
 //builder.Services.AddOpenApi("v1.5",
 //    options => ConfigureOptions(options, "v1.5", isDeprecated: true));
-builder.Services.AddOpenApi("v1.5", options =>
-    DocumentTools.ConfigureOptions(options, "v1.5", isDeprecated: true, controllerNamesToDeprecate:
-    [
-        "Cars"
-    ]));
-builder.Services.AddOpenApi("v2", options => DocumentTools.ConfigureOptions(options, "v2"));
-builder.Services.AddOpenApi("v2.5-Beta", options => DocumentTools.ConfigureOptions(options, "v2.5-Beta"));
-builder.Services.AddOpenApi("v3-Beta", options => DocumentTools.ConfigureOptions(options, "v3-Beta"));
+builder.Services.AddOpenApi(
+    "v1.5",
+    options =>
+        DocumentTools.ConfigureOptions(
+            options,
+            "v1.5",
+            isDeprecated: true,
+            controllerNamesToDeprecate:
+            [
+                "Cars"
+            ]));
+builder.Services.AddOpenApi(
+    "v2",
+    options =>
+    DocumentTools.ConfigureOptions(
+        options,
+        "v2"));
+builder.Services.AddOpenApi(
+    "v2.5-Beta",
+    options =>
+    DocumentTools.ConfigureOptions(
+        options,
+        "v2.5-Beta"));
+builder.Services.AddOpenApi(
+    "v3-Beta",
+    options =>
+    DocumentTools.ConfigureOptions(
+        options,
+        "v3-Beta"));
 
 var app = builder.Build();
 
@@ -179,8 +213,12 @@ if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Local"))
         {
             var isDeprecated = versionDescription.IsDeprecated ? " (Deprecated)" : "";
             var name = $"AutoLot API Version {versionDescription.ApiVersion.ToString()}{isDeprecated}";
-            docs.Add(new ScalarDocument(versionDescription.GroupName, name));
+            docs.Add(
+                new ScalarDocument(
+                    versionDescription.GroupName,
+                    name));
         }
+
         options.AddDocuments(docs);
     });
     app.UseSwaggerUI(options =>
@@ -190,7 +228,9 @@ if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Local"))
             var groupName = versionDescription.GroupName;
             var url = $"/openapi/{groupName}.json";
             var name = $"AutoLot API: {groupName}";
-            options.SwaggerEndpoint(url, name);
+            options.SwaggerEndpoint(
+                url,
+                name);
         }
     });
     //Initialize the database

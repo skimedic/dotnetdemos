@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - ApplicationDbContext.cs
+// AutoLot-WebApps - AutoLot.Dal - ApplicationDbContext.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.EfStructures;
@@ -18,12 +18,16 @@ public class ApplicationDbContext(
     public DbSet<SeriLogEntry> SeriLogEntries { get; set; }
     public DbSet<CarViewModel> CarViewModels { get; set; }
 
-    [DbFunction("udf_CountOfMakes", Schema = "dbo")]
+    [DbFunction(
+        "udf_CountOfMakes",
+        Schema = "dbo")]
     public static int InventoryCountFor(
         int makeId) =>
         throw new NotSupportedException();
 
-    [DbFunction("udtf_GetCarsForMake", Schema = "dbo")]
+    [DbFunction(
+        "udtf_GetCarsForMake",
+        Schema = "dbo")]
     public IQueryable<CarViewModel> GetCarsFor(
         int makeId) =>
         FromExpression(() => GetCarsFor(makeId));
@@ -75,20 +79,28 @@ public class ApplicationDbContext(
         catch (DbUpdateConcurrencyException ex)
         {
             DemoConcurrencyException(ex);
-            throw new CustomConcurrencyException("A concurrency error happened.", ex);
+            throw new CustomConcurrencyException(
+                "A concurrency error happened.",
+                ex);
         }
         catch (RetryLimitExceededException ex)
         {
             //DbResiliency retry limit exceeded
-            throw new CustomRetryLimitExceededException("There is a problem with SQL Server.", ex);
+            throw new CustomRetryLimitExceededException(
+                "There is a problem with SQL Server.",
+                ex);
         }
         catch (DbUpdateException ex)
         {
-            throw new CustomDbUpdateException("An error occurred updating the database", ex);
+            throw new CustomDbUpdateException(
+                "An error occurred updating the database",
+                ex);
         }
         catch (Exception ex)
         {
-            throw new CustomException("An error occurred updating the database", ex);
+            throw new CustomException(
+                "An error occurred updating the database",
+                ex);
         }
     }
 }

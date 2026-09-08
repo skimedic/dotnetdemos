@@ -12,10 +12,9 @@ else
         <div class="row">
             <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                @Html.EditorFor(x => x.Entity, new
-                {
-                    LookupValues = Model.LookupValues
-                })
+                @Html.EditorFor(
+                    x => x.Entity,
+                    new { LookupValues = Model.LookupValues })
             </div>
         </div>
         <div class="d-flex flex-row mt-3">

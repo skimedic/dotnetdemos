@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - CustomConcurrencyException.cs
+// AutoLot-WebApps - AutoLot.Dal - CustomConcurrencyException.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Exceptions;
@@ -20,7 +20,9 @@ public class CustomConcurrencyException : CustomException
 
     public CustomConcurrencyException(
         string message,
-        DbUpdateConcurrencyException innerException) : base(message, innerException)
+        DbUpdateConcurrencyException innerException) : base(
+        message,
+        innerException)
     {
     }
 }

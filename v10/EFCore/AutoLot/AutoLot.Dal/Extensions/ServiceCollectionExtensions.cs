@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - ServiceCollectionExtensions.cs
+// AutoLot-WebApps - AutoLot.Dal - ServiceCollectionExtensions.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Extensions;
@@ -13,8 +13,8 @@ public static class ServiceCollectionExtensions
         IServiceCollection services)
     {
         /// <summary>
-        /// Registers all AutoLot DAL services: DbContext pool and all repo scoped registrations.
-        /// Call once from each host's Program.cs instead of repeating the individual registrations.
+        ///     Registers all AutoLot DAL services: DbContext pool and all repo scoped registrations.
+        ///     Call once from each host's Program.cs instead of repeating the individual registrations.
         /// </summary>
         public IServiceCollection AddAutoLotDal(
             string connectionString)
@@ -22,9 +22,11 @@ public static class ServiceCollectionExtensions
             services.AddDbContextPool<ApplicationDbContext>(options =>
             {
                 options.ConfigureWarnings(wc => wc.Ignore(RelationalEventId.BoolWithDefaultWarning));
-                options.UseSqlServer(connectionString, sqlOptions =>
-                    sqlOptions.EnableRetryOnFailure()
-                        .CommandTimeout(60));
+                options.UseSqlServer(
+                    connectionString,
+                    sqlOptions =>
+                        sqlOptions.EnableRetryOnFailure()
+                            .CommandTimeout(60));
             });
 
             services.AddScoped<ICarDriverRepo, CarDriverRepo>();

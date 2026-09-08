@@ -3,6 +3,7 @@
     var showBanner = !consentFeature?.CanTrack ?? false;
     var cookieString = consentFeature?.CreateConsentCookie();
 }
+
 @if (showBanner)
 {
     <div id="cookieConsent" class="alert alert-info alert-dismissible fade show" role="alert">
@@ -19,8 +20,10 @@
             button.addEventListener("click",
                 function(event) {
                     document.cookie = button.dataset.cookieString;
-                    window.location = '@Url.Action(nameof(HomeController.Index), nameof(HomeController)
-                                           .RemoveControllerSuffix())';
+                    window.location = '@Url.Action(
+                                           nameof(HomeController.Index),
+                                           nameof(HomeController)
+                                               .RemoveControllerSuffix())';
                 },
                 false);
         })();

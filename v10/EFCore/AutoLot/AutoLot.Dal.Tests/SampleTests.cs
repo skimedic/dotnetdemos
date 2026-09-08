@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot - AutoLot.Dal.Tests - SampleTests.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Tests;
@@ -12,17 +12,27 @@ public class SampleTests
     [Fact]
     public void SimpleFactTest()
     {
-        Assert.Equal(5, 3 + 2);
+        Assert.Equal(
+            5,
+            3 + 2);
     }
 
     [Theory]
-    [InlineData(3, 2, 5)]
-    [InlineData(1, -1, 0)]
+    [InlineData(
+        3,
+        2,
+        5)]
+    [InlineData(
+        1,
+        -1,
+        0)]
     public void SimpleTheoryTest(
         int addend1,
         int addend2,
         int expectedResult)
     {
-        Assert.Equal(expectedResult, addend1 + addend2);
+        Assert.Equal(
+            expectedResult,
+            addend1 + addend2);
     }
 }

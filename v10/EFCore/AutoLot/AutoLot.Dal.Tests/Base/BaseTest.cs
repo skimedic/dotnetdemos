@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot - AutoLot.Dal.Tests - BaseTest.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Tests.Base;

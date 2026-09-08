@@ -1,3 +1,10 @@
+// Copyright Information
+// ==================================
+// AutoLot - AutoLot.Web - Validation.cshtml.cs
+// All samples copyright Philip Japikse
+// http://www.skimedic.com 2026/09/05
+// ==================================
+
 namespace AutoLot.Web.Pages;
 
 public class ValidationModel : PageModel
@@ -11,13 +18,13 @@ public class ValidationModel : PageModel
     public void OnGet()
     {
         Entity =
-            new AddToCartViewModelRp
-            {
-                Id = 1,
-                ItemId = 1,
-                StockQuantity = 2,
-                Quantity = 0
-            };
+        new AddToCartViewModelRp
+        {
+            Id = 1,
+            ItemId = 1,
+            StockQuantity = 2,
+            Quantity = 0
+        };
     }
 
     public async Task<IActionResult> OnPostAsync()

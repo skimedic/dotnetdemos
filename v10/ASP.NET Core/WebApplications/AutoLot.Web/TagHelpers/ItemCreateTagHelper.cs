@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Web - ItemCreateTagHelper.cs
+// AutoLot-WebApps - AutoLot.Web - ItemCreateTagHelper.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Web.TagHelpers;
@@ -11,7 +11,9 @@ public class ItemCreateTagHelper : ItemLinkTagHelperBase
 {
     public ItemCreateTagHelper(
         IHttpContextAccessor contextAccessor,
-        IUrlHelperFactory urlHelperFactory) : base(contextAccessor, urlHelperFactory)
+        IUrlHelperFactory urlHelperFactory) : base(
+        contextAccessor,
+        urlHelperFactory)
     {
         ActionName = "Create";
     }
@@ -20,6 +22,10 @@ public class ItemCreateTagHelper : ItemLinkTagHelperBase
         TagHelperContext context,
         TagHelperOutput output)
     {
-        BuildContent(output, "text-success", "Create New", "plus");
+        BuildContent(
+            output,
+            "text-success",
+            "Create New",
+            "plus");
     }
 }

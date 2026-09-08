@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - OpenApiUtilities.cs
+// AutoLot-APIs - AutoLot.Api - DocumentTools.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/12
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Api.OpenAPIUtilities;
@@ -30,7 +30,7 @@ public static class DocumentTools
                     Name = "Phil Japikse",
                     Email = "skimedic@outlook.com"
                 },
-            TermsOfService = new System.Uri("https://www.linktotermsofservice.com"),
+            TermsOfService = new Uri("https://www.linktotermsofservice.com"),
             License =
                 new OpenApiLicense()
                 {
@@ -53,9 +53,10 @@ public static class DocumentTools
                         Count: > 0
                     })
                 {
-                    controllerNames
-                        .Where(controllerName =>
-                            path.Key.Contains($"/{controllerName}", StringComparison.OrdinalIgnoreCase))
+                    controllerNames.Where(controllerName =>
+                        path.Key.Contains(
+                            $"/{controllerName}",
+                            StringComparison.OrdinalIgnoreCase))
                         .ToList()
                         .ForEach(controllerName => op.Value.Deprecated = true);
                 }
@@ -79,10 +80,15 @@ public static class DocumentTools
             context,
             cancellationToken) =>
         {
-            document.Info = BuildDocumentInfo(documentName, isDeprecated);
+            document.Info =
+            BuildDocumentInfo(
+                documentName,
+                isDeprecated);
             if (isDeprecated)
             {
-                AddDeprecated(document, controllerNamesToDeprecate);
+                AddDeprecated(
+                    document,
+                    controllerNamesToDeprecate);
             }
 
             return Task.CompletedTask;
@@ -93,14 +99,11 @@ public static class DocumentTools
         if (includeBlankGroups)
         {
             openApiOptions.ShouldInclude =
-            (
-                description) => description.GroupName == null || description.GroupName == openApiOptions.DocumentName;
+                (description) => description.GroupName == null || description.GroupName == openApiOptions.DocumentName;
         }
         else
         {
-            openApiOptions.ShouldInclude =
-            (
-                description) => description.GroupName == openApiOptions.DocumentName;
+            openApiOptions.ShouldInclude = (description) => description.GroupName == openApiOptions.DocumentName;
         }
     }
 }

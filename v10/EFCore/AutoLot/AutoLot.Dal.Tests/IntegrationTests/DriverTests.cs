@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot - AutoLot.Dal.Tests - DriverTests.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
 namespace AutoLot.Dal.Tests.IntegrationTests;
@@ -21,7 +21,6 @@ public class DriverTests : BaseTest,
 
     public override void Dispose()
     {
-        _repo.Dispose();
         base.Dispose();
     }
 
@@ -36,17 +35,31 @@ public class DriverTests : BaseTest,
                 LastName = "Jetson"
             };
         var driver = _repo.Find(1);
-        Assert.Equal("Fred", driver.PersonInformation.FirstName);
-        Assert.Equal("Flintstone", driver.PersonInformation.LastName);
+        Assert.Equal(
+            "Fred",
+            driver.PersonInformation.FirstName);
+        Assert.Equal(
+            "Flintstone",
+            driver.PersonInformation.LastName);
         ExecuteInATransaction(RunTheTest);
 
         void RunTheTest()
         {
-            var count = _repo.ExecuteBulkUpdate(x => x.Id == 1, s => s.SetProperty(b => b.PersonInformation, person));
+            var count =
+                _repo.ExecuteBulkUpdate(
+                    x => x.Id == 1,
+                    s =>
+                    s.SetProperty(
+                        b => b.PersonInformation,
+                        person));
             Context.ChangeTracker.Clear();
             var updatedDriver = _repo.Find(1);
-            Assert.Equal(person.FirstName, updatedDriver.PersonInformation.FirstName);
-            Assert.Equal(person.LastName, updatedDriver.PersonInformation.LastName);
+            Assert.Equal(
+                person.FirstName,
+                updatedDriver.PersonInformation.FirstName);
+            Assert.Equal(
+                person.LastName,
+                updatedDriver.PersonInformation.LastName);
         }
     }
 }

@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot - AutoLot.Web - RazorSyntax.cshtml.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
 namespace AutoLot.Web.Pages;
@@ -22,7 +22,11 @@ public class RazorSyntaxModel(
 
     public async Task<IActionResult> OnGetAsync()
     {
-        LookupValues = new(await makeDataService.GetAllAsync(), nameof(Make.Id), nameof(Make.Name));
+        LookupValues =
+        new(
+            await makeDataService.GetAllAsync(),
+            nameof(Make.Id),
+            nameof(Make.Name));
         Entity = await carDataService.FindAsync(6);
         return Page();
     }

@@ -2,14 +2,17 @@
 // ==================================
 // AutoLot - AutoLot.Web - Index.cshtml.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
 namespace AutoLot.Web.Pages.Cars;
 
 public class IndexModel(
-    IAppLogging appLogging,
-    ICarDataService carDataService) : BasePageModel<Car>(appLogging, carDataService, "Inventory")
+    IAppLogger appLogger,
+    ICarDataService carDataService) : BasePageModel<Car>(
+    appLogger,
+    carDataService,
+    "Inventory")
 {
     public string MakeName { get; set; }
     public int? MakeId { get; set; }

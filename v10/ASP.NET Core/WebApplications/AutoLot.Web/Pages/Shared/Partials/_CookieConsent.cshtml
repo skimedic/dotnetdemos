@@ -16,14 +16,14 @@
         </button>
     </div>
     <script>
-        (function () {
-          var button = document.querySelector("#cookieConsent button[data-cookie-string]");
+        (function() {
+            var button = document.querySelector("#cookieConsent button[data-cookie-string]");
             button.addEventListener("click",
                 function(event) {
-            document.cookie = button.dataset.cookieString;
+                    document.cookie = button.dataset.cookieString;
                     window.location = '@Url.Page(nameof(Index))';
                 },
                 false);
-          })();
+        })();
     </script>
 }

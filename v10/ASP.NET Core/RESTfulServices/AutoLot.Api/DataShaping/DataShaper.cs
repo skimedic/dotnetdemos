@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - DataShaper.cs
+// AutoLot-APIs - AutoLot.Api - DataShaper.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Api.DataShaping;
@@ -25,20 +25,28 @@ public class DataShaper<TEntity> : IDataShaper<TEntity>
     internal PropertyInfo FindProperty(
         List<PropertyInfo> properties,
         string fieldName) =>
-        properties.FirstOrDefault(p => p.Name.Equals(fieldName.Trim(), StringComparison.OrdinalIgnoreCase));
+        properties.FirstOrDefault(p =>
+        p.Name.Equals(
+            fieldName.Trim(),
+            StringComparison.OrdinalIgnoreCase));
 
     internal void SetValue<TI>(
         TI entity,
         ExpandoObject shapedObject,
         PropertyInfo prop)
     {
-        ((IDictionary<string, object>)shapedObject).Add(prop.Name, prop.GetValue(entity));
+        ((IDictionary<string, object>)shapedObject).Add(
+            prop.Name,
+            prop.GetValue(entity));
     }
 
     public IEnumerable<ShapedEntity> ShapeData(
         IEnumerable<TEntity> entities,
         string fieldsString) =>
-        entities.Select(e => ShapeData(e, fieldsString));
+        entities.Select(e =>
+        ShapeData(
+            e,
+            fieldsString));
 
     public void UpdateData(
         TEntity entity,
@@ -47,10 +55,15 @@ public class DataShaper<TEntity> : IDataShaper<TEntity>
         //This only works with strings
         foreach (var entry in values)
         {
-            var property = FindProperty(_properties, entry.Key);
+            var property =
+                FindProperty(
+                    _properties,
+                    entry.Key);
             if (property != null)
             {
-                property.SetValue(entity, entry.Value);
+                property.SetValue(
+                    entity,
+                    entry.Value);
                 continue;
             }
 
@@ -60,17 +73,24 @@ public class DataShaper<TEntity> : IDataShaper<TEntity>
                     complexProperty.PropertyType
                         .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                         .ToList();
-                var innerProperty = FindProperty(innerProperties, entry.Key);
+                var innerProperty =
+                    FindProperty(
+                        innerProperties,
+                        entry.Key);
                 if (innerProperty != null)
                 {
                     var innerValue = complexProperty.GetValue(entity);
                     if (innerValue == null)
                     {
                         innerValue = Activator.CreateInstance(complexProperty.PropertyType);
-                        complexProperty.SetValue(entity, innerValue);
+                        complexProperty.SetValue(
+                            entity,
+                            innerValue);
                     }
 
-                    innerProperty.SetValue(innerValue, entry.Value);
+                    innerProperty.SetValue(
+                        innerValue,
+                        entry.Value);
                     continue;
                 }
             }
@@ -82,7 +102,10 @@ public class DataShaper<TEntity> : IDataShaper<TEntity>
         string fieldsString)
     {
         var shapedObject = new ExpandoObject();
-        var idProp = FindProperty(_properties, nameof(BaseEntity.Id));
+        var idProp =
+            FindProperty(
+                _properties,
+                nameof(BaseEntity.Id));
         var entityId = (int?)idProp!.GetValue(entity) ?? 0;
 
         if (string.IsNullOrWhiteSpace(fieldsString))
@@ -98,24 +121,39 @@ public class DataShaper<TEntity> : IDataShaper<TEntity>
                     var innerValue = prop.GetValue(entity);
                     foreach (var innerProp in innerProperties)
                     {
-                        SetValue(innerValue, shapedObject, innerProp);
+                        SetValue(
+                            innerValue,
+                            shapedObject,
+                            innerProp);
                     }
 
                     continue;
                 }
 
-                SetValue(entity, shapedObject, prop);
+                SetValue(
+                    entity,
+                    shapedObject,
+                    prop);
             }
         }
         else
         {
-            var fields = fieldsString.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            var fields =
+                fieldsString.Split(
+                    ',',
+                    StringSplitOptions.RemoveEmptyEntries);
             foreach (var field in fields)
             {
-                var prop = FindProperty(_properties, field.Trim());
+                var prop =
+                    FindProperty(
+                        _properties,
+                        field.Trim());
                 if (prop != null)
                 {
-                    SetValue(entity, shapedObject, prop);
+                    SetValue(
+                        entity,
+                        shapedObject,
+                        prop);
                 }
 
                 foreach (var complexProp in _complexProperties)
@@ -124,14 +162,20 @@ public class DataShaper<TEntity> : IDataShaper<TEntity>
                         complexProp.PropertyType
                             .GetProperties(BindingFlags.Public | BindingFlags.Instance)
                             .ToList();
-                    var innerProp = FindProperty(innerProperties, field.Trim());
+                    var innerProp =
+                        FindProperty(
+                            innerProperties,
+                            field.Trim());
                     if (innerProp == null)
                     {
                         continue;
                     }
 
                     var innerValue = complexProp.GetValue(entity);
-                    SetValue(innerValue, shapedObject, innerProp);
+                    SetValue(
+                        innerValue,
+                        shapedObject,
+                        innerProp);
                 }
             }
         }

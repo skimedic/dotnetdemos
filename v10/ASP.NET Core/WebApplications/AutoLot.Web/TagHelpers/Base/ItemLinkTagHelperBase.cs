@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Web - ItemLinkTagHelperBase.cs
+// AutoLot-WebApps - AutoLot.Web - ItemLinkTagHelperBase.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Web.TagHelpers.Base;
@@ -23,7 +23,8 @@ public abstract class ItemLinkTagHelperBase : TagHelper
         var endpoint = httpContext?.GetEndpoint();
         var actionDescriptor = endpoint?.Metadata.GetMetadata<ActionDescriptor>() as ControllerActionDescriptor;
         UrlHelper =
-            urlHelperFactory.GetUrlHelper(new ActionContext
+        urlHelperFactory.GetUrlHelper(
+            new ActionContext
             {
                 HttpContext = httpContext,
                 RouteData = httpContext.GetRouteData(),
@@ -33,7 +34,9 @@ public abstract class ItemLinkTagHelperBase : TagHelper
             httpContext?.GetRouteData()
                 ?.Values["page"] as string;
         _pageName =
-            pageRouteValue?.Split('/', StringSplitOptions.RemoveEmptyEntries)
+            pageRouteValue?.Split(
+                    '/',
+                    StringSplitOptions.RemoveEmptyEntries)
                 .FirstOrDefault();
     }
 
@@ -46,13 +49,16 @@ public abstract class ItemLinkTagHelperBase : TagHelper
         output.TagName = "a";
         var target =
             ItemId.HasValue
-                ? UrlHelper.Page($"/{_pageName}/{ActionName}", new
-                {
-                    id = ItemId
-                })
+                ? UrlHelper.Page(
+                    $"/{_pageName}/{ActionName}",
+                    new { id = ItemId })
                 : UrlHelper.Page($"/{_pageName}/{ActionName}");
-        output.Attributes.SetAttribute("href", target);
-        output.Attributes.Add("class", cssClassName);
+        output.Attributes.SetAttribute(
+            "href",
+            target);
+        output.Attributes.Add(
+            "class",
+            cssClassName);
         output.Content.AppendHtml($@"{displayText} <i class=""fa-solid fa-{fontAwesomeName}""></i>");
     }
 }

@@ -1,46 +1,41 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - DataShapingController.cs
+// AutoLot-APIs - AutoLot.Api - DataShapingController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
+namespace AutoLot.Api.Controllers.Specials;
 
-
-namespace AutoLot.Api.Controllers;
-
-[ApiController]
 [ApiVersionNeutral]
-[Route("api/[controller]")]
-[Route("api/v{version:apiVersion}/[controller]")]
 public class DataShapingController(
     IDriverRepo driverRepo,
-    IDataShaper<Driver> dataShaper) : ControllerBase
+    IDataShaper<Driver> dataShaper) : BaseAppController
 {
     [HttpGet]
     [Produces("application/json")]
-    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest, "application/problem+json")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType<IEnumerable<Driver>>(StatusCodes.Status200OK)]
     [EndpointSummary("Gets shaped driver data")]
     [EndpointDescription("Returns driver data shaped to include only the requested fields from the query string.")]
-    public IActionResult GetFromQuery(
-        [FromQuery]
-        [Description("Comma-separated list of fields to include in the response.")]
+    public ActionResult<IEnumerable<Driver>> GetFromQuery(
+        [FromQuery] [Description("Comma-separated list of fields to include in the response.")]
         string fields) =>
-        Ok(dataShaper.ShapeData(driverRepo.GetAllAsList(), fields));
+        Ok(
+            dataShaper.ShapeData(
+                driverRepo.GetAllAsList(),
+                fields));
 
     [HttpPost("{id}")]
     [Produces("application/json")]
-    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest, "application/problem+json")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType<Driver>(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [EndpointSummary("Updates a driver from shaped values")]
-    [EndpointDescription("Updates an existing driver by applying field/value pairs provided as JSON in the query string.")]
-    public IActionResult UpdateDriverFromValues(
+    [EndpointDescription(
+        "Updates an existing driver by applying field/value pairs provided as JSON in the query string.")]
+    public ActionResult<Driver> UpdateDriverFromValues(
         [Description("The unique identifier of the driver. Required.")]
         int id,
-        [FromQuery]
-        [Description("A JSON object containing field/value pairs to apply.")]
+        [FromQuery] [Description("A JSON object containing field/value pairs to apply.")]
         string values)
     {
         if (string.IsNullOrWhiteSpace(values))
@@ -64,7 +59,9 @@ public class DataShapingController(
             return NoContent();
         }
 
-        dataShaper.UpdateData(driver, convertedValues);
+        dataShaper.UpdateData(
+            driver,
+            convertedValues);
         driverRepo.Update(driver);
         return Ok(driver);
     }

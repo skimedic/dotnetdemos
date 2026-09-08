@@ -12,10 +12,9 @@ else
         <div class="row">
             <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly"></div>
-                @Html.EditorFor(x => x.Entity, new
-                {
-                    LookupValues = Model.LookupValues
-                })
+                @Html.EditorFor(
+                    x => x.Entity,
+                    new { LookupValues = Model.LookupValues })
                 <input type="hidden" asp-for="Entity.Id"/>
                 <input type="hidden" asp-for="Entity.TimeStamp"/>
             </div>

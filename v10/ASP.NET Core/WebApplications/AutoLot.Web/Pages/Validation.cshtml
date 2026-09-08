@@ -1,5 +1,5 @@
 ﻿@page
-@model AutoLot.Web.Pages.ValidationModel
+@model ValidationModel
 <h1>Validation</h1>
 <h4>Add To Cart</h4>
 <hr/>
@@ -36,8 +36,9 @@
         </form>
     </div>
 </div>
+
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial"/>
     <script type="text/javascript" language="javascript">
         function reValidate(input) {
             const form = $("#validationForm");

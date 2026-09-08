@@ -10,11 +10,14 @@ namespace AutoLot.Dal.Tests;
 public static class TestHelpers
 {
     public static IConfiguration GetConfiguration() =>
-        new ConfigurationBuilder()
-            .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.testing.json", true, true)
+        new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile(
+                "appsettings.testing.json",
+                true,
+                true)
             .Build();
-    public static ApplicationDbContext GetContext(IConfiguration configuration)
+    public static ApplicationDbContext GetContext(
+        IConfiguration configuration)
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
         var connectionString = configuration.GetConnectionString("AutoLot");

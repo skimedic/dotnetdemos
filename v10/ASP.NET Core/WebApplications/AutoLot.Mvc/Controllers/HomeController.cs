@@ -2,15 +2,16 @@
 // ==================================
 // AutoLot - AutoLot.Mvc - HomeController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
 namespace AutoLot.Mvc.Controllers;
 
 [Route("[controller]/[action]")]
 public class HomeController(
-    IAppLogging logger) : Controller
+    IAppLogger logger) : Controller
 {
+    //[Route("/MyHomePage")]
     [Route("/")]
     [Route("/[controller]")]
     [Route("/[controller]/[action]")]
@@ -28,7 +29,9 @@ public class HomeController(
         [FromKeyedServices(nameof(SimpleServiceOne))]
         ISimpleService service)
     {
-        return View("SimpleService", service.SayHello());
+        return View(
+            "SimpleService",
+            service.SayHello());
     }
 
     [HttpGet]
@@ -36,7 +39,9 @@ public class HomeController(
         [FromKeyedServices(nameof(SimpleServiceTwo))]
         ISimpleService service)
     {
-        return View("SimpleService", service.SayHello());
+        return View(
+            "SimpleService",
+            service.SayHello());
     }
 
     [HttpGet]
@@ -45,11 +50,11 @@ public class HomeController(
         HttpContext.Features
             .Get<ITrackingConsentFeature>()
             .GrantConsent();
-        return RedirectToAction(nameof(Index), nameof(HomeController)
-            .RemoveControllerSuffix(), new
-        {
-            area = ""
-        });
+        return RedirectToAction(
+            nameof(Index),
+            nameof(HomeController)
+                .RemoveControllerSuffix(),
+            new { area = "" });
     }
 
     [HttpGet]
@@ -58,11 +63,11 @@ public class HomeController(
         HttpContext.Features
             .Get<ITrackingConsentFeature>()
             .WithdrawConsent();
-        return RedirectToAction(nameof(Index), nameof(HomeController)
-            .RemoveControllerSuffix(), new
-        {
-            area = ""
-        });
+        return RedirectToAction(
+            nameof(Index),
+            nameof(HomeController)
+                .RemoveControllerSuffix(),
+            new { area = "" });
     }
 
     [HttpGet]
@@ -99,8 +104,11 @@ public class HomeController(
         }
 
         await Task.Delay(5000);
-        return RedirectToAction(nameof(Validation), nameof(HomeController)
-            .RemoveControllerSuffix());
+
+        return RedirectToAction(
+            nameof(Validation),
+            nameof(HomeController)
+                .RemoveControllerSuffix());
     }
 
     [HttpGet]
@@ -109,12 +117,12 @@ public class HomeController(
         return View();
     }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    [ResponseCache(
+        Duration = 0,
+        Location = ResponseCacheLocation.None,
+        NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel
-        {
-            RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-        });
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

@@ -1,13 +1,12 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - GlobalUsings.cs
+// AutoLot-WebApps - AutoLot.Dal - GlobalUsings.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 global using AutoLot.Dal.EfStructures;
 global using AutoLot.Dal.Exceptions;
-global using AutoLot.Dal.Extensions;
 global using AutoLot.Dal.Repos;
 global using AutoLot.Dal.Repos.Base;
 global using AutoLot.Dal.Repos.Interfaces;

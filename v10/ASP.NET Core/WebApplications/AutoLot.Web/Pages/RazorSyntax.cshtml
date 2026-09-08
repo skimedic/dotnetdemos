@@ -1,5 +1,5 @@
 ﻿@page
-@model AutoLot.Web.Pages.RazorSyntaxModel
+@model RazorSyntaxModel
 @{
     //can be set here or in the code behind
     //ViewData["Title"] = "Razor Syntax";
@@ -48,7 +48,9 @@ test@(foo)<br/>
         var list = from s in strings orderby s select s;
         return list.ToList();
     }
+
 }
+
 @{
     var myList =
         new List<string>
@@ -63,6 +65,7 @@ test@(foo)<br/>
 @foreach (string s in sortedList)
 {
     @s
+
     @:&nbsp;
 }
 <hr/>
@@ -79,17 +82,23 @@ Make:
 @Html.DisplayFor(x => x.Entity.MakeNavigation)
 Car:
 <div class="container">
-@*     @Html.DisplayFor(c => c.Entity)
+    @*     @Html.DisplayFor(c => c.Entity)
 </div>
 Car Editor:
 @Html.EditorFor(c => c.Entity)
  *@
-@* If the templates were in the shared folder, you wouldn't need the full path listed*@
-    @Html.DisplayFor(c => c.Entity, "Cars/DisplayTemplates/Car.cshtml")
+    @* If the templates were in the shared folder, you wouldn't need the full path listed*@
+    @Html.DisplayFor(
+        c => c.Entity,
+        "Cars/DisplayTemplates/Car.cshtml")
     <hr/>
-    @Html.DisplayFor(c => c.Entity, "Cars/DisplayTemplates/CarWithColors.cshtml")
+    @Html.DisplayFor(
+        c => c.Entity,
+        "Cars/DisplayTemplates/CarWithColors.cshtml")
 </div>
 Car Editor:
-@Html.EditorFor(c => c.Entity, "Cars/EditorTemplates/Car.cshtml")
+@Html.EditorFor(
+    c => c.Entity,
+    "Cars/EditorTemplates/Car.cshtml")
 <hr/>
 <a asp-page="/Cars/Details" asp-route-id="@Model.Entity.Id">@Model.Entity.PetName</a>

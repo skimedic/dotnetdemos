@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - ITemporalTableBaseRepo.cs
+// AutoLot-WebApps - AutoLot.Dal - ITemporalTableBaseRepo.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Repos.Interfaces.Base;

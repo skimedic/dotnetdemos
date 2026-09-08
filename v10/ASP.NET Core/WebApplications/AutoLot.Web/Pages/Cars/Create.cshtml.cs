@@ -2,21 +2,19 @@
 // ==================================
 // AutoLot - AutoLot.Web - Create.cshtml.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
 namespace AutoLot.Web.Pages.Cars;
 
 public class CreateModel(
-    IAppLogging appLogging,
+    IAppLogger appLogger,
     ICarDataService carDataService,
-    IMakeDataService makeDataService) : BasePageModel<Car>(appLogging, carDataService, "Create")
+    IMakeDataService makeDataService) : BasePageModel<Car>(
+    appLogger,
+    carDataService,
+    "Create")
 {
-    protected override async Task GetLookupValuesAsync() =>
-        LookupValues =
-            new SelectList((await makeDataService.GetAllAsync()).OrderBy(m => m.Name), nameof(Make.Id),
-                nameof(Make.Name));
-
     public async Task OnGetAsync()
     {
         await GetLookupValuesAsync();
@@ -24,4 +22,11 @@ public class CreateModel(
     }
 
     public Task<IActionResult> OnPostAsync() => SaveOneEntityWithLookupAsync(carDataService.AddAsync);
+    protected override async Task GetLookupValuesAsync() =>
+        LookupValues =
+        new SelectList(
+            (await makeDataService.GetAllAsync()).OrderBy(m => m.Name),
+            nameof(Make.Id),
+            nameof(Make.Name));
+
 }

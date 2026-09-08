@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Services - MustBeGreaterThanZeroAttribute.cs
+// AutoLot-WebApps - AutoLot.Services - MustBeGreaterThanZeroAttribute.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Services.Validation;
@@ -17,7 +17,9 @@ public class MustBeGreaterThanZeroAttribute(
 
     public override string FormatErrorMessage(
         string name) =>
-        string.Format(ErrorMessageString, name);
+        string.Format(
+            ErrorMessageString,
+            name);
 
     protected override ValidationResult IsValid(
         object value,
@@ -25,15 +27,19 @@ public class MustBeGreaterThanZeroAttribute(
     {
         if (value is not int intValue)
         {
-            return new ValidationResult(FormatErrorMessage(validationContext.DisplayName), [
-                validationContext.MemberName
-            ]);
+            return new ValidationResult(
+                FormatErrorMessage(validationContext.DisplayName),
+                [
+                    validationContext.MemberName
+                ]);
         }
 
         return intValue <= 0
-            ? new ValidationResult(FormatErrorMessage(validationContext.DisplayName), [
-                validationContext.MemberName
-            ])
+            ? new ValidationResult(
+                FormatErrorMessage(validationContext.DisplayName),
+                [
+                    validationContext.MemberName
+                ])
             : ValidationResult.Success;
     }
 
@@ -42,7 +48,11 @@ public class MustBeGreaterThanZeroAttribute(
     {
         string propertyDisplayName = context.ModelMetadata.DisplayName ?? context.ModelMetadata.PropertyName;
         string errorMessage = FormatErrorMessage(propertyDisplayName);
-        context.Attributes.Add("data-val-greaterthanzero", errorMessage);
-        context.Attributes.Add("data-val-greaterthanzero-reevaluate", "true");
+        context.Attributes.Add(
+            "data-val-greaterthanzero",
+            errorMessage);
+        context.Attributes.Add(
+            "data-val-greaterthanzero-reevaluate",
+            "true");
     }
 }

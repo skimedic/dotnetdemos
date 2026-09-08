@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - MigrationHelpers.cs
+// AutoLot-WebApps - AutoLot.Dal - MigrationHelpers.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.EfStructures;
@@ -25,7 +25,8 @@ internal static class MigrationHelpers
     public static void CreateSproc(
         MigrationBuilder migrationBuilder)
     {
-        migrationBuilder.Sql(@"exec (N' 
+        migrationBuilder.Sql(
+            @"exec (N' 
     CREATE PROCEDURE [dbo].[GetPetName] 
       @carID int, 
       @petName nvarchar(50) output
@@ -42,7 +43,8 @@ internal static class MigrationHelpers
     public static void CreateFunctions(
         MigrationBuilder migrationBuilder)
     {
-        migrationBuilder.Sql(@"exec (N'
+        migrationBuilder.Sql(
+            @"exec (N'
     CREATE FUNCTION [dbo].[udtf_GetCarsForMake] ( @makeId int )
     RETURNS TABLE 
     AS
@@ -52,7 +54,8 @@ internal static class MigrationHelpers
         FROM Inventory WHERE MakeId = @makeId
       )')");
 
-        migrationBuilder.Sql(@"exec (N'
+        migrationBuilder.Sql(
+            @"exec (N'
     CREATE FUNCTION [dbo].[udf_CountOfMakes] ( @makeid int )
     RETURNS int
     AS

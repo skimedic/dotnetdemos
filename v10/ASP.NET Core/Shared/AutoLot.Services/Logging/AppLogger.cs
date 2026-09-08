@@ -1,14 +1,14 @@
 // Copyright Information
 // ==================================
-// AutoLot-Temp - AutoLot.Services - AppLogging.cs
+// AutoLot-WebApps - AutoLot.Services - AppLogger.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/23
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Services.Logging;
 
-public class AppLogging(
-    ILogger<AppLogging> logger) : IAppLogging
+public class AppLogger(
+    ILogger<AppLogger> logger) : IAppLogger
 {
     internal void LogWithException(
         string memberName,
@@ -21,13 +21,22 @@ public class AppLogging(
         var disposables =
             new List<IDisposable>
             {
-                LogContext.PushProperty("MemberName", memberName),
-                LogContext.PushProperty("FilePath", filePath),
-                LogContext.PushProperty("LineNumber", lineNumber)
+                LogContext.PushProperty(
+                    "MemberName",
+                    memberName),
+                LogContext.PushProperty(
+                    "FilePath",
+                    filePath),
+                LogContext.PushProperty(
+                    "LineNumber",
+                    lineNumber)
             };
         try
         {
-            logAction(ex, message, Array.Empty<object>());
+            logAction(
+                ex,
+                message,
+                Array.Empty<object>());
         }
         finally
         {
@@ -48,13 +57,21 @@ public class AppLogging(
         var disposables =
             new List<IDisposable>
             {
-                LogContext.PushProperty("MemberName", memberName),
-                LogContext.PushProperty("FilePath", filePath),
-                LogContext.PushProperty("LineNumber", lineNumber)
+                LogContext.PushProperty(
+                    "MemberName",
+                    memberName),
+                LogContext.PushProperty(
+                    "FilePath",
+                    filePath),
+                LogContext.PushProperty(
+                    "LineNumber",
+                    lineNumber)
             };
         try
         {
-            logAction(message, Array.Empty<object>());
+            logAction(
+                message,
+                Array.Empty<object>());
         }
         finally
         {
@@ -74,7 +91,13 @@ public class AppLogging(
         string filePath = "",
         [CallerLineNumber]
         int lineNumber = 0) =>
-        LogWithException(memberName, filePath, lineNumber, message, ex, logger.LogError);
+        LogWithException(
+            memberName,
+            filePath,
+            lineNumber,
+            message,
+            ex,
+            logger.LogError);
 
     public void LogAppError(
         string message,
@@ -84,7 +107,12 @@ public class AppLogging(
         string filePath = "",
         [CallerLineNumber]
         int lineNumber = 0) =>
-        LogWithoutException(memberName, filePath, lineNumber, message, logger.LogError);
+        LogWithoutException(
+            memberName,
+            filePath,
+            lineNumber,
+            message,
+            logger.LogError);
 
     public void LogAppCritical(
         Exception ex,
@@ -95,7 +123,13 @@ public class AppLogging(
         string filePath = "",
         [CallerLineNumber]
         int lineNumber = 0) =>
-        LogWithException(memberName, filePath, lineNumber, message, ex, logger.LogCritical);
+        LogWithException(
+            memberName,
+            filePath,
+            lineNumber,
+            message,
+            ex,
+            logger.LogCritical);
 
     public void LogAppCritical(
         string message,
@@ -105,7 +139,12 @@ public class AppLogging(
         string filePath = "",
         [CallerLineNumber]
         int lineNumber = 0) =>
-        LogWithoutException(memberName, filePath, lineNumber, message, logger.LogCritical);
+        LogWithoutException(
+            memberName,
+            filePath,
+            lineNumber,
+            message,
+            logger.LogCritical);
 
     public void LogAppDebug(
         string message,
@@ -115,7 +154,12 @@ public class AppLogging(
         string filePath = "",
         [CallerLineNumber]
         int lineNumber = 0) =>
-        LogWithoutException(memberName, filePath, lineNumber, message, logger.LogDebug);
+        LogWithoutException(
+            memberName,
+            filePath,
+            lineNumber,
+            message,
+            logger.LogDebug);
 
     public void LogAppTrace(
         string message,
@@ -125,7 +169,12 @@ public class AppLogging(
         string filePath = "",
         [CallerLineNumber]
         int lineNumber = 0) =>
-        LogWithoutException(memberName, filePath, lineNumber, message, logger.LogTrace);
+        LogWithoutException(
+            memberName,
+            filePath,
+            lineNumber,
+            message,
+            logger.LogTrace);
 
     public void LogAppInformation(
         string message,
@@ -135,7 +184,12 @@ public class AppLogging(
         string filePath = "",
         [CallerLineNumber]
         int lineNumber = 0) =>
-        LogWithoutException(memberName, filePath, lineNumber, message, logger.LogInformation);
+        LogWithoutException(
+            memberName,
+            filePath,
+            lineNumber,
+            message,
+            logger.LogInformation);
 
     public void LogAppWarning(
         string message,
@@ -145,5 +199,10 @@ public class AppLogging(
         string filePath = "",
         [CallerLineNumber]
         int lineNumber = 0) =>
-        LogWithoutException(memberName, filePath, lineNumber, message, logger.LogWarning);
+        LogWithoutException(
+            memberName,
+            filePath,
+            lineNumber,
+            message,
+            logger.LogWarning);
 }

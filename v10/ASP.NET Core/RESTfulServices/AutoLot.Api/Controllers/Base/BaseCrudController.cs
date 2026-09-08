@@ -1,47 +1,42 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - BaseCrudController.cs
+// AutoLot-APIs - AutoLot.Api - BaseCrudController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Api.Controllers.Base;
 
 /// <summary>
-/// Abstract base controller providing generic CRUD operations for entities.
+///     Abstract base controller providing generic CRUD operations for entities.
 /// </summary>
 /// <typeparam name="TEntity">The entity type, must inherit from BaseEntity and have a parameterless constructor.</typeparam>
-[ApiController]
-[Route("api/[controller]")]
-[Route("api/v{version:apiVersion}/[controller]")]
 public abstract class BaseCrudController<TEntity>(
-    IAppLogging appLogging,
-    IBaseRepo<TEntity> baseRepo) : ControllerBase where TEntity : BaseEntity, new()
+    IAppLogger appLogger,
+    IBaseRepo<TEntity> baseRepo) : BaseAppController where TEntity : BaseEntity, new()
 {
-    protected readonly IAppLogging AppLoggingInstance = appLogging;
+    protected readonly IAppLogger AppLoggerInstance = appLogger;
     protected readonly IBaseRepo<TEntity> MainRepoInstance = baseRepo;
 
     /// <summary>
-    /// Gets all entities.
+    ///     Gets all entities.
     /// </summary>
     /// <returns>A list of all entities.</returns>
     [HttpGet]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest, "application/problem+json")]
     [EndpointSummary("Gets all entities.")]
     [EndpointDescription("Returns a list of all entities. Example: GET /api/[controller]. No request body required.")]
-    public ActionResult<List<TEntity>> GetAll() => Ok(MainRepoInstance.GetAllAsList());
+    public ActionResult<IEnumerable<TEntity>> GetAll() => Ok(MainRepoInstance.GetAllAsList());
 
     /// <summary>
-    /// Gets a single entity by ID.
+    ///     Gets a single entity by ID.
     /// </summary>
     /// <param name="id">The entity ID.</param>
     /// <returns>The entity if found; otherwise NotFound.</returns>
     [HttpGet("{id}")]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest, "application/problem+json")]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [EndpointSummary("Gets a single entity by ID.")]
     [EndpointDescription(
@@ -55,14 +50,13 @@ public abstract class BaseCrudController<TEntity>(
     }
 
     /// <summary>
-    /// Adds a new entity.
+    ///     Adds a new entity.
     /// </summary>
     /// <param name="entity">The entity to add.</param>
     /// <returns>The created entity with a 201 Created response.</returns>
     [HttpPost]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status201Created)]
-    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest, "application/problem+json")]
     [EndpointSummary("Adds a new entity.")]
     [EndpointDescription(
         "Creates a new entity. Example: POST /api/[controller]. JSON body required: { \"property\": \"value\" }")]
@@ -76,14 +70,14 @@ public abstract class BaseCrudController<TEntity>(
         }
 
         MainRepoInstance.Add(entity);
-        return CreatedAtAction(nameof(GetOne), new
-        {
-            id = entity.Id
-        }, entity);
+        return CreatedAtAction(
+            nameof(GetOne),
+            new { id = entity.Id },
+            entity);
     }
 
     /// <summary>
-    /// Updates an existing entity.
+    ///     Updates an existing entity.
     /// </summary>
     /// <param name="id">The entity ID from the route.</param>
     /// <param name="entity">The entity to update.</param>
@@ -91,7 +85,6 @@ public abstract class BaseCrudController<TEntity>(
     [HttpPut("{id}")]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest, "application/problem+json")]
     [EndpointSummary("Updates an entity by ID.")]
     [EndpointDescription(
         "Updates the entity with the specified ID. Example: PUT /api/[controller]/1. JSON body required: { \"property\": \"value\" }")]
@@ -116,7 +109,7 @@ public abstract class BaseCrudController<TEntity>(
     }
 
     /// <summary>
-    /// Deletes an entity by ID.
+    ///     Deletes an entity by ID.
     /// </summary>
     /// <param name="id">The entity ID from the route.</param>
     /// <param name="entity">The entity to delete (for ID verification).</param>
@@ -124,7 +117,6 @@ public abstract class BaseCrudController<TEntity>(
     [HttpDelete("{id}")]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest, "application/problem+json")]
     [EndpointSummary("Deletes an entity by ID.")]
     [EndpointDescription(
         "Deletes the entity with the specified ID. Example: DELETE /api/[controller]/1. JSON body required: { \"id\": 1 }")]

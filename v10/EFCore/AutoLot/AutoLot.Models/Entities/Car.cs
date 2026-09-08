@@ -1,39 +1,43 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Models - Car.cs
+// AutoLot-WebApps - AutoLot.Models - Car.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Models.Entities;
 
 /// <summary>
-/// Represents a car in the inventory.
+///     Represents a car in the inventory.
 /// </summary>
 /// <remarks>
-/// Contains details about the car, its make, drivers, and radio.
+///     Contains details about the car, its make, drivers, and radio.
 /// </remarks>
 [Serializable]
-[Table("Inventory", Schema = "dbo")]
+[Table(
+    "Inventory",
+    Schema = "dbo")]
 [EntityTypeConfiguration(typeof(CarConfiguration))]
-[Index(nameof(MakeId), Name = "IX_Inventory_MakeId")]
+[Index(
+    nameof(MakeId),
+    Name = "IX_Inventory_MakeId")]
 public class Car : BaseEntity
 {
     /// <summary>
-    /// The color of the car.
+    ///     The color of the car.
     /// </summary>
     /// <remarks>
-    /// Required, maximum length 50.
+    ///     Required, maximum length 50.
     /// </remarks>
     [Required]
     [MaxLength(50)]
     public string Color { get; set; }
 
     /// <summary>
-    /// The price of the car.
+    ///     The price of the car.
     /// </summary>
     /// <remarks>
-    /// May be null or empty if not set.
+    ///     May be null or empty if not set.
     /// </remarks>
     public string Price { get; set; }
 
@@ -47,37 +51,37 @@ public class Car : BaseEntity
     //}
 
     /// <summary>
-    /// Indicates if the car is drivable.
+    ///     Indicates if the car is drivable.
     /// </summary>
     /// <remarks>
-    /// Defaults to true.
+    ///     Defaults to true.
     /// </remarks>
     [DisplayName("Is Drivable")]
     public bool IsDrivable { get; set; } = true;
 
     /// <summary>
-    /// The date the car was built.
+    ///     The date the car was built.
     /// </summary>
     /// <remarks>
-    /// Nullable; may not be set for all cars.
+    ///     Nullable; may not be set for all cars.
     /// </remarks>
     public DateTime? DateBuilt { get; set; }
 
     /// <summary>
-    /// The display string for the car.
+    ///     The display string for the car.
     /// </summary>
     /// <remarks>
-    /// Computed by the database.
+    ///     Computed by the database.
     /// </remarks>
     [XmlIgnore]
-	[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+    [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
     public string Display { get; private set; }
 
     /// <summary>
-    /// The pet name of the car.
+    ///     The pet name of the car.
     /// </summary>
     /// <remarks>
-    /// Required, maximum length 50.
+    ///     Required, maximum length 50.
     /// </remarks>
     [Required]
     [MaxLength(50)]
@@ -85,20 +89,20 @@ public class Car : BaseEntity
     public string PetName { get; set; }
 
     /// <summary>
-    /// The foreign key to the make of the car.
+    ///     The foreign key to the make of the car.
     /// </summary>
     /// <remarks>
-    /// Required.
+    ///     Required.
     /// </remarks>
     [Required]
     [DisplayName("Make")]
     public int MakeId { get; set; }
 
     /// <summary>
-    /// Navigation property to the make entity.
+    ///     Navigation property to the make entity.
     /// </summary>
     /// <remarks>
-    /// References the make of the car.
+    ///     References the make of the car.
     /// </remarks>
     // XmlIgnore prevents circular reference stack overflow when serializing to XML
     // via the API's XmlFormatter, which has no built-in cycle detection.
@@ -108,10 +112,10 @@ public class Car : BaseEntity
     public Make MakeNavigation { get; set; }
 
     /// <summary>
-    /// Navigation property to the radio entity.
+    ///     Navigation property to the radio entity.
     /// </summary>
     /// <remarks>
-    /// References the radio installed in the car.
+    ///     References the radio installed in the car.
     /// </remarks>
     // XmlIgnore prevents circular reference stack overflow when serializing to XML
     // via the API's XmlFormatter, which has no built-in cycle detection.
@@ -120,10 +124,10 @@ public class Car : BaseEntity
     public Radio RadioNavigation { get; set; }
 
     /// <summary>
-    /// Navigation property to the car-driver relationships.
+    ///     Navigation property to the car-driver relationships.
     /// </summary>
     /// <remarks>
-    /// Collection of car-driver entities.
+    ///     Collection of car-driver entities.
     /// </remarks>
     // XmlIgnore prevents circular reference stack overflow when serializing to XML
     // via the API's XmlFormatter, which has no built-in cycle detection.
@@ -132,10 +136,10 @@ public class Car : BaseEntity
     public ICollection<CarDriver> CarDrivers { get; set; } = new List<CarDriver>();
 
     /// <summary>
-    /// Navigation property to the drivers of the car.
+    ///     Navigation property to the drivers of the car.
     /// </summary>
     /// <remarks>
-    /// Collection of drivers associated with the car.
+    ///     Collection of drivers associated with the car.
     /// </remarks>
     // XmlIgnore prevents circular reference stack overflow when serializing to XML
     // via the API's XmlFormatter, which has no built-in cycle detection.
@@ -144,20 +148,20 @@ public class Car : BaseEntity
     public ICollection<Driver> Drivers { get; set; } = new List<Driver>();
 
     /// <summary>
-    /// The name of the make for this car.
+    ///     The name of the make for this car.
     /// </summary>
     /// <remarks>
-    /// Returns "Unknown" if the make is not set.
+    ///     Returns "Unknown" if the make is not set.
     /// </remarks>
     [XmlIgnore]
-	[NotMapped]
+    [NotMapped]
     public string MakeName => MakeNavigation?.Name ?? "Unknown";
 
     /// <summary>
-    /// Returns a string representation of the car.
+    ///     Returns a string representation of the car.
     /// </summary>
     /// <remarks>
-    /// Includes pet name, color, make, and ID.
+    ///     Includes pet name, color, make, and ID.
     /// </remarks>
     public override string ToString() =>
         $"{PetName ?? "**No Name**"} is a {Color} {MakeNavigation?.Name} with ID {Id}.";

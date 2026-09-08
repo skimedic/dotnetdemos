@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - MakeRepo.cs
+// AutoLot-WebApps - AutoLot.Dal - MakeRepo.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Repos;
@@ -29,7 +29,10 @@ public class MakeRepo : TemporalTableBaseRepo<Make>,
             .IgnoreQueryFilters();
 
     public override IQueryable<Make> GetAllIgnoreQueryFiltersAsQueryable(
-        string[] filtersToIgnore) =>
+        IEnumerable<string> filtersToIgnore) =>
         BuildBaseQuery()
-            .IgnoreQueryFilters(filtersToIgnore);
+            .IgnoreQueryFilters(
+            [
+                .. filtersToIgnore
+            ]);
 }

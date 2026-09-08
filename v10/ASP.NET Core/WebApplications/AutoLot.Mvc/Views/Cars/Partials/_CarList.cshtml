@@ -1,7 +1,9 @@
 ﻿@model IEnumerable<Car>
 @{
     var showMake = true;
-    if (bool.TryParse(ViewBag.ByMake?.ToString(), out bool byMake))
+    if (bool.TryParse(
+            ViewBag.ByMake?.ToString(),
+            out bool byMake))
     {
         showMake = !byMake;
     }

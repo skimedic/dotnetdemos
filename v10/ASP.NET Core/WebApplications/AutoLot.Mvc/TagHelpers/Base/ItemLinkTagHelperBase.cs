@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Mvc - ItemLinkTagHelperBase.cs
+// AutoLot-WebApps - AutoLot.Mvc - ItemLinkTagHelperBase.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Mvc.TagHelpers.Base;
@@ -24,7 +24,8 @@ public abstract class ItemLinkTagHelperBase : TagHelper
         ActionName = actionDescriptor?.ActionName;
         _controllerName = actionDescriptor?.ControllerName;
         UrlHelper =
-            urlHelperFactory.GetUrlHelper(new ActionContext
+        urlHelperFactory.GetUrlHelper(
+            new ActionContext
             {
                 HttpContext = httpContext,
                 RouteData = httpContext.GetRouteData(),
@@ -41,13 +42,19 @@ public abstract class ItemLinkTagHelperBase : TagHelper
         output.TagName = "a"; // Replaces <email> with <a> tag
         var target =
             (ItemId.HasValue)
-                ? UrlHelper.Action(ActionName, _controllerName, new
-                {
-                    id = ItemId
-                })
-                : UrlHelper.Action(ActionName, _controllerName);
-        output.Attributes.SetAttribute("href", target);
-        output.Attributes.Add("class", cssClassName);
+                ? UrlHelper.Action(
+                    ActionName,
+                    _controllerName,
+                    new { id = ItemId })
+                : UrlHelper.Action(
+                    ActionName,
+                    _controllerName);
+        output.Attributes.SetAttribute(
+            "href",
+            target);
+        output.Attributes.Add(
+            "class",
+            cssClassName);
         output.Content.AppendHtml($@"{displayText} <i class=""fa-solid fa-{fontAwesomeName}""></i>");
     }
 }

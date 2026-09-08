@@ -1,26 +1,22 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - HealthCheckController.cs
+// AutoLot-APIs - AutoLot.Api - HealthCheckController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
-namespace AutoLot.Api.Controllers;
+namespace AutoLot.Api.Controllers.Specials;
 
 [ApiVersionNeutral]
-[ApiController]
-[Route("api/[controller]")]
-[Route("api/v{version:apiVersion}/[controller]")]
-public class HealthCheckController : ControllerBase
+public class HealthCheckController : BaseAppController
 {
     [HttpOptions]
     [Produces("application/json")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType<ProblemDetails>(StatusCodes.Status400BadRequest, "application/problem+json")]
     [EndpointSummary("Returns allowed HTTP methods and API version.")]
     [EndpointDescription(
         "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.")]
-    public IActionResult Options(
+    public ActionResult<string> Options(
         [FromServices]
         IApiVersionDescriptionProvider provider)
     {
@@ -40,10 +36,16 @@ public class HealthCheckController : ControllerBase
                 .Distinct()
                 .OrderBy(v => v)
                 .ToArray();
-        Response.Headers["api-supported-versions"] = string.Join(", ", supportedVersions);
+        Response.Headers["api-supported-versions"] =
+        string.Join(
+            ", ",
+            supportedVersions);
         if (deprecatedVersions.Length > 0)
         {
-            Response.Headers["api-deprecated-versions"] = string.Join(", ", deprecatedVersions);
+            Response.Headers["api-deprecated-versions"] =
+            string.Join(
+                ", ",
+                deprecatedVersions);
         }
 
         return Ok("Worked");

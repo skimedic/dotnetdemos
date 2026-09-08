@@ -2,14 +2,17 @@
 // ==================================
 // AutoLot - AutoLot.Web - Details.cshtml.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
 namespace AutoLot.Web.Pages.Cars;
 
 public class DetailsModel(
-    IAppLogging appLogging,
-    ICarDataService carDataService) : BasePageModel<Car>(appLogging, carDataService, "Details")
+    IAppLogger appLogger,
+    ICarDataService carDataService) : BasePageModel<Car>(
+    appLogger,
+    carDataService,
+    "Details")
 {
     public async Task OnGetAsync(
         int? id)

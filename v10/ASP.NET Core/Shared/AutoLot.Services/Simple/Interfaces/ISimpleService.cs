@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Services - ISimpleService.cs
+// AutoLot-WebApps - AutoLot.Services - ISimpleService.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Services.Simple.Interfaces;

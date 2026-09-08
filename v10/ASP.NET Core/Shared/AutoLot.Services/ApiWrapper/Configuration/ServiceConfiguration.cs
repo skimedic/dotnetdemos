@@ -1,11 +1,9 @@
 // Copyright Information
 // ==================================
-// AutoLot-Temp - AutoLot.Services - ServiceConfiguration.cs
+// AutoLot-WebApps - AutoLot.Services - ServiceConfiguration.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/04
+// http://www.skimedic.com 2026/09/07
 // ==================================
-
-using Microsoft.AspNetCore.Hosting;
 
 namespace AutoLot.Services.ApiWrapper.Configuration;
 
@@ -15,10 +13,10 @@ public static class ServiceConfiguration
         this IServiceCollection services,
         IConfiguration config)
     {
-            services.AddOptions<ApiServiceSettings>()
-                .BindConfiguration(nameof(ApiServiceSettings))
-                .ValidateDataAnnotations()
-                .ValidateOnStart();
+        services.AddOptions<ApiServiceSettings>()
+            .BindConfiguration(nameof(ApiServiceSettings))
+            .ValidateDataAnnotations()
+            .ValidateOnStart();
         services.AddHttpClient<ICarApiServiceWrapper, CarApiServiceWrapper>();
         services.AddHttpClient<IMakeApiServiceWrapper, MakeApiServiceWrapper>();
         return services;

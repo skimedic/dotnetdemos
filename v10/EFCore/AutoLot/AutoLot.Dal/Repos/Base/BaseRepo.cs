@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - BaseRepo.cs
+// AutoLot-WebApps - AutoLot.Dal - BaseRepo.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Repos.Base;
@@ -37,7 +37,9 @@ public abstract class BaseRepo<T> : BaseViewRepo<T>,
     public virtual void ExecuteParameterizedQuery(
         string sql,
         object[] sqlParametersObjects) =>
-        Context.Database.ExecuteSqlRaw(sql, sqlParametersObjects);
+        Context.Database.ExecuteSqlRaw(
+            sql,
+            sqlParametersObjects);
 
     public virtual int Add(
         T entity,
@@ -131,7 +133,9 @@ public abstract class BaseRepo<T> : BaseViewRepo<T>,
         catch (Exception ex)
         {
             //Should log and handle intelligently
-            throw new CustomException("An error occurred updating the database", ex);
+            throw new CustomException(
+                "An error occurred updating the database",
+                ex);
         }
     }
 }

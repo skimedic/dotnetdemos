@@ -1,13 +1,15 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - DriversController.cs
+// AutoLot-APIs - AutoLot.Api - DriversController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Api.Controllers;
 
 [ApiVersion(1.0)]
 public class DriversController(
-    IAppLogging appLogging,
-    IDriverRepo driverRepo) : BaseCrudController<Driver>(appLogging, driverRepo);
+    IAppLogger appLogger,
+    IDriverRepo driverRepo) : BaseCrudController<Driver>(
+    appLogger,
+    driverRepo);

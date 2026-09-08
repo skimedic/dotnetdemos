@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - ShapedEntity.cs
+// AutoLot-APIs - AutoLot.Api - ShapedEntity.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Api.DataShaping.Models;

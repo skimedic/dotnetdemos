@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Web - MenuViewComponent.cs
+// AutoLot-WebApps - AutoLot.Web - MenuViewComponent.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Web.ViewComponents;
@@ -16,6 +16,8 @@ public class MenuViewComponent(
             await makeDataService.GetAllAsync() ??
             [
             ];
-        return View("MenuView", makes);
+        return View(
+            "MenuView",
+            makes);
     }
 }

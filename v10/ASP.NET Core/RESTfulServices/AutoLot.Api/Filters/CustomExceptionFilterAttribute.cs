@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Api - CustomExceptionFilterAttribute.cs
+// AutoLot-APIs - AutoLot.Api - CustomExceptionFilterAttribute.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/12/03
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Api.Filters;
@@ -32,11 +32,7 @@ public class CustomExceptionFilterAttribute(
             problemDetails.Detail = ex.Message;
         }
 
-        context.Result =
-            new ObjectResult(problemDetails)
-            {
-                StatusCode = statusCode
-            };
+        context.Result = new ObjectResult(problemDetails) { StatusCode = statusCode };
 
         //If this is uncommented, the exception is swallowed
         context.ExceptionHandled = true;

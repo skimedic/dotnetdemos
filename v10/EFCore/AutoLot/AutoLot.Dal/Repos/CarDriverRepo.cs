@@ -1,8 +1,8 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Dal - CarDriverRepo.cs
+// AutoLot-WebApps - AutoLot.Dal - CarDriverRepo.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/18
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Dal.Repos;
@@ -31,9 +31,12 @@ public class CarDriverRepo : TemporalTableBaseRepo<CarDriver>,
             .IgnoreQueryFilters();
 
     public override IQueryable<CarDriver> GetAllIgnoreQueryFiltersAsQueryable(
-        string[] filtersToIgnore) =>
+        IEnumerable<string> filtersToIgnore) =>
         BuildBaseQuery()
-            .IgnoreQueryFilters(filtersToIgnore);
+            .IgnoreQueryFilters(
+            [
+                .. filtersToIgnore
+            ]);
 
     public override CarDriver Find(
         int? id) =>

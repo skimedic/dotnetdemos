@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Web - ItemDetailsTagHelper.cs
+// AutoLot-WebApps - AutoLot.Web - ItemDetailsTagHelper.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Web.TagHelpers;
@@ -11,7 +11,9 @@ public class ItemDetailsTagHelper : ItemLinkTagHelperBase
 {
     public ItemDetailsTagHelper(
         IHttpContextAccessor contextAccessor,
-        IUrlHelperFactory urlHelperFactory) : base(contextAccessor, urlHelperFactory)
+        IUrlHelperFactory urlHelperFactory) : base(
+        contextAccessor,
+        urlHelperFactory)
     {
         ActionName = "Details";
     }
@@ -20,6 +22,10 @@ public class ItemDetailsTagHelper : ItemLinkTagHelperBase
         TagHelperContext context,
         TagHelperOutput output)
     {
-        BuildContent(output, "text-info", "Details", "info-circle");
+        BuildContent(
+            output,
+            "text-info",
+            "Details",
+            "info-circle");
     }
 }

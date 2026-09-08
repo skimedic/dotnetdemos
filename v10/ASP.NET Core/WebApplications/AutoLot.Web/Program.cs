@@ -1,12 +1,12 @@
 // Copyright Information
 // ==================================
-// AutoLot - AutoLot.Web - Program.cs
+// AutoLot-WebApps - AutoLot.Web - Program.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/07/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 var builder = WebApplication.CreateBuilder(args);
-builder.ConfigureSerilog();
+builder.ConfigureSerilog(builder.Configuration);
 builder.Services.RegisterLoggingInterfaces();
 if (!builder.Environment.IsDevelopment())
 {
@@ -63,7 +63,9 @@ builder.Services.ConfigureApiServiceWrapper(builder.Configuration);
 
 if (builder.Environment.IsDevelopment() || builder.Environment.IsEnvironment("Local"))
 {
-    builder.Services.AddWebOptimizer(false, false);
+    builder.Services.AddWebOptimizer(
+        false,
+        false);
 }
 else
 {
@@ -75,7 +77,9 @@ else
         //options.MinifyJsFiles(); //Minifies all JS files
         options.MinifyJsFiles("js/site.js");
         //options.MinifyJsFiles("js/**/*.js");
-        options.AddJavaScriptBundle("js/validations/validationCode.js", "js/validations/**/*.js");
+        options.AddJavaScriptBundle(
+            "js/validations/validationCode.js",
+            "js/validations/**/*.js");
         //This is another format to bundle and minify the files
         //options.AddJavaScriptBundle("js/validations/validationCode.js", 
         //  "js/validations/validators.js", "js/validations/errorFormatting.js");

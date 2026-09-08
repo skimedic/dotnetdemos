@@ -1,8 +1,15 @@
+// Copyright Information
+// ==================================
+// AutoLot-WebApps - AutoLot.Services - IDataServiceBase.cs
+// All samples copyright Philip Japikse
+// http://www.skimedic.com 2026/09/07
+// ==================================
+
 namespace AutoLot.Services.DataServices.Interfaces.Base;
 
 public interface IDataServiceBase<TEntity> where TEntity : BaseEntity, new()
 {
-    Task<IList<TEntity>> GetAllAsync();
+    Task<List<TEntity>> GetAllAsync();
 
     Task<TEntity> FindAsync(
         int id);

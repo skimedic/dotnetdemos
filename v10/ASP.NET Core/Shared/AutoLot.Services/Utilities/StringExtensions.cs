@@ -1,8 +1,8 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot - AutoLot.Services - StringExtensions.cs
+// AutoLot-WebApps - AutoLot.Services - StringExtensions.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2025/11/13
+// http://www.skimedic.com 2026/09/07
 // ==================================
 
 namespace AutoLot.Services.Utilities;
@@ -13,9 +13,17 @@ public static class StringExtensions
         string value)
     {
         public string RemoveControllerSuffix() =>
-            value != null && value.EndsWith("Controller", StringComparison.OrdinalIgnoreCase) ? value[..^10] : value;
+            value != null && value.EndsWith(
+                "Controller",
+                StringComparison.OrdinalIgnoreCase)
+                ? value[..^10]
+                : value;
 
         public string RemoveAsyncSuffix() =>
-            value != null && value.EndsWith("Async", StringComparison.Ordinal) ? value[..^5] : value;
+            value != null && value.EndsWith(
+                "Async",
+                StringComparison.Ordinal)
+                ? value[..^5]
+                : value;
     }
 }
