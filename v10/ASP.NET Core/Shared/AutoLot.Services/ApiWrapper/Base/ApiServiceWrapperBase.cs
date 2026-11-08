@@ -4,7 +4,6 @@
 // All samples copyright Philip Japikse
 // http://www.skimedic.com 2026/09/07
 // ==================================
-
 namespace AutoLot.Services.ApiWrapper.Base;
 
 public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TEntity> where TEntity : BaseEntity, new()

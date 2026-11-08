@@ -14,7 +14,7 @@ public class ApplicationDbContextFactory : IDesignTimeDbContextFactory<Applicati
     {
         var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
         var connectionString = @"server=(localdb)\MsSqlLocalDb;Database=AutoLot_Hol;Integrated Security=true;";
-        //var connectionString = @"server=(localdb)\ProjectModels;Database=AutoLot_Hol;Trusted_Connection=True;";
+        //var connectionString = @"server=(localdb)\ProjectModels;Database=AutoLot_Hol;Integrated Security=True;";
         //var connectionString = @"server=.,5433;Database=AutoLot_Hol;User Id=sa;Password=P@ssw0rd;Encrypt=false;";
         optionsBuilder.UseSqlServer(connectionString);
         //This is for teaching purposes only, you should not use this in production code.
