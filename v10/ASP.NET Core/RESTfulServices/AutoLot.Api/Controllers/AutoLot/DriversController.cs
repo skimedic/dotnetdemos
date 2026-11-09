@@ -1,11 +1,11 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot-APIs - AutoLot.Api - DriversController.cs
+// AutoLot - AutoLot.Api - DriversController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/09/07
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
-namespace AutoLot.Api.Controllers;
+namespace AutoLot.Api.Controllers.AutoLot;
 
 [ApiVersion(1.0)]
 public class DriversController(

@@ -59,8 +59,7 @@ builder.Services.Configure<JsonOptions>(options =>
     options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
 });
 
-builder.Services.AddScoped(
-    typeof(IDataShaper<>),
+builder.Services.AddScoped(typeof(IDataShaper<>),
     typeof(DataShaper<>));
 
 var connectionString = builder.Configuration.GetConnectionString("AutoLot");
@@ -68,8 +67,7 @@ builder.Services.AddAutoLotDal(connectionString);
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(
-        "AllowAll",
+    options.AddPolicy("AllowAll",
         pb =>
         {
             pb.AllowAnyHeader()
@@ -97,8 +95,7 @@ builder.Services
         // for query string, header, or media type versioning
         // NOTE: In a real application, pick one method, not all of them
         options.ApiVersionReader =
-            ApiVersionReader.Combine(
-                new UrlSegmentApiVersionReader(),
+            ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
                 new QueryStringApiVersionReader(), //defaults to "api-version"
                 new QueryStringApiVersionReader("v"),
                 new HeaderApiVersionReader("x-ms-api-version"),
@@ -154,48 +151,47 @@ builder.Services
         //options.DefaultApiVersionParameterDescription = "The requested API version";
         //Following derives from the ApiVersioningOptions setup and should not be set differently
         //options.AssumeDefaultVersionWhenUnspecified = true;
+    })
+    .AddOpenApi(options =>
+    {
+        //options.Document.OpenApiVersion = OpenApiSpecVersion.OpenApi3_1;
+        options.Document.AddScalarTransformers();
+        options.Document.AddDocumentTransformer((
+            document,
+            context,
+            cancellationToken) =>
+        {
+            document.Info.Contact =
+            new OpenApiContact()
+            {
+                Email = "skimedic@gmail.com",
+                Name = "Philip Japikse",
+                Url = new Uri("https://www.skimedic.com")
+            };
+            document.Info.License = new OpenApiLicense()
+            {
+                Name = "MIT",
+                Url = new Uri("https://opensource.org/licenses/MIT")
+            };
+            document.Info.Summary = "API Endpoints for the AutoLot application";
+            document.Tags = new HashSet<OpenApiTag>
+            {
+                new OpenApiTag
+                {
+                    Name = "Cars",
+                    Description = "Operations related to cars"
+                },
+                new OpenApiTag
+                {
+                    Name = "ScalarExamples",
+                    Description = "Operations related to Scalar UI"
+                }
+            };
+            return Task.CompletedTask;
+        });
     });
 
 builder.Services.TryAddEnumerable(ServiceDescriptor.Transient<IApiControllerSpecification, ApiBehaviorSpecification>());
-
-builder.Services.AddOpenApi(
-    "v1",
-    options =>
-    DocumentTools.ConfigureOptions(
-        options,
-        "v1",
-        includeBlankGroups: true));
-//builder.Services.AddOpenApi("v1.5",
-//    options => ConfigureOptions(options, "v1.5", isDeprecated: true));
-builder.Services.AddOpenApi(
-    "v1.5",
-    options =>
-        DocumentTools.ConfigureOptions(
-            options,
-            "v1.5",
-            isDeprecated: true,
-            controllerNamesToDeprecate:
-            [
-                "Cars"
-            ]));
-builder.Services.AddOpenApi(
-    "v2",
-    options =>
-    DocumentTools.ConfigureOptions(
-        options,
-        "v2"));
-builder.Services.AddOpenApi(
-    "v2.5-Beta",
-    options =>
-    DocumentTools.ConfigureOptions(
-        options,
-        "v2.5-Beta"));
-builder.Services.AddOpenApi(
-    "v3-Beta",
-    options =>
-    DocumentTools.ConfigureOptions(
-        options,
-        "v3-Beta"));
 
 var app = builder.Build();
 
@@ -204,32 +200,35 @@ app.UseCors("AllowAll");
 
 if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Local"))
 {
-    app.MapOpenApi();
-    var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
+    app.MapOpenApi()
+        .WithDocumentPerVersion();
     app.MapScalarApiReference(options =>
     {
-        var docs = new List<ScalarDocument>();
-        foreach (var versionDescription in provider.ApiVersionDescriptions)
+        options.ForceLightMode();
+        //var docs = new List<ScalarDocument>();
+        //foreach (var versionDescription in provider.ApiVersionDescriptions)
+        var descriptions = app.DescribeApiVersions();
+        for (var i = 0; i < descriptions.Count; i++)
         {
-            var isDeprecated = versionDescription.IsDeprecated ? " (Deprecated)" : "";
-            var name = $"AutoLot API Version {versionDescription.ApiVersion.ToString()}{isDeprecated}";
-            docs.Add(
-                new ScalarDocument(
-                    versionDescription.GroupName,
-                    name));
+            var description = descriptions[i];
+            var isDeprecated = description.IsDeprecated ? " (Deprecated)" : "";
+            var name = $"AutoLot API Version {description.ApiVersion.ToString()}{isDeprecated}";
+
+            options.AddDocument(description.GroupName,
+                name,
+                isDefault: i == 0);
         }
 
-        options.AddDocuments(docs);
     });
     app.UseSwaggerUI(options =>
     {
-        foreach (var versionDescription in provider.ApiVersionDescriptions)
+        var descriptions = app.DescribeApiVersions();
+        foreach (var versionDescription in descriptions)
         {
             var groupName = versionDescription.GroupName;
             var url = $"/openapi/{groupName}.json";
             var name = $"AutoLot API: {groupName}";
-            options.SwaggerEndpoint(
-                url,
+            options.SwaggerEndpoint(url,
                 name);
         }
     });

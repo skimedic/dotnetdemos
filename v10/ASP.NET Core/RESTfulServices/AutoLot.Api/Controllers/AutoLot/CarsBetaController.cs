@@ -1,11 +1,11 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot-APIs - AutoLot.Api - CarsBetaController.cs
+// AutoLot - AutoLot.Api - CarsBetaController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/09/07
+// http://www.skimedic.com 2026/09/05
 // ==================================
 
-namespace AutoLot.Api.Controllers;
+namespace AutoLot.Api.Controllers.AutoLot;
 
 [ApiVersion("2.5-Beta")]
 [ApiVersion(

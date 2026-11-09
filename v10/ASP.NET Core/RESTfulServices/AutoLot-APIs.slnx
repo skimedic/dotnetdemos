@@ -12,4 +12,5 @@
   <Project Path="../../EFCore/AutoLot/AutoLot.Models/AutoLot.Models.csproj" />
   <Project Path="../Shared/AutoLot.Services/AutoLot.Services.csproj" />
   <Project Path="AutoLot.Api/AutoLot.Api.csproj" />
+  <Project Path="AutoLot.MinimalApi/AutoLot.MinimalApi.csproj" />
 </Solution>

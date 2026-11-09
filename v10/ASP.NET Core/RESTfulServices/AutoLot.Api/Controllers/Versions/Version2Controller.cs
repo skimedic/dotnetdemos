@@ -30,7 +30,7 @@ public class Version2Controller : Version1Controller
         [Description("The unique identifier. Required.")]
         int id)
     {
-        ApiVersion version = HttpContext.GetRequestedApiVersion();
+        ApiVersion version = HttpContext.RequestedApiVersion;
         var newLine = Environment.NewLine;
         return $"Controller = {GetType().Name}{newLine}Version = {version}{newLine}id = {id}";
     }

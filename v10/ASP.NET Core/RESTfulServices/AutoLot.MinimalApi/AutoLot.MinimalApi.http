@@ -1,0 +1,6 @@
+@AutoLot.MinimalApi_HostAddress = http://localhost:5208
+
+GET {{AutoLot.MinimalApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -32,7 +32,7 @@ public class Version1Controller : VersionControllerBase
         [Description("The route ID to include in the response.")]
         int id)
     {
-        ApiVersion version = HttpContext.GetRequestedApiVersion();
+        ApiVersion version = HttpContext.RequestedApiVersion;
         var newLine = Environment.NewLine;
         return $"Controller = {GetType().Name}{newLine}Version = {version}{newLine}id = {id}";
     }
