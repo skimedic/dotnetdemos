@@ -10,18 +10,16 @@
 		<OpenApiGenerateDocumentsOnBuild>true</OpenApiGenerateDocumentsOnBuild>
 		<OpenApiDocumentsDirectory>$(MSBuildProjectDirectory)\OpenApi</OpenApiDocumentsDirectory>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<PackageReference Include="Asp.Versioning.Mvc" Version="10.*" />
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="10.*" />
 		<PackageReference Include="Asp.Versioning.OpenApi" Version="10.*" />
-		<PackageReference Include="Microsoft.OpenApi" Version="2.13.0" />
+		<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.*" />
+		<PackageReference Include="Microsoft.OpenApi" Version="2.*" />
 		<PackageReference Include="Microsoft.Extensions.ApiDescription.Server" Version="10.*">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<!--<PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.*" />-->
-		<!--<PackageReference Include="Microsoft.OpenApi" Version="3.*" />-->
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.*">
 			<!--<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
 			<PrivateAssets>all</PrivateAssets>
@@ -39,6 +37,9 @@
 		<ProjectReference Include="..\..\..\EFCore\AutoLot\AutoLot.Dal\AutoLot.Dal.csproj" />
 		<ProjectReference Include="..\..\..\EFCore\AutoLot\AutoLot.Models\AutoLot.Models.csproj" />
 		<ProjectReference Include="..\..\Shared\AutoLot.Services\AutoLot.Services.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="OpenApi\" />
 	</ItemGroup>
 
 </Project>

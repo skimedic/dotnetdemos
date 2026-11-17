@@ -8,7 +8,7 @@
 namespace AutoLot.Api.Controllers.Versions;
 
 [ApiVersion(2.0)]
-public class Version2Controller : Version1Controller
+public class Version2Controller(IAppLogger appLogger) : Version1Controller(appLogger)
 {
     [HttpGet]
     [Produces("application/json")]

@@ -27,6 +27,7 @@ global using AutoLot.Models.Entities.Base;
 
 global using AutoLot.Services.Logging.Configuration;
 global using AutoLot.Services.Logging.Interfaces;
+global using AutoLot.Services.Utilities;
 
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.Filters;

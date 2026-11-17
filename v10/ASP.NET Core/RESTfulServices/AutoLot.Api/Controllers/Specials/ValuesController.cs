@@ -9,7 +9,7 @@ namespace AutoLot.Api.Controllers.Specials;
 
 [ApiVersionNeutral]
 public class ValuesController(
-    IAppLogger appLogger) : BaseAppController
+    IAppLogger appLogger) : BaseAppController(appLogger)
 {
     [HttpGet("problem")]
     [Produces("application/json")]
@@ -24,7 +24,7 @@ public class ValuesController(
     [EndpointDescription("Writes a test error log entry and returns OK.")]
     public IActionResult TestLogging()
     {
-        appLogger.LogAppError("Test error");
+        AppLoggerInstance.LogAppError("Test error");
         return Ok();
     }
 

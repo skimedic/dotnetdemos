@@ -7,6 +7,6 @@
 
 namespace AutoLot.Api.Controllers.Versions.Base;
 
-public class VersionControllerBase : BaseAppController
+public class VersionControllerBase(IAppLogger appLogger) : BaseAppController(appLogger)
 {
 }

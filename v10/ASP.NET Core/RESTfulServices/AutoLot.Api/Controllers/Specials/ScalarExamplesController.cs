@@ -1,9 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿// Copyright Information
+// ==================================
+// AutoLot - AutoLot.Api - ScalarExamplesController.cs
+// All samples copyright Philip Japikse
+// http://www.skimedic.com 2026/11/16
+// ==================================
 
-namespace AutoLot.Api.Controllers;
+using Microsoft.AspNetCore.Mvc;
+
+namespace AutoLot.Api.Controllers.Specials;
 
 [ApiVersionNeutral]
-public class ScalarExamplesController : BaseAppController
+public class ScalarExamplesController(IAppLogger appLogger) : BaseAppController(appLogger)
 {
     [HttpGet("internal-status1")]
     [ExcludeFromApiReference]

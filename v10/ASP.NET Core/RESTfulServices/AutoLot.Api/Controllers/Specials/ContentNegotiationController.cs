@@ -8,18 +8,18 @@
 namespace AutoLot.Api.Controllers.Specials;
 
 [ApiVersionNeutral]
-public class ContentNegotiationController : BaseAppController
+public class ContentNegotiationController(IAppLogger appLogger) : BaseAppController(appLogger)
 {
     [HttpGet]
     [Produces(
         "application/json",
         "application/xml",
         "text/csv")]
-    [ProducesResponseType<IEnumerable<Driver>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<List<Driver>>(StatusCodes.Status200OK)]
     [EndpointSummary("Gets all drivers with content negotiation.")]
     [EndpointDescription(
         "Returns all drivers in the requested format (JSON, XML, CSV). Example: GET /api/contentnegotiation. No request body required.")]
-    public ActionResult<IEnumerable<Driver>> Get(
+    public ActionResult<List<Driver>> Get(
         [FromServices]
         IDriverRepo driverRepo) =>
         driverRepo.GetAllAsList();

@@ -13,9 +13,8 @@ namespace AutoLot.Api.Controllers.Base;
 /// <typeparam name="TEntity">The entity type, must inherit from BaseEntity and have a parameterless constructor.</typeparam>
 public abstract class BaseCrudController<TEntity>(
     IAppLogger appLogger,
-    IBaseRepo<TEntity> baseRepo) : BaseAppController where TEntity : BaseEntity, new()
+    IBaseRepo<TEntity> baseRepo) : BaseAppController(appLogger) where TEntity : BaseEntity, new()
 {
-    protected readonly IAppLogger AppLoggerInstance = appLogger;
     protected readonly IBaseRepo<TEntity> MainRepoInstance = baseRepo;
 
     /// <summary>
@@ -27,7 +26,7 @@ public abstract class BaseCrudController<TEntity>(
     [ProducesResponseType(StatusCodes.Status200OK)]
     [EndpointSummary("Gets all entities.")]
     [EndpointDescription("Returns a list of all entities. Example: GET /api/[controller]. No request body required.")]
-    public ActionResult<IEnumerable<TEntity>> GetAll() => Ok(MainRepoInstance.GetAllAsList());
+    public ActionResult<List<TEntity>> GetAll() => Ok(MainRepoInstance.GetAllAsList());
 
     /// <summary>
     ///     Gets a single entity by ID.

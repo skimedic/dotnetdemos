@@ -16,12 +16,13 @@
     "summary": "API Endpoints for the AutoLot application"
   },
   "paths": {
-    "/api/ScalarExamples/internal-status1": {
-      "get": {
+    "/api/HealthCheck": {
+      "options": {
         "tags": [
-          "ScalarExamples"
+          "HealthCheck"
         ],
-        "summary": "",
+        "summary": "Returns allowed HTTP methods and API version.",
+        "description": "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.",
         "parameters": [
           {
             "name": "api-version",
@@ -77,7 +78,8 @@
                 "schema": {
                   "$ref": "#/components/schemas/ValidationProblemDetails"
                 }
-              }
+              },
+              "application/json": { }
             }
           },
           "500": {
@@ -87,127 +89,31 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              }
+              },
+              "application/json": { }
             }
-          }
-        },
-        "x-scalar-ignore": true
-      }
-    },
-    "/api/v2/ScalarExamples/internal-status1": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "responses": {
-          "400": {
-            "description": "Bad Request",
+          },
+          "200": {
+            "description": "OK",
             "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
+              "application/json; v=2.0; api-version=2.0": {
                 "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                  "type": "string"
                 }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-scalar-ignore": true
-      }
-    },
-    "/api/ScalarExamples/internal-status2": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
+              },
+              "application/json": { }
             }
           }
         }
       }
     },
-    "/api/v2/ScalarExamples/internal-status2": {
-      "get": {
+    "/api/v2/HealthCheck": {
+      "options": {
         "tags": [
-          "ScalarExamples"
+          "HealthCheck"
         ],
-        "summary": "",
+        "summary": "Returns allowed HTTP methods and API version.",
+        "description": "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.",
         "responses": {
           "400": {
             "description": "Bad Request",
@@ -216,7 +122,8 @@
                 "schema": {
                   "$ref": "#/components/schemas/ValidationProblemDetails"
                 }
-              }
+              },
+              "application/json": { }
             }
           },
           "500": {
@@ -226,476 +133,22 @@
                 "schema": {
                   "$ref": "#/components/schemas/ProblemDetails"
                 }
-              }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": { }
             }
           }
         }
-      }
-    },
-    "/api/ScalarExamples/documents-stable": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-scalar-stability": "stable",
-        "x-codeSamples": [
-          {
-            "source": "curl -X GET https://api.example.com/documents",
-            "lang": "shell"
-          }
-        ]
-      }
-    },
-    "/api/v2/ScalarExamples/documents-stable": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-scalar-stability": "stable",
-        "x-codeSamples": [
-          {
-            "source": "curl -X GET https://api.example.com/documents",
-            "lang": "shell"
-          }
-        ]
-      }
-    },
-    "/api/ScalarExamples/documents-experimental": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-scalar-stability": "experimental"
-      }
-    },
-    "/api/v2/ScalarExamples/documents-experimental": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-scalar-stability": "experimental"
-      }
-    },
-    "/api/ScalarExamples/documents-deprecated": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-scalar-stability": "deprecated"
-      }
-    },
-    "/api/v2/ScalarExamples/documents-deprecated": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-scalar-stability": "deprecated"
-      }
-    },
-    "/api/ScalarExamples/documents-badge": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.0"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-badges": [
-          {
-            "name": "New"
-          },
-          {
-            "name": "V2",
-            "position": "after",
-            "color": "#007bff"
-          }
-        ]
-      }
-    },
-    "/api/v2/ScalarExamples/documents-badge": {
-      "get": {
-        "tags": [
-          "ScalarExamples"
-        ],
-        "summary": "",
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              }
-            }
-          }
-        },
-        "x-badges": [
-          {
-            "name": "New"
-          },
-          {
-            "name": "V2",
-            "position": "after",
-            "color": "#007bff"
-          }
-        ]
       }
     },
     "/api/Version": {
@@ -1535,13 +988,13 @@
         }
       }
     },
-    "/api/HealthCheck": {
-      "options": {
+    "/api/Hateoas/hateos": {
+      "get": {
         "tags": [
-          "HealthCheck"
+          "Hateoas"
         ],
-        "summary": "Returns allowed HTTP methods and API version.",
-        "description": "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.",
+        "summary": "Returns a HATEOAS response",
+        "description": "Returns a HATEOAS response with links to related resources.",
         "parameters": [
           {
             "name": "api-version",
@@ -1615,24 +1068,19 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "type": "string"
-                }
-              },
               "application/json": { }
             }
           }
         }
       }
     },
-    "/api/v2/HealthCheck": {
-      "options": {
+    "/api/v2/Hateoas/hateos": {
+      "get": {
         "tags": [
-          "HealthCheck"
+          "Hateoas"
         ],
-        "summary": "Returns allowed HTTP methods and API version.",
-        "description": "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.",
+        "summary": "Returns a HATEOAS response",
+        "description": "Returns a HATEOAS response with links to related resources.",
         "responses": {
           "400": {
             "description": "Bad Request",
@@ -1659,15 +1107,692 @@
           "200": {
             "description": "OK",
             "content": {
-              "application/json; v=2.0; api-version=2.0": {
-                "schema": {
-                  "type": "string"
-                }
-              },
               "application/json": { }
             }
           }
         }
+      }
+    },
+    "/api/ScalarExamples/internal-status1": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-scalar-ignore": true
+      }
+    },
+    "/api/v2/ScalarExamples/internal-status1": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-scalar-ignore": true
+      }
+    },
+    "/api/ScalarExamples/internal-status2": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2/ScalarExamples/internal-status2": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ScalarExamples/documents-stable": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-scalar-stability": "stable",
+        "x-codeSamples": [
+          {
+            "source": "curl -X GET https://api.example.com/documents",
+            "lang": "shell"
+          }
+        ]
+      }
+    },
+    "/api/v2/ScalarExamples/documents-stable": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-scalar-stability": "stable",
+        "x-codeSamples": [
+          {
+            "source": "curl -X GET https://api.example.com/documents",
+            "lang": "shell"
+          }
+        ]
+      }
+    },
+    "/api/ScalarExamples/documents-experimental": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-scalar-stability": "experimental"
+      }
+    },
+    "/api/v2/ScalarExamples/documents-experimental": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-scalar-stability": "experimental"
+      }
+    },
+    "/api/ScalarExamples/documents-deprecated": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-scalar-stability": "deprecated"
+      }
+    },
+    "/api/v2/ScalarExamples/documents-deprecated": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-scalar-stability": "deprecated"
+      }
+    },
+    "/api/ScalarExamples/documents-badge": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.0"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-badges": [
+          {
+            "name": "New"
+          },
+          {
+            "name": "V2",
+            "position": "after",
+            "color": "#007bff"
+          }
+        ]
+      }
+    },
+    "/api/v2/ScalarExamples/documents-badge": {
+      "get": {
+        "tags": [
+          "ScalarExamples"
+        ],
+        "summary": "",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.0; api-version=2.0": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        },
+        "x-badges": [
+          {
+            "name": "New"
+          },
+          {
+            "name": "V2",
+            "position": "after",
+            "color": "#007bff"
+          }
+        ]
       }
     },
     "/api/Values/problem": {

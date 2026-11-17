@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot - AutoLot.Api - CarsController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/09/05
+// http://www.skimedic.com 2026/11/16
 // ==================================
 
 namespace AutoLot.Api.Controllers.AutoLot;
@@ -11,26 +11,20 @@ namespace AutoLot.Api.Controllers.AutoLot;
 //[AdvertiseApiVersions(2.0)]
 public class CarsController(
     IAppLogger appLogger,
-    ICarRepo carRepo) : BaseCrudController<Car>(
-    appLogger,
+    ICarRepo carRepo) : BaseCrudController<Car>(appLogger,
     carRepo)
 {
     [HttpGet("bymake/{makeId?}")]
     [Produces("application/json")]
-    [ProducesResponseType<IEnumerable<Car>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<List<Car>>(StatusCodes.Status200OK)]
     [EndpointSummary("Gets cars by make ID.")]
-    [EndpointDescription(
-        "Returns a list of cars filtered by make ID. Example: GET /api/cars/bymake/1. No request body required.")]
-    public ActionResult<IEnumerable<Car>> ByMake(
-        [Description("The make ID to filter cars. Optional.")]
-        int? makeId) =>
-        Ok(makeId is > 0 ? carRepo.GetAllByAsList(makeId.Value) : MainRepoInstance.GetAllAsList());
+    [EndpointDescription("Returns a list of cars filtered by make ID. Example: GET /api/cars/bymake/1. No request body required.")]
+    public ActionResult<List<Car>> ByMake([Description("The make ID to filter cars. Optional.")] int? makeId) => Ok(makeId is > 0 ? carRepo.GetAllByAsList(makeId.Value) : MainRepoInstance.GetAllAsList());
 
-    [ApiVersion(
-        1.5,
+    [ApiVersion(1.5,
         Deprecated = true)]
     [HttpGet]
     [Produces("application/json")]
-    [ProducesResponseType<IEnumerable<Car>>(StatusCodes.Status200OK)]
-    public ActionResult<IEnumerable<Car>> GetAllBad() => throw new Exception("I said not to use this one");
+    [ProducesResponseType<List<Car>>(StatusCodes.Status200OK)]
+    public ActionResult<List<Car>> GetAllBad() => throw new Exception("I said not to use this one");
 }

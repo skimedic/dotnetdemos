@@ -9,8 +9,7 @@ namespace AutoLot.Services.DataServices.Dal;
 
 public class MakeDalDataService(
     IAppLogger appLogger,
-    IMakeRepo makeRepo) : DalDataServiceBase<Make>(
-        appLogger,
+    IMakeRepo makeRepo) : DalDataServiceBase<Make>(appLogger,
         makeRepo),
     IMakeDataService
 {

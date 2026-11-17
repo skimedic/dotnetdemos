@@ -9,6 +9,5 @@ namespace AutoLot.Services.ApiWrapper.Interfaces;
 
 public interface ICarApiServiceWrapper : IApiServiceWrapperBase<Car>
 {
-    Task<List<Car>> GetCarsByMakeAsync(
-        int id);
+    Task<List<Car>> GetCarsByMakeAsync(int id);
 }

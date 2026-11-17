@@ -10,6 +10,5 @@ namespace AutoLot.Api.Controllers.AutoLot;
 [ApiVersion(1.0)]
 public class CarDriversController(
     IAppLogger appLogger,
-    ICarDriverRepo carDriverRepo) : BaseCrudController<CarDriver>(
-    appLogger,
+    ICarDriverRepo carDriverRepo) : BaseCrudController<CarDriver>(appLogger,
     carDriverRepo);

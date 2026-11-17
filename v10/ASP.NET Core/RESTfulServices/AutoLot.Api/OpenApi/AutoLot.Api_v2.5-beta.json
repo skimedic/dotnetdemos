@@ -16,6 +16,803 @@
     "summary": "API Endpoints for the AutoLot application"
   },
   "paths": {
+    "/api/HealthCheck": {
+      "options": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Returns allowed HTTP methods and API version.",
+        "description": "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2.5-Beta/HealthCheck": {
+      "options": {
+        "tags": [
+          "HealthCheck"
+        ],
+        "summary": "Returns allowed HTTP methods and API version.",
+        "description": "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/ContentNegotiation": {
+      "get": {
+        "tags": [
+          "ContentNegotiation"
+        ],
+        "summary": "Gets all drivers with content negotiation.",
+        "description": "Returns all drivers in the requested format (JSON, XML, CSV). Example: GET /api/contentnegotiation. No request body required.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { },
+              "application/xml": { },
+              "text/csv": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { },
+              "application/xml": { },
+              "text/csv": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              },
+              "application/xml; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              },
+              "text/csv; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              },
+              "application/json": { },
+              "application/xml": { },
+              "text/csv": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2.5-Beta/ContentNegotiation": {
+      "get": {
+        "tags": [
+          "ContentNegotiation"
+        ],
+        "summary": "Gets all drivers with content negotiation.",
+        "description": "Returns all drivers in the requested format (JSON, XML, CSV). Example: GET /api/contentnegotiation. No request body required.",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { },
+              "application/xml": { },
+              "text/csv": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { },
+              "application/xml": { },
+              "text/csv": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              },
+              "application/xml; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              },
+              "text/csv; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              },
+              "application/json": { },
+              "application/xml": { },
+              "text/csv": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/DataShaping": {
+      "get": {
+        "tags": [
+          "DataShaping"
+        ],
+        "summary": "Gets shaped driver data",
+        "description": "Returns driver data shaped to include only the requested fields from the query string.",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated list of fields to include in the response.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              },
+              "application/json": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2.5-Beta/DataShaping": {
+      "get": {
+        "tags": [
+          "DataShaping"
+        ],
+        "summary": "Gets shaped driver data",
+        "description": "Returns driver data shaped to include only the requested fields from the query string.",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Comma-separated list of fields to include in the response.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Driver"
+                  }
+                }
+              },
+              "application/json": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/DataShaping/{id}": {
+      "post": {
+        "tags": [
+          "DataShaping"
+        ],
+        "summary": "Updates a driver from shaped values",
+        "description": "Updates an existing driver by applying field/value pairs provided as JSON in the query string.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the driver. Required.",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "values",
+            "in": "query",
+            "description": "A JSON object containing field/value pairs to apply.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/Driver"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2.5-Beta/DataShaping/{id}": {
+      "post": {
+        "tags": [
+          "DataShaping"
+        ],
+        "summary": "Updates a driver from shaped values",
+        "description": "Updates an existing driver by applying field/value pairs provided as JSON in the query string.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The unique identifier of the driver. Required.",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "values",
+            "in": "query",
+            "description": "A JSON object containing field/value pairs to apply.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/Driver"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "204": {
+            "description": "No Content",
+            "content": {
+              "application/json": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/Hateoas/hateos": {
+      "get": {
+        "tags": [
+          "Hateoas"
+        ],
+        "summary": "Returns a HATEOAS response",
+        "description": "Returns a HATEOAS response with links to related resources.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The requested API version",
+            "required": true,
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "v",
+            "in": "query",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-api-version",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "name": "x-ms-v",
+            "in": "header",
+            "description": "The requested API version",
+            "schema": {
+              "enum": [
+                "2.5-Beta"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": { }
+            }
+          }
+        }
+      }
+    },
+    "/api/v2.5-Beta/Hateoas/hateos": {
+      "get": {
+        "tags": [
+          "Hateoas"
+        ],
+        "summary": "Returns a HATEOAS response",
+        "description": "Returns a HATEOAS response with links to related resources.",
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": { }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": { }
+            }
+          }
+        }
+      }
+    },
     "/api/ScalarExamples/internal-status1": {
       "get": {
         "tags": [
@@ -696,678 +1493,6 @@
             "color": "#007bff"
           }
         ]
-      }
-    },
-    "/api/ContentNegotiation": {
-      "get": {
-        "tags": [
-          "ContentNegotiation"
-        ],
-        "summary": "Gets all drivers with content negotiation.",
-        "description": "Returns all drivers in the requested format (JSON, XML, CSV). Example: GET /api/contentnegotiation. No request body required.",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/json": { },
-              "application/xml": { },
-              "text/csv": { }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": { },
-              "application/xml": { },
-              "text/csv": { }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Driver"
-                  }
-                }
-              },
-              "application/xml; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Driver"
-                  }
-                }
-              },
-              "text/csv; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Driver"
-                  }
-                }
-              },
-              "application/json": { },
-              "application/xml": { },
-              "text/csv": { }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2.5-Beta/ContentNegotiation": {
-      "get": {
-        "tags": [
-          "ContentNegotiation"
-        ],
-        "summary": "Gets all drivers with content negotiation.",
-        "description": "Returns all drivers in the requested format (JSON, XML, CSV). Example: GET /api/contentnegotiation. No request body required.",
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/json": { },
-              "application/xml": { },
-              "text/csv": { }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": { },
-              "application/xml": { },
-              "text/csv": { }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Driver"
-                  }
-                }
-              },
-              "application/xml; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Driver"
-                  }
-                }
-              },
-              "text/csv; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Driver"
-                  }
-                }
-              },
-              "application/json": { },
-              "application/xml": { },
-              "text/csv": { }
-            }
-          }
-        }
-      }
-    },
-    "/api/DataShaping": {
-      "get": {
-        "tags": [
-          "DataShaping"
-        ],
-        "summary": "Gets shaped driver data",
-        "description": "Returns driver data shaped to include only the requested fields from the query string.",
-        "parameters": [
-          {
-            "name": "fields",
-            "in": "query",
-            "description": "Comma-separated list of fields to include in the response.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Driver"
-                  }
-                }
-              },
-              "application/json": { }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2.5-Beta/DataShaping": {
-      "get": {
-        "tags": [
-          "DataShaping"
-        ],
-        "summary": "Gets shaped driver data",
-        "description": "Returns driver data shaped to include only the requested fields from the query string.",
-        "parameters": [
-          {
-            "name": "fields",
-            "in": "query",
-            "description": "Comma-separated list of fields to include in the response.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Driver"
-                  }
-                }
-              },
-              "application/json": { }
-            }
-          }
-        }
-      }
-    },
-    "/api/DataShaping/{id}": {
-      "post": {
-        "tags": [
-          "DataShaping"
-        ],
-        "summary": "Updates a driver from shaped values",
-        "description": "Updates an existing driver by applying field/value pairs provided as JSON in the query string.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier of the driver. Required.",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          },
-          {
-            "name": "values",
-            "in": "query",
-            "description": "A JSON object containing field/value pairs to apply.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/Driver"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": { }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2.5-Beta/DataShaping/{id}": {
-      "post": {
-        "tags": [
-          "DataShaping"
-        ],
-        "summary": "Updates a driver from shaped values",
-        "description": "Updates an existing driver by applying field/value pairs provided as JSON in the query string.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The unique identifier of the driver. Required.",
-            "required": true,
-            "schema": {
-              "pattern": "^-?(?:0|[1-9]\\d*)$",
-              "type": [
-                "integer",
-                "string"
-              ],
-              "format": "int32"
-            }
-          },
-          {
-            "name": "values",
-            "in": "query",
-            "description": "A JSON object containing field/value pairs to apply.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/Driver"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "204": {
-            "description": "No Content",
-            "content": {
-              "application/json": { }
-            }
-          }
-        }
-      }
-    },
-    "/api/HealthCheck": {
-      "options": {
-        "tags": [
-          "HealthCheck"
-        ],
-        "summary": "Returns allowed HTTP methods and API version.",
-        "description": "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.",
-        "parameters": [
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The requested API version",
-            "required": true,
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "v",
-            "in": "query",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-api-version",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          },
-          {
-            "name": "x-ms-v",
-            "in": "header",
-            "description": "The requested API version",
-            "schema": {
-              "enum": [
-                "2.5-Beta"
-              ],
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": { }
-            }
-          }
-        }
-      }
-    },
-    "/api/v2.5-Beta/HealthCheck": {
-      "options": {
-        "tags": [
-          "HealthCheck"
-        ],
-        "summary": "Returns allowed HTTP methods and API version.",
-        "description": "Returns allowed HTTP methods and API version for the HealthCheck endpoint. Example: OPTIONS /api/healthcheck. No request body required.",
-        "responses": {
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ValidationProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "500": {
-            "description": "Internal Server Error",
-            "content": {
-              "application/problem+json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProblemDetails"
-                }
-              },
-              "application/json": { }
-            }
-          },
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json; v=2.5-Beta; api-version=2.5-Beta": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": { }
-            }
-          }
-        }
       }
     },
     "/api/Values/problem": {

@@ -9,8 +9,7 @@ namespace AutoLot.Services.ApiWrapper;
 
 public class MakeApiServiceWrapper(
     HttpClient client,
-    IOptionsSnapshot<ApiServiceSettings> apiSettingsSnapshot) : ApiServiceWrapperBase<Make>(
-        client,
+    IOptionsSnapshot<ApiServiceSettings> apiSettingsSnapshot) : ApiServiceWrapperBase<Make>(client,
         apiSettingsSnapshot,
         apiSettingsSnapshot.Value.MakeBaseUri),
     IMakeApiServiceWrapper;

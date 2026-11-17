@@ -9,16 +9,12 @@ namespace AutoLot.Services.DataServices.Dal;
 
 public class CarDalDataService(
     IAppLogger appLogger,
-    ICarRepo carRepo) : DalDataServiceBase<Car>(
-        appLogger,
+    ICarRepo carRepo) : DalDataServiceBase<Car>(appLogger,
         carRepo),
     ICarDataService
 {
     // Typed reference avoids repeated downcasting from IBaseRepo<Car>.
     private readonly ICarRepo _carRepo = carRepo;
 
-    public Task<List<Car>> GetAllByMakeIdAsync(
-        int? makeId) =>
-        Task.FromResult(
-            makeId.HasValue ? _carRepo.GetAllByAsList(makeId.Value) : _carRepo.GetAllIgnoreQueryFiltersAsList());
+    public Task<List<Car>> GetAllByMakeIdAsync(int? makeId) => Task.FromResult(makeId.HasValue ? _carRepo.GetAllByAsList(makeId.Value) : _carRepo.GetAllIgnoreQueryFiltersAsList());
 }

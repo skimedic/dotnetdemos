@@ -1,14 +1,14 @@
 ﻿// Copyright Information
 // ==================================
-// AutoLot-APIs - AutoLot.Api - HealthCheckController.cs
+// AutoLot - AutoLot.Api - HealthCheckController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/09/07
+// http://www.skimedic.com 2026/11/16
 // ==================================
 
-namespace AutoLot.Api.Controllers.Specials;
+namespace AutoLot.Api.Controllers;
 
 [ApiVersionNeutral]
-public class HealthCheckController : BaseAppController
+public class HealthCheckController(IAppLogger appLogger) : BaseAppController(appLogger)
 {
     [HttpOptions]
     [Produces("application/json")]

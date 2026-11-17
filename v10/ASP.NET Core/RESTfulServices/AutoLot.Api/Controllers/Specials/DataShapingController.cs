@@ -9,15 +9,16 @@ namespace AutoLot.Api.Controllers.Specials;
 
 [ApiVersionNeutral]
 public class DataShapingController(
+    IAppLogger appLogger,
     IDriverRepo driverRepo,
-    IDataShaper<Driver> dataShaper) : BaseAppController
+    IDataShaper<Driver> dataShaper) : BaseAppController(appLogger)
 {
     [HttpGet]
     [Produces("application/json")]
-    [ProducesResponseType<IEnumerable<Driver>>(StatusCodes.Status200OK)]
+    [ProducesResponseType<List<Driver>>(StatusCodes.Status200OK)]
     [EndpointSummary("Gets shaped driver data")]
     [EndpointDescription("Returns driver data shaped to include only the requested fields from the query string.")]
-    public ActionResult<IEnumerable<Driver>> GetFromQuery(
+    public ActionResult<List<Driver>> GetFromQuery(
         [FromQuery] [Description("Comma-separated list of fields to include in the response.")]
         string fields) =>
         Ok(

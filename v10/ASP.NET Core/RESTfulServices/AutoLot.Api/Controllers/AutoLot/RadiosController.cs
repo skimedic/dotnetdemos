@@ -2,7 +2,7 @@
 // ==================================
 // AutoLot - AutoLot.Api - RadiosController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/09/05
+// http://www.skimedic.com 2026/11/16
 // ==================================
 
 namespace AutoLot.Api.Controllers.AutoLot;
@@ -10,6 +10,5 @@ namespace AutoLot.Api.Controllers.AutoLot;
 [ApiVersion(1.0)]
 public class RadiosController(
     IAppLogger appLogger,
-    IRadioRepo radioRepo) : BaseCrudController<Radio>(
-    appLogger,
+    IRadioRepo radioRepo) : BaseCrudController<Radio>(appLogger,
     radioRepo);

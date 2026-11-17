@@ -2,19 +2,17 @@
 // ==================================
 // AutoLot - AutoLot.Api - CarsBetaController.cs
 // All samples copyright Philip Japikse
-// http://www.skimedic.com 2026/09/05
+// http://www.skimedic.com 2026/11/16
 // ==================================
 
 namespace AutoLot.Api.Controllers.AutoLot;
 
 [ApiVersion("2.5-Beta")]
-[ApiVersion(
-    3.0,
+[ApiVersion(3.0,
     "Beta")]
 public class CarsBetaController(
     IAppLogger appLogger,
-    ICarRepo carRepo) : BaseCrudController<Car>(
-    appLogger,
+    ICarRepo carRepo) : BaseCrudController<Car>(appLogger,
     carRepo)
 {
     [MapToApiVersion("2.5-Beta")]

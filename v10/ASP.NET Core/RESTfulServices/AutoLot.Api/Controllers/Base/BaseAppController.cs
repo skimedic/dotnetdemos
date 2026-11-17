@@ -16,6 +16,7 @@ namespace AutoLot.Api.Controllers.Base;
     "application/problem+json")]
 [Route("api/[controller]")]
 [Route("api/v{version:apiVersion}/[controller]")]
-public class BaseAppController : ControllerBase
+public class BaseAppController(IAppLogger appLogger) : ControllerBase
 {
+    protected readonly IAppLogger AppLoggerInstance = appLogger;
 }

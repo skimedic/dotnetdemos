@@ -29,20 +29,16 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
     internal async Task<HttpResponseMessage> PostAsJsonAsync(
         string uri,
         string json) =>
-        await Client.PostAsync(
-            uri,
-            new StringContent(
-                json,
+        await Client.PostAsync(uri,
+            new StringContent(json,
                 Encoding.UTF8,
                 "application/json"));
 
     internal async Task<HttpResponseMessage> PutAsJsonAsync(
         string uri,
         string json) =>
-        await Client.PutAsync(
-            uri,
-            new StringContent(
-                json,
+        await Client.PutAsync(uri,
+            new StringContent(json,
                 Encoding.UTF8,
                 "application/json"));
 
@@ -54,8 +50,7 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
             new HttpRequestMessage
             {
                 Content =
-                    new StringContent(
-                        json,
+                    new StringContent(json,
                         Encoding.UTF8,
                         "application/json"),
                 Method = HttpMethod.Delete,
@@ -72,8 +67,7 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
         return result;
     }
 
-    public async Task<TEntity> GetEntityAsync(
-        int id)
+    public async Task<TEntity> GetEntityAsync(int id)
     {
         var response = await Client.GetAsync($"{ApiSettings.BaseUri}{_endPoint}/{id}?v={ApiVersion}");
         response.EnsureSuccessStatusCode();
@@ -81,12 +75,10 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
         return result;
     }
 
-    public async Task<TEntity> AddEntityAsync(
-        TEntity entity)
+    public async Task<TEntity> AddEntityAsync(TEntity entity)
     {
         var response =
-            await PostAsJsonAsync(
-                $"{ApiSettings.BaseUri}{_endPoint}?v={ApiVersion}",
+            await PostAsJsonAsync($"{ApiSettings.BaseUri}{_endPoint}?v={ApiVersion}",
                 JsonSerializer.Serialize(entity));
         if (response == null)
         {
@@ -96,23 +88,19 @@ public abstract class ApiServiceWrapperBase<TEntity> : IApiServiceWrapperBase<TE
         return await response.Content.ReadFromJsonAsync<TEntity>() ?? await GetEntityAsync(entity.Id);
     }
 
-    public async Task<TEntity> UpdateEntityAsync(
-        TEntity entity)
+    public async Task<TEntity> UpdateEntityAsync(TEntity entity)
     {
         var response =
-            await PutAsJsonAsync(
-                $"{ApiSettings.BaseUri}{_endPoint}/{entity.Id}?v={ApiVersion}",
+            await PutAsJsonAsync($"{ApiSettings.BaseUri}{_endPoint}/{entity.Id}?v={ApiVersion}",
                 JsonSerializer.Serialize(entity));
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadFromJsonAsync<TEntity>() ?? await GetEntityAsync(entity.Id);
     }
 
-    public async Task DeleteEntityAsync(
-        TEntity entity)
+    public async Task DeleteEntityAsync(TEntity entity)
     {
         var response =
-            await DeleteAsJsonAsync(
-                $"{ApiSettings.BaseUri}{_endPoint}/{entity.Id}?v={ApiVersion}",
+            await DeleteAsJsonAsync($"{ApiSettings.BaseUri}{_endPoint}/{entity.Id}?v={ApiVersion}",
                 JsonSerializer.Serialize(entity));
         response.EnsureSuccessStatusCode();
     }
